@@ -11,8 +11,8 @@ export interface RPPGCameraInit {
 }
 
 export interface RPPGCameraConfig {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   videoElement?: HTMLVideoElement | null;
   canvasElement?: HTMLCanvasElement | null;
   onError?: (event: Error) => void;

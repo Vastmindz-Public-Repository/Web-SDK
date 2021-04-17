@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import { PATH_TO_WASM } from './consts/api';
 import {
   ERROR_MODULE_INITIALIZATION,
   ERROR_MODULE_NOT_INITIALIZED,
@@ -32,7 +33,9 @@ class RPPGtracker implements RPPGTrackerInterface {
 
   async init(): Promise<void> {
     try {
-      this.module = await new (this.Module as any)() as EmscriptenModule
+      
+      const moduleOptions = this.getModuleOptions()
+      this.module = await new (this.Module as any)(moduleOptions) as EmscriptenModule
       if (this.module) {
         await this.module.ready
         await this.module._initTracker()
@@ -42,6 +45,16 @@ class RPPGtracker implements RPPGTrackerInterface {
       this.module = null
       console.error(ERROR_MODULE_INITIALIZATION, e)
       throw Error(ERROR_MODULE_INITIALIZATION)
+    }
+  }
+
+  private getModuleOptions() {
+    let { pathToWasmData = PATH_TO_WASM } = this.config
+    if (!pathToWasmData.endsWith('/')) {
+      pathToWasmData += '/'
+    }
+    return {
+      locateFile: (path: string) => pathToWasmData + path,
     }
   }
 

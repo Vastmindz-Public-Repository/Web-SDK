@@ -1,6 +1,7 @@
 export interface RPPGTrackerConfig {
   width?: number;
   height?: number;
+  pathToWasmData?: string;
   onError?: () => void;
   onBgr1d?: () => void;
   onLandmarks?: () => void;

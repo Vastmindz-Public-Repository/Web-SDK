@@ -1,5 +1,5 @@
 export interface RPPGSocketConfig {
-  url: string;
+  url?: string;
   authToken: string;
   onConnect?: (arg0: Event) => void;
   onClose?: (arg0: CloseEvent) => void;

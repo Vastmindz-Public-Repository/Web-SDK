@@ -1,5 +1,4 @@
 async function init() {
-  const socketUrl = 'wss://rppg-dev2.xyz/vp/bgr_signal_socket'
   const backendUrl = 'https://rppg-dev2.xyz/v1/account/api/public/login'
   const videoElement = document.querySelector('.video')
   const canvasElement = document.querySelector('.canvas')
@@ -22,7 +21,9 @@ async function init() {
     canvasElement: canvasElement,
   })
 
-  await rppgInstance.initTracker()
+  await rppgInstance.initTracker({
+    pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+  })
 
   loginButton.addEventListener('click', async () => {
     try {
@@ -48,7 +49,7 @@ async function init() {
   startButton.addEventListener('click', async () => {
     if (!rppgInstance.rppgSocket) {
       await this.rppgInstance.initSocket({
-        url: socketUrl,
+        url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
         authToken: tokenInput.value,
         onMessage: (messageType, data) => {
           console.log(messageType, data)

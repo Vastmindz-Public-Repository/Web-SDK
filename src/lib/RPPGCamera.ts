@@ -25,10 +25,7 @@ class RPPGCamera implements RPPGCameraInterface {
 
   async init(): Promise<RPPGCameraInit> {
     try {
-      this.stream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: true, // {width: {exact: 1280}, height: {exact: 720}}
-      })
+      this.stream = await this.getWebcamStream()
       this.videoElement.srcObject = this.stream
       await this.videoElement.play()
       this.width = this.videoElement.videoWidth
@@ -50,6 +47,20 @@ class RPPGCamera implements RPPGCameraInterface {
       this.onError(error)
       throw error
     }
+  }
+
+  private getWebcamStream(): Promise<MediaStream> {
+    return navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: {
+        width: {
+          ideal: this.config.width || 640,
+        },
+        height: {
+          ideal: this.config.height || 480,
+        }
+      }
+    })
   }
 
   getFrame(): RPPGCameraGetFrame | null {

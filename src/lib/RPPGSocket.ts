@@ -1,3 +1,4 @@
+import { SOCKET_URL } from './consts/api';
 import {
   RPPGSocketConfig,
   RPPGSocketInterface,
@@ -26,7 +27,7 @@ class RPPGSocket implements RPPGSocketInterface {
   }
 
   init(): Promise<Event> {
-    const url = `${this.config.url}?authToken=${this.config.authToken}`
+    const url = `${this.config.url || SOCKET_URL}?authToken=${this.config.authToken}`
     const socket = new WebSocket(url)
     this.socket = socket
 
