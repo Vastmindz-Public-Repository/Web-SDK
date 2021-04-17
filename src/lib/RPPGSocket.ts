@@ -5,21 +5,6 @@ import {
   RPPGSocketSendMessage,
 } from './RPPGSocket.types'
 
-const events = {
-  ACCESS_TOKEN: 'accessToken',
-  MEASUREMENT_MEAN_DATA: 'onMeasurementMeanData',
-  MEASUREMENT_STATUS: 'onMeasurementStatus',
-  SENDING_RATE_WARNING: 'onSendingRateWarning',
-  MEASUREMENT_PROGRESS: 'onMeasurementProgress',
-  MEASUREMENT_SIGNAL: 'onMeasurementSignal',
-  MOVING_WARNING: 'onMovingWarning',
-  BLOOD_PRESSURE: 'onBloodPressure',
-  UNSTABLE_CONDITIONS_WARNING: 'onUnstableConditionsWarning',
-  INTERFERENCE_WARNING: 'onInterferenceWarning',
-  SIGNAL_QUALITY: 'onSignalQuality',
-  HRV_METRICS: 'hrvMetrics',
-}
-
 class RPPGSocket implements RPPGSocketInterface {
   config: RPPGSocketConfig;
   socket!: WebSocket;
@@ -37,6 +22,7 @@ class RPPGSocket implements RPPGSocketInterface {
       onConnect,
       onClose,
       onMessage,
+      onEvent,
       onError,
     } = this.config
 
@@ -59,12 +45,8 @@ class RPPGSocket implements RPPGSocketInterface {
         if (typeof onMessage === 'function') {
           onMessage(messageType, data)
         }
-
-        // TODO optimize
-        // @ts-ignore
-        const func = this.config[events[messageType]]
-        if (func && typeof func === 'function') {
-          func(data)
+        if (typeof onEvent === 'function') {
+          onEvent(messageType, data)
         }
       }
 

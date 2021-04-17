@@ -1,5 +1,5 @@
 import { RPPGCameraConfig } from './RPPGCamera.types'
-import { RPPGSocketConfig } from './RPPGSocket.types'
+import { AccessToken, BloodPressure, HrvMetrics, InterferenceWarning, MeasurementMeanData, MeasurementProgress, MeasurementSignal, MeasurementStatus, MovingWarning, RPPGSocketConfig, SendingRateWarning, SignalQuality, UnstableConditionsWarning } from './RPPGSocket.types'
 import { RPPGTrackerConfig, RPPGTrackerProcessLandmarkData } from './RPPGTracker.types'
 
 export interface RPPGOnFrame {
@@ -14,6 +14,18 @@ export interface RPPGConfig {
   rppgSocketConfig?: RPPGSocketConfig;
   rppgCameraConfig?: RPPGCameraConfig;
   onFrame?: (data: RPPGOnFrame) => void;
+  onAccessToken?: (arg0: AccessToken) => void;
+  onMeasurementMeanData?: (arg0: MeasurementMeanData) => void;
+  onMeasurementStatus?: (arg0: MeasurementStatus) => void;
+  onSendingRateWarning?: (arg0: SendingRateWarning) => void;
+  onMeasurementProgress?: (arg0: MeasurementProgress) => void;
+  onMeasurementSignal?: (arg0: MeasurementSignal) => void;
+  onMovingWarning?: (arg0: MovingWarning) => void;
+  onBloodPressure?: (arg0: BloodPressure) => void;
+  onSignalQuality?: (arg0: SignalQuality) => void;
+  onInterferenceWarning?: (arg0: InterferenceWarning) => void;
+  onUnstableConditionsWarning?: (arg0: UnstableConditionsWarning) => void;
+  onHrvMetrics?: (arg0: HrvMetrics) => void;
 }
 
 export interface RPPGinterface {

@@ -1,10 +1,25 @@
 import RPPGCamera from './RPPGCamera'
 import RPPGSocket from './RPPGSocket'
 import RPPGTracker from './RPPGTracker'
-import { RPPGConfig, RPPGinterface, RPPGOnFrame } from './RPPG.types'
-import { RPPGCameraConfig, RPPGCameraInterface } from './RPPGCamera.types'
-import { RPPGSocketConfig, RPPGSocketInterface } from './RPPGSocket.types'
-import { RPPGTrackerConfig, RPPGTrackerInterface } from './RPPGTracker.types'
+import {
+  RPPGConfig,
+  RPPGinterface,
+  RPPGOnFrame,
+} from './RPPG.types'
+import {
+  RPPGCameraConfig,
+  RPPGCameraInterface,
+} from './RPPGCamera.types'
+import {
+  MessageEvents,
+  RPPGSocketConfig,
+  RPPGSocketInterface,
+} from './RPPGSocket.types'
+import {
+  RPPGTrackerConfig,
+  RPPGTrackerInterface,
+} from './RPPGTracker.types'
+import { EVENTS } from './consts/events'
 
 class RPPG implements RPPGinterface {
   config: RPPGConfig;
@@ -71,7 +86,10 @@ class RPPG implements RPPGinterface {
       console.log('Error initializing - rppgSocket is already initialized')
       return Promise.reject()
     }
-    this.rppgSocket = new RPPGSocket(rppgSocketConfig)
+    this.rppgSocket = new RPPGSocket({
+      ...rppgSocketConfig,
+      onEvent: this.onEvent.bind(this),
+    })
     return this.rppgSocket.init()
   }
 
@@ -153,6 +171,18 @@ class RPPG implements RPPGinterface {
   onFrame(data: RPPGOnFrame): void {
     if (typeof this.config.onFrame === 'function') {
       this.config.onFrame(data)
+    }
+  }
+
+  private onEvent(
+    eventType: string,
+    event: MessageEvents,
+  ) {
+    // TODO optimize
+    // @ts-ignore
+    const func = this.config[EVENTS[eventType]]
+    if (func && typeof func === 'function') {
+      func(event)
     }
   }
 }

@@ -11,9 +11,9 @@ async function init() {
   const loginButton = document.querySelector('.loginButton')
 
   const rppgInstance = window.rppgInstance = new rppg({
-    onFrame: (data) => {
-      console.log('onFrame', data)
-    }
+    onFrame: (data) => console.log('onFrame', data),
+    onMeasurementProgress: (data) => console.log('onMeasurementProgress', data),
+    onMeasurementMeanData: (data) => console.log('onMeasurementMeanData', data),
   })
 
   await rppgInstance.initCamera({
@@ -33,12 +33,12 @@ async function init() {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: emailInput.value,
-          password: passwordInput.value
-        })
+          password: passwordInput.value,
+        }),
       })
       const { data } = await response.json()
       tokenInput.value = data.authToken
@@ -56,9 +56,6 @@ async function init() {
         onConnect: () => console.log('Socket connection established'),
         onClose: (event) => console.log('Socket connection closed', event),
         onError: (event) => console.log('Socket connection error', event),
-        onMessage: (messageType, data) => {
-          console.log(messageType, data)
-        },
       })
     }
     if (rppgInstance.processing) {

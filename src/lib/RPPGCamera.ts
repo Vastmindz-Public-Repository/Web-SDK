@@ -58,8 +58,8 @@ class RPPGCamera implements RPPGCameraInterface {
         },
         height: {
           ideal: this.config.height || 480,
-        }
-      }
+        },
+      },
     })
   }
 

@@ -6,33 +6,26 @@ export interface RPPGSocketConfig {
   onError?: (arg0: Event) => void;
   onMessage?: (
     arg0: string,
-    arg1:
-      AccessToken |
-      MeasurementMeanData |
-      MeasurementStatus |
-      SendingRateWarning |
-      MeasurementProgress |
-      MeasurementSignal |
-      MovingWarning |
-      BloodPressure |
-      SignalQuality |
-      InterferenceWarning |
-      UnstableConditionsWarning |
-      HrvMetrics) => void;
+    arg1: MessageEvents) => void;
 
-  onAccessToken?: (arg0: AccessToken) => void;
-  onMeasurementMeanData?: (arg0: MeasurementMeanData) => void;
-  onMeasurementStatus?: (arg0: MeasurementStatus) => void;
-  onSendingRateWarning?: (arg0: SendingRateWarning) => void;
-  onMeasurementProgress?: (arg0: MeasurementProgress) => void;
-  onMeasurementSignal?: (arg0: MeasurementSignal) => void;
-  onMovingWarning?: (arg0: MovingWarning) => void;
-  onBloodPressure?: (arg0: BloodPressure) => void;
-  onSignalQuality?: (arg0: SignalQuality) => void;
-  onInterferenceWarning?: (arg0: InterferenceWarning) => void;
-  onUnstableConditionsWarning?: (arg0: UnstableConditionsWarning) => void;
-  onHrvMetrics?: (arg0: HrvMetrics) => void;
+  onEvent?: (
+    arg0: string,
+    arg1: MessageEvents) => void;
 }
+
+export type MessageEvents =
+  AccessToken |
+  MeasurementMeanData |
+  MeasurementStatus |
+  SendingRateWarning |
+  MeasurementProgress |
+  MeasurementSignal |
+  MovingWarning |
+  BloodPressure |
+  SignalQuality |
+  InterferenceWarning |
+  UnstableConditionsWarning |
+  HrvMetrics
 
 export interface RPPGSocketSendMessage {
   bgrSignal: number[];

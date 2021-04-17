@@ -21,6 +21,13 @@
     "semi": [2, "never"],
     "no-plusplus": 0,
     "@typescript-eslint/ban-ts-ignore": 0,
-    "@typescript-eslint/ban-ts-comment": 0
+    "@typescript-eslint/ban-ts-comment": 0,
+    "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+    }]
   }
 }
