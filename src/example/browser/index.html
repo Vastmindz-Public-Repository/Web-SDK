@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container .video-container {
+      display: flex;
+    }
+    .container .video-container .video {
+      transform: scaleX(-1);
+    }
+    .container .video-container canvas {
+      display: none;
+    }
+
+    .container .control-container {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="video-container">
+      <video class="video"></video>
+      <canvas class="canvas"></canvas>
+    </div>
+    <div class="control-container">
+      <div class="login-container">
+        <input class="email" type="email" value="ggevgg@gmail.com" />
+        <input class="password" type="password" value="kenitek6" />
+        <button class="loginButton">Login</button>
+      </div>
+      <div class="tracker-container">
+        token: <input class="token" />
+        <button class="startButton" disabled>Start</button>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="rppg.min.js"></script>
+<script src="index.js"></script>

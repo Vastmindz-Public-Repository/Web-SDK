@@ -1,0 +1,28 @@
+{
+  "name": "rppg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "tsc && cp -r ./src/lib/module ./dist/lib/",
+    "build-browser": "npm run build && rollup -c && npm run copy-example",
+    "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/lib/module/rppg.* ./dist/example/browser && cp ./dist/rppg.* ./dist/example/browser",
+    "watch-browser": "npm run build-browser && http-server ./dist/example/browser",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "browser": "dist/rppg.min.js",
+  "devDependencies": {
+    "@types/emscripten": "^1.39.4",
+    "@types/node": "^14.14.41",
+    "rollup": "^2.45.2",
+    "rollup-plugin-babel-minify": "^10.0.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "dependencies": {
+    "@types/webpack-env": "^1.16.0",
+    "tslib": "^2.2.0"
+  }
+}
