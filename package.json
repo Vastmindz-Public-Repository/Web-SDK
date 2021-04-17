@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && cp -r ./src/lib/module ./dist/lib/",
     "build-browser": "npm run build && rollup -c && npm run copy-example",
-    "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/lib/module/rppg.* ./dist/example/browser && cp ./dist/rppg.* ./dist/example/browser",
+    "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/rppg.* ./dist/example/browser",
     "watch-browser": "npm run build-browser && http-server ./dist/example/browser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
