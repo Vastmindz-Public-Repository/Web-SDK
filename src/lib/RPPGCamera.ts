@@ -86,14 +86,14 @@ class RPPGCamera implements RPPGCameraInterface {
     }
   }
 
-  onError(event: Error) {
+  onError(event: Error): void {
     const { onError } = this.config
     if (typeof onError === 'function') {
       onError(event)
     }
   }
 
-  onSuccess(event: RPPGCameraInit) {
+  onSuccess(event: RPPGCameraInit): void {
     const { onSuccess } = this.config
     if (typeof onSuccess === 'function') {
       onSuccess(event)

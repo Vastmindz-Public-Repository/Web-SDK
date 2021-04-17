@@ -1,3 +1,5 @@
+/* global rppg */
+
 async function init() {
   const backendUrl = 'https://rppg-dev2.xyz/v1/account/api/public/login'
   const videoElement = document.querySelector('.video')

@@ -1,4 +1,4 @@
-import { SOCKET_URL } from './consts/api';
+import { SOCKET_URL } from './consts/api'
 import {
   RPPGSocketConfig,
   RPPGSocketInterface,
@@ -62,6 +62,7 @@ class RPPGSocket implements RPPGSocketInterface {
         }
 
         // TODO optimize
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const func = this.config[events[messageType]]
         if (func && typeof func === 'function') {
@@ -79,7 +80,7 @@ class RPPGSocket implements RPPGSocketInterface {
     })
   }
 
-  send(message: RPPGSocketSendMessage) {
+  send(message: RPPGSocketSendMessage): void {
     this.socket.send(JSON.stringify(message))
   }
 }

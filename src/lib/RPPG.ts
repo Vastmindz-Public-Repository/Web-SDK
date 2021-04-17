@@ -27,7 +27,7 @@ class RPPG implements RPPGinterface {
     // TODO verify config
   }
 
-  async init() {
+  async init(): Promise<void> {
     const {
       rppgTrackerConfig,
       rppgSocketConfig,
@@ -90,7 +90,7 @@ class RPPG implements RPPGinterface {
     this.height = height
   }
 
-  closeCamera() {
+  closeCamera(): void {
     if (this.rppgCamera) {
       this.rppgCamera.close()
     }
@@ -111,7 +111,7 @@ class RPPG implements RPPGinterface {
     this.processing = false
   }
 
-  async capture() {
+  async capture(): Promise<void> {
     if (this.processing) {
       requestAnimationFrame(this.capture.bind(this))
     }
@@ -150,7 +150,7 @@ class RPPG implements RPPGinterface {
     this.averageFps = +((1000 * this.frameNumber) / (this.timestamp - this.startTimeStamp)).toFixed(2)
   }
 
-  onFrame(data: RPPGOnFrame) {
+  onFrame(data: RPPGOnFrame): void {
     if (typeof this.config.onFrame === 'function') {
       this.config.onFrame(data)
     }

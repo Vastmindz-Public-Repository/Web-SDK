@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { PATH_TO_WASM } from './consts/api';
+import { PATH_TO_WASM } from './consts/api'
 import {
   ERROR_MODULE_INITIALIZATION,
   ERROR_MODULE_NOT_INITIALIZED,
@@ -124,7 +124,7 @@ class RPPGtracker implements RPPGTrackerInterface {
     return this.module.getFace()
   }
 
-  getROIs() {
+  getROIs(): void {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
