@@ -53,9 +53,12 @@ async function init() {
       await this.rppgInstance.initSocket({
         url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
         authToken: tokenInput.value,
+        onConnect: () => console.log('Socket connection established'),
+        onClose: (event) => console.log('Socket connection closed', event),
+        onError: (event) => console.log('Socket connection error', event),
         onMessage: (messageType, data) => {
           console.log(messageType, data)
-        }
+        },
       })
     }
     if (rppgInstance.processing) {

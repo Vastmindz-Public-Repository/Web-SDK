@@ -6,6 +6,7 @@ import {
 } from './RPPGSocket.types'
 
 const events = {
+  ACCESS_TOKEN: 'accessToken',
   MEASUREMENT_MEAN_DATA: 'onMeasurementMeanData',
   MEASUREMENT_STATUS: 'onMeasurementStatus',
   SENDING_RATE_WARNING: 'onSendingRateWarning',
@@ -13,9 +14,10 @@ const events = {
   MEASUREMENT_SIGNAL: 'onMeasurementSignal',
   MOVING_WARNING: 'onMovingWarning',
   BLOOD_PRESSURE: 'onBloodPressure',
-  SIGNAL_QUALITY: 'onSignalQuality',
-  INTERFERENCE_WARNING: 'onInterferenceWarning',
   UNSTABLE_CONDITIONS_WARNING: 'onUnstableConditionsWarning',
+  INTERFERENCE_WARNING: 'onInterferenceWarning',
+  SIGNAL_QUALITY: 'onSignalQuality',
+  HRV_METRICS: 'hrvMetrics',
 }
 
 class RPPGSocket implements RPPGSocketInterface {
@@ -40,7 +42,6 @@ class RPPGSocket implements RPPGSocketInterface {
 
     return new Promise((resolve, reject) => {
       socket.onopen = (event) => {
-        console.log('Connected', event)
         if (typeof onConnect === 'function') {
           onConnect(event)
         }
@@ -48,14 +49,12 @@ class RPPGSocket implements RPPGSocketInterface {
       }
 
       socket.onclose = (event) => {
-        console.log(event)
         if (typeof onClose === 'function') {
           onClose(event)
         }
       }
 
       socket.onmessage = (event) => {
-        // console.log(event)
         const { messageType, data } = JSON.parse(event.data) as { messageType: string; data: any}
         if (typeof onMessage === 'function') {
           onMessage(messageType, data)
@@ -70,7 +69,6 @@ class RPPGSocket implements RPPGSocketInterface {
       }
 
       socket.onerror = (event) => {
-        console.log('Error ', event)
         if (typeof onError === 'function') {
           onError(event)
         }

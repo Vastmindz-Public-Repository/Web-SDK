@@ -7,6 +7,7 @@ export interface RPPGSocketConfig {
   onMessage?: (
     arg0: string,
     arg1:
+      AccessToken |
       MeasurementMeanData |
       MeasurementStatus |
       SendingRateWarning |
@@ -16,8 +17,10 @@ export interface RPPGSocketConfig {
       BloodPressure |
       SignalQuality |
       InterferenceWarning |
-      UnstableConditionsWarning) => void;
+      UnstableConditionsWarning |
+      HrvMetrics) => void;
 
+  onAccessToken?: (arg0: AccessToken) => void;
   onMeasurementMeanData?: (arg0: MeasurementMeanData) => void;
   onMeasurementStatus?: (arg0: MeasurementStatus) => void;
   onSendingRateWarning?: (arg0: SendingRateWarning) => void;
@@ -28,6 +31,7 @@ export interface RPPGSocketConfig {
   onSignalQuality?: (arg0: SignalQuality) => void;
   onInterferenceWarning?: (arg0: InterferenceWarning) => void;
   onUnstableConditionsWarning?: (arg0: UnstableConditionsWarning) => void;
+  onHrvMetrics?: (arg0: HrvMetrics) => void;
 }
 
 export interface RPPGSocketSendMessage {
@@ -52,6 +56,10 @@ export enum RPPGSocketOnMessageType {
   SIGNAL_QUALITY,
   INTERFERENCE_WARNING,
   UNSTABLE_CONDITIONS_WARNING,
+}
+
+export interface AccessToken {
+  accessToken: string;
 }
 
 export interface MeasurementMeanData {
@@ -131,4 +139,10 @@ export interface InterferenceWarning {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UnstableConditionsWarning {
 
+}
+
+export interface HrvMetrics {
+  ibi: number;
+  rmssd: number
+  sdnn: number
 }
