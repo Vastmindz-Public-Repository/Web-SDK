@@ -40,8 +40,8 @@
 	          "hideGenerator": false,
             "navLinks": [
                 {
-                    "label": "Bitbucket",
-                    "href": "https://bitbucket.org/ggevgg/sdk"
+                    "label": "Github",
+                    "href": "https://github.com/Vastmindz-Public-Repository/Web-SDK"
                 },
                 {
                     "label": "Example",
