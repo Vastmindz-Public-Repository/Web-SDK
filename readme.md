@@ -6,7 +6,7 @@
 
 [Live demo](https://websdk1.blob.core.windows.net/sdk/example/index.html)
 
-[Source code of examples](https://bitbucket.org/ggevgg/sdk/src/master/src/example/)
+[Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example)
 
 
 ## Build
@@ -14,7 +14,7 @@
 #### Cloning repository:
 
 ```
-$ git clone https://ggevgg@bitbucket.org/ggevgg/sdk.git/wiki
+$ git clone https://github.com/Vastmindz-Public-Repository/Web-SDK
 $ cd sdk
 ```
 
