@@ -1,6 +1,8 @@
 # RPPG
 
-[Documentation](https://websdk1.blob.core.windows.net/sdk/docs/RPPG.html)
+[Documentation](https://websdk1.blob.core.windows.net/sdk/docs/index.html)
+
+[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk/docs/RPPG.html)
 
 [Live demo](https://websdk1.blob.core.windows.net/sdk/example/index.html)
 
