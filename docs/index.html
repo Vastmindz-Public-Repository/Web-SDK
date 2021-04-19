@@ -133,38 +133,17 @@
 <p><a href="https://websdk1.blob.core.windows.net/sdk/docs/RPPG.html">Documentation RPPG class</a></p>
 <p><a href="https://websdk1.blob.core.windows.net/sdk/example/index.html">Live demo</a></p>
 <p><a href="https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example">Source code of examples</a></p>
-<h2>Build</h2>
-<h4>Cloning repository:</h4>
-<pre class="prettyprint source"><code>$ git clone https://github.com/Vastmindz-Public-Repository/Web-SDK
-$ cd sdk
+<h2>Install</h2>
+<p>yarn</p>
+<pre class="prettyprint source"><code>$ yarn add https://github.com/Vastmindz-Public-Repository/Web-SDK
 </code></pre>
-<h4>Install dependencies</h4>
-<pre class="prettyprint source"><code>$ npm install
+<p>npm</p>
+<pre class="prettyprint source"><code>$ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 </code></pre>
-<h4>Build for usage with module structure</h4>
-<pre class="prettyprint source"><code>$ npm run build
+<p>cdn (<code>rppg</code> will be available as global in Browsers)</p>
+<pre class="prettyprint source"><code>&lt;script src=&quot;https://websdk1.blob.core.windows.net/sdk/dist/rppg.min.js&quot;>&lt;/script>
 </code></pre>
-<p>Here's an example of some Javscript code:</p>
-<pre class="prettyprint source lang-javascript"><code>import RPPG from 'dist/RPPG'
-const rppgInstance = new RPPG({
-  config
-})
-</code></pre>
-<h4>Build for usage with browser script</h4>
-<pre class="prettyprint source"><code>$ npm run build:browser
-</code></pre>
-<p>Here's an example of some HTML code:</p>
-<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;dist/rppg.min.js&quot;>
-&lt;script>
-const rppgInstance = new rppg({
-  config
-})
-&lt;/script>
-</code></pre>
-<h4>Build documentation</h4>
-<pre class="prettyprint source"><code>$ npm run build:docs
-</code></pre>
-<h2>Usage example</h2>
+<h2>Quick usage</h2>
 <pre class="prettyprint source lang-javascript"><code>import RPPG from './dist/lib/RPPG'
 ...
 const rppgInstance = new RPPG({
@@ -221,7 +200,40 @@ await rppgInstance.initSocket({
 })
 rppgInstance.start()
 ...
-</code></pre></article>
+</code></pre>
+<h2>Build</h2>
+<h4>Cloning repository:</h4>
+<pre class="prettyprint source"><code>$ git clone https://github.com/Vastmindz-Public-Repository/Web-SDK
+$ cd Web-SDK
+</code></pre>
+<h4>Install dependencies</h4>
+<pre class="prettyprint source"><code>$ npm install
+</code></pre>
+<h4>Build for usage with module structure</h4>
+<pre class="prettyprint source"><code>$ npm run build
+</code></pre>
+<p>Here's an example of some Javscript code:</p>
+<pre class="prettyprint source lang-javascript"><code>import RPPG from 'dist/RPPG'
+const rppgInstance = new RPPG({
+  config
+})
+</code></pre>
+<h4>Build for usage with browser script</h4>
+<pre class="prettyprint source"><code>$ npm run build:browser
+</code></pre>
+<p>Here's an example of some HTML code:</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;dist/rppg.min.js&quot;>
+&lt;script>
+const rppgInstance = new rppg({
+  config
+})
+&lt;/script>
+</code></pre>
+<h4>Build documentation</h4>
+<pre class="prettyprint source"><code>$ npm run build:docs
+</code></pre>
+<h2>Note</h2>
+<p>The sdk is based on the WebAssembly standard; therefore, on first use, it needs some time to download and compile the wasm and data files. After the first use, the browser may cache the file so that the next time no 'downloading' is required.</p></article>
     </section>
 
 
