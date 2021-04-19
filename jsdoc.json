@@ -1,0 +1,53 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "include": ["./src"],
+        "includePattern": "\\.(jsx|js|ts|tsx)$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "node_modules/better-docs/typescript",
+        "plugins/markdown",
+        "node_modules/better-docs/category"
+    ],
+    "opts": {
+        "encoding": "utf8",
+        "destination": "docs/",
+        "readme": "readme.md",
+        "recurse": true,
+        "verbose": true,
+        "template": "node_modules/better-docs"
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": false,
+        "search": true,
+        "default": {
+            "staticFiles": {
+              "include": [
+              ]
+            },
+            "outputSourceFiles": false
+        },
+        "better-docs": {
+            "name": "RPPG SDK Documentation",
+            "logo": "images/logo.png",
+            "title": "",
+            "css": "style.css",
+            "trackingCode": "tracking-code-which-will-go-to-the-HEAD",
+	          "hideGenerator": false,
+            "navLinks": [
+                {
+                    "label": "Bitbucket",
+                    "href": "https://bitbucket.org/ggevgg/sdk"
+                },
+                {
+                    "label": "Example",
+                    "href": "https://websdk1.blob.core.windows.net/sdk/example/index.html"
+                }
+            ]
+        }
+    }
+}

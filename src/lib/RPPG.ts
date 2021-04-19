@@ -21,9 +21,47 @@ import {
 } from './RPPGTracker.types'
 import { EVENTS } from './consts/events'
 
+/**
+ * Class RPPG
+ * @example
+ * const rppgInstance = window.rppgInstance = new rppg({
+ *   onFrame: (data) => console.log('onFrame', data),
+ *   onMeasurementProgress: (data) => console.log('onMeasurementProgress', data),
+ *   onMeasurementMeanData: (data) => console.log('onMeasurementMeanData', data),
+ * })
+ * await rppgInstance.initCamera({
+ *   width: 640,
+ *   height: 480,
+ *   videoElement: videoElement,
+ *   canvasElement: canvasElement,
+ * })
+ * await rppgInstance.initTracker({
+ *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+ * })
+ * await this.rppgInstance.initSocket({
+ *   url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
+ *   authToken: 'token',
+ *   onConnect: () => console.log('Socket connection established'),
+ *   onClose: (event) => console.log('Socket connection closed', event),
+ *   onError: (event) => console.log('Socket connection error', event),
+ * })
+ * this.rppgInstance.start()
+ */
 class RPPG implements RPPGinterface {
-  config: RPPGConfig;
-  processing = false
+  /**
+   * config
+   */
+  public config: RPPGConfig;
+
+  /**
+   * true, when tracking is active
+   */
+  public processing: boolean
+
+  /**
+   * RPPG version
+   */
+  public version: string
 
   private rppgCamera: RPPGCameraInterface | null = null;
   private rppgTracker: RPPGTrackerInterface | null = null;
@@ -37,8 +75,13 @@ class RPPG implements RPPGinterface {
   private startTimeStamp = 0
   private instantFps = 0
 
+  /**
+   * @param {RPPGConfig} config Config passed to RPPG
+   */
   constructor(config: RPPGConfig = {}) {
     this.config = config
+    this.version = '0.0.0'
+    this.processing = false
     // TODO verify config
   }
 
@@ -62,6 +105,16 @@ class RPPG implements RPPGinterface {
     }
   }
 
+  /**
+   * Initialize RPPG Tracker instance
+   * @param {RPPGTrackerConfig} rppgTrackerConfig
+   * @return {Promise<void>}
+   * @example
+   * const rppgInstance = new RPPG()
+   * await rppgInstance.initTracker({
+   *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+   * })
+   */
   initTracker(rppgTrackerConfig: RPPGTrackerConfig = {}): Promise<void> {
     if (this.rppgTracker) {
       // TODO
@@ -80,6 +133,21 @@ class RPPG implements RPPGinterface {
     return this.rppgTracker.init()
   }
 
+  /**
+   * Initialize RPPG Socket instance
+   * @param {RPPGSocketConfig} rppgSocketConfig Socket configuration
+   * @return {Promise<Event>}
+   * @example
+   * const rppgInstance = new RPPG()
+   *   await this.rppgInstance.initSocket({
+   *     url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
+   *     authToken: 'token',
+   *     onConnect: () => console.log('Socket connection established'),
+   *     onClose: (event) => console.log('Socket connection closed', event),
+   *     onError: (event) => console.log('Socket connection error', event),
+   *   })
+   * 
+   */
   initSocket(rppgSocketConfig: RPPGSocketConfig): Promise<Event> {
     if (this.rppgSocket) {
       // TODO
@@ -93,6 +161,26 @@ class RPPG implements RPPGinterface {
     return this.rppgSocket.init()
   }
 
+  /**
+   * Initialize RPPG Camera instance
+   * @param {RPPGCameraConfig} rppgCameraConfig
+   * @return {Promise<void>}
+   * @example
+   * const rppgInstance = new RPPG()
+   * const {
+   *   width,
+   *   height,
+   *   stream
+   * } = await rppgInstance.initCamera({
+   *   width: 640,
+   *   height: 480,
+   *   videoElement: document.querySelector('video'),
+   *   canvasElement: document.querySelector('canvas'),
+   *   onSuccess: data => console.log('Initializing camera success', data),
+   *   onError: error => console.error('Error initializing camera', error)
+   * })
+   *
+   */
   async initCamera(rppgCameraConfig: RPPGCameraConfig): Promise<void> {
     if (this.rppgCamera) {
       // TODO
@@ -108,14 +196,21 @@ class RPPG implements RPPGinterface {
     this.height = height
   }
 
+  /**
+   * Close camera stream
+   * @return {void}
+   */
   closeCamera(): void {
     if (this.rppgCamera) {
       this.rppgCamera.close()
     }
   }
 
+  /**
+   * Start tracking
+   * @return {void}
+   */
   public start(): void {
-    console.log('start')
     this.processing = true
     this.frameNumber = 0
     this.averageFps = 0
@@ -124,12 +219,15 @@ class RPPG implements RPPGinterface {
     this.capture()
   }
 
+  /**
+   * Stop tracking
+   * @return {void}
+   */
   public stop(): void {
-    console.log('stop')
     this.processing = false
   }
 
-  async capture(): Promise<void> {
+  private async capture(): Promise<void> {
     if (this.processing) {
       requestAnimationFrame(this.capture.bind(this))
     }
@@ -168,6 +266,15 @@ class RPPG implements RPPGinterface {
     this.averageFps = +((1000 * this.frameNumber) / (this.timestamp - this.startTimeStamp)).toFixed(2)
   }
 
+  /**
+   * Describe your function
+   * @param {RPPGOnFrame} data
+   * @return {void}
+   * @example
+   * const rppgInstance = new rppg({
+   *   onFrame: (data) => console.log('onFrame', data),
+   * })
+   */
   onFrame(data: RPPGOnFrame): void {
     if (typeof this.config.onFrame === 'function') {
       this.config.onFrame(data)

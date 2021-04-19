@@ -12,7 +12,12 @@ import {
   RPPGTrackerProcessLandmarkData,
 } from './RPPGTracker.types'
 
-class RPPGtracker implements RPPGTrackerInterface {
+/**
+ * Class RPPGTracker
+ * @example
+ * const rppgTrackerInstance = new RPPGTracker()
+ */
+class RPPGTracker implements RPPGTrackerInterface {
   config: RPPGTrackerConfig;
 
   private Module = Module;
@@ -24,6 +29,9 @@ class RPPGtracker implements RPPGTrackerInterface {
   private width!: number;
   private height!: number;
 
+  /**
+   * @param {RPPGTrackerConfig} config Config passed to RPPGTracker
+   */
   constructor(config: RPPGTrackerConfig = {}) {
     this.width = config.width || 0
     this.height = config.height || 0
@@ -31,6 +39,10 @@ class RPPGtracker implements RPPGTrackerInterface {
     this.bufferSize = this.width * this.height * this.deepColor
   }
 
+  /**
+   * Init RPPG Tracker instance
+   * @returns {Promise<void>}
+   */
   async init(): Promise<void> {
     try {
       
@@ -58,7 +70,7 @@ class RPPGtracker implements RPPGTrackerInterface {
     }
   }
 
-  initMemoryBuffer(): void {
+  private initMemoryBuffer(): void {
     if (!this.module) {
       return
     }
@@ -93,6 +105,10 @@ class RPPGtracker implements RPPGTrackerInterface {
     }
   }
 
+  /**
+   * getBgr1d
+   * @returns {number[]}
+   */
   getBgr1d(): number[] {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
@@ -105,6 +121,10 @@ class RPPGtracker implements RPPGTrackerInterface {
     return bgr1dArr
   }
 
+  /**
+   * getLastLandmarks
+   * @returns {number[]}
+   */
   getLastLandmarks(): number[] {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
@@ -117,6 +137,10 @@ class RPPGtracker implements RPPGTrackerInterface {
     return landmarksArr
   }
 
+  /**
+   * getFace
+   * @returns {number[]}
+   */
   getFace(): number[] {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
@@ -124,6 +148,10 @@ class RPPGtracker implements RPPGTrackerInterface {
     return this.module.getFace()
   }
 
+  /**
+   * getROIs
+   * @returns {void[]}
+   */
   getROIs(): void {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
@@ -132,4 +160,4 @@ class RPPGtracker implements RPPGTrackerInterface {
   }
 }
 
-export default RPPGtracker
+export default RPPGTracker

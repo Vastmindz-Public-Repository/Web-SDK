@@ -5,6 +5,11 @@ import {
   RPPGCameraInterface,
 } from './RPPGCamera.types'
 
+/**
+ * Class RPPGCamera
+ * @example
+ * const rppgCameraInstance = new RPPGCamera()
+ */
 class RPPGCamera implements RPPGCameraInterface {
   public config: RPPGCameraConfig
 
@@ -15,6 +20,9 @@ class RPPGCamera implements RPPGCameraInterface {
   private width = 0
   private height = 0
 
+  /**
+   * @param {RPPGCameraConfig} config Config passed to RPPGCamera
+   */
   constructor(config: RPPGCameraConfig) {
     this.config = config
     this.videoElement = config.videoElement || document.createElement('video')
@@ -23,6 +31,30 @@ class RPPGCamera implements RPPGCameraInterface {
     this.stream = null
   }
 
+  /**
+   * Init RPPG Camera instance
+   * 
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * const rppgInstance = new RPPG()
+   * const {
+   *   width,
+   *   height,
+   *   stream
+   * } = await rppgInstance.initCamera({
+   *   width: 640,
+   *   height: 480,
+   *   videoElement: document.querySelector('video'),
+   *   canvasElement: document.querySelector('canvas'),
+   *   onSuccess: data => console.log('Initializing camera success', data),
+   *   onError: error => console.error('Error initializing camera', error)
+   * })
+   * ```
+   * 
+   * @returns {Promise<RPPGCameraInit>} Returns actual parameters of camera
+   *
+   */
   async init(): Promise<RPPGCameraInit> {
     try {
       this.stream = await this.getWebcamStream()

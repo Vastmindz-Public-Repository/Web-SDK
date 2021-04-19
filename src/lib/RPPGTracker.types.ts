@@ -1,18 +1,46 @@
+/**
+ * RPPGTrackerConfig
+ */
 export interface RPPGTrackerConfig {
+  /** */
   width?: number;
+
+  /** */
   height?: number;
+
+  /** */
   pathToWasmData?: string;
+
+  /** */
   onError?: () => void;
+
+  /** */
   onBgr1d?: () => void;
+
+  /** */
   onLandmarks?: () => void;
+
+  /** */
   onStatus?: () => void;
+
+  /** */
   onFace?: () => void;
 }
 
+/**
+ * RPPGTrackerProcessLandmarkData
+ */
 export interface RPPGTrackerProcessLandmarkData {
+  /** */
   status: string;
+
+  /** */
   bgr1d: number[];
+
+  /** */
   landmarks: number[];
+
+  /** */
   face: number[];
 }
 

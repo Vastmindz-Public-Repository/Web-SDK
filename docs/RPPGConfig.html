@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  tracking-code-which-will-go-to-the-HEAD
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> RPPGConfig</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="images/logo.png" alt="logo">
+                </a>
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">RPPG SDK Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://bitbucket.org/ggevgg/sdk"
+                        >
+                            Bitbucket
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="https://websdk1.blob.core.windows.net/sdk/example/index.html"
+                        >
+                            Example
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="RPPG.html">RPPG</a></li><li><a href="RPPGCamera.html">RPPGCamera</a></li><li><a href="RPPGSocket.html">RPPGSocket</a></li><li><a href="RPPGTracker.html">RPPGTracker</a></li></ul><h3>Interfaces</h3><ul><li><a href="AccessToken.html">AccessToken</a></li><li><a href="BloodPressure.html">BloodPressure</a></li><li><a href="HrvMetrics.html">HrvMetrics</a></li><li><a href="InterferenceWarning.html">InterferenceWarning</a></li><li><a href="MeasurementMeanData.html">MeasurementMeanData</a></li><li><a href="MeasurementProgress.html">MeasurementProgress</a></li><li><a href="MeasurementSignal.html">MeasurementSignal</a></li><li><a href="MeasurementStatus.html">MeasurementStatus</a></li><li><a href="MovingWarning.html">MovingWarning</a></li><li><a href="RPPGCameraConfig.html">RPPGCameraConfig</a></li><li><a href="RPPGCameraGetFrame.html">RPPGCameraGetFrame</a></li><li><a href="RPPGCameraInit.html">RPPGCameraInit</a></li><li><a href="RPPGConfig.html">RPPGConfig</a></li><li><a href="RPPGOnFrame.html">RPPGOnFrame</a></li><li><a href="RPPGSocketConfig.html">RPPGSocketConfig</a></li><li><a href="RPPGSocketSendMessage.html">RPPGSocketSendMessage</a></li><li><a href="RPPGTrackerConfig.html">RPPGTrackerConfig</a></li><li><a href="RPPGTrackerProcessLandmarkData.html">RPPGTrackerProcessLandmarkData</a></li><li><a href="SendingRateWarning.html">SendingRateWarning</a></li><li><a href="SignalQuality.html">SignalQuality</a></li><li><a href="UnstableConditionsWarning.html">UnstableConditionsWarning</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BloodPressureStatus">BloodPressureStatus</a></li><li><a href="global.html#RPPGSocketOnMessageType">RPPGSocketOnMessageType</a></li><li><a href="global.html#StatusCode">StatusCode</a></li><li><a href="global.html#StressStatus">StressStatus</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Interface</p>
+                    <h1>RPPGConfig</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>RPPGConfig</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>RPPGConfig</p>
+<p>This is config for RPPG instance</p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMeasurementMeanData: data => console.log('MeasurementMeanData:', data)
+})
+</code></pre></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onAccessToken">
+    <a class="href-link" href="#onAccessToken">#</a>
+    
+    <span class="code-name">
+        onAccessToken
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onAccessToken event, cb: <a href="AccessToken.html"><code>AccessToken</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onAccessToken: (<a href="AccessToken.html"><code>AccessToken</code></a>) => console.log('onAccessToken:', <a href="AccessToken.html"><code>AccessToken</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onBloodPressure">
+    <a class="href-link" href="#onBloodPressure">#</a>
+    
+    <span class="code-name">
+        onBloodPressure
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onBloodPressure event, cb: <a href="BloodPressure.html"><code>BloodPressure</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onBloodPressure: (<a href="BloodPressure.html"><code>BloodPressure</code></a>) => console.log('onBloodPressure:', <a href="BloodPressure.html"><code>BloodPressure</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onFrame">
+    <a class="href-link" href="#onFrame">#</a>
+    
+    <span class="code-name">
+        onFrame
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onFrame event, cb: <a href="RPPGOnFrame.html"><code>RPPGOnFrame</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onFrame: (<a href="RPPGOnFrame.html"><code>RPPGOnFrame</code></a>) => console.log('onFrame:', <a href="RPPGOnFrame.html"><code>RPPGOnFrame</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onHrvMetrics">
+    <a class="href-link" href="#onHrvMetrics">#</a>
+    
+    <span class="code-name">
+        onHrvMetrics
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onHrvMetrics event, cb: <a href="HrvMetrics.html"><code>HrvMetrics</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onHrvMetrics: (<a href="HrvMetrics.html"><code>HrvMetrics</code></a>) => console.log('onHrvMetrics:', <a href="HrvMetrics.html"><code>HrvMetrics</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onInterferenceWarning">
+    <a class="href-link" href="#onInterferenceWarning">#</a>
+    
+    <span class="code-name">
+        onInterferenceWarning
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onInterferenceWarning event, cb: <a href="InterferenceWarning.html"><code>InterferenceWarning</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onInterferenceWarning: (<a href="InterferenceWarning.html"><code>InterferenceWarning</code></a>) => console.log('onInterferenceWarning:', <a href="InterferenceWarning.html"><code>InterferenceWarning</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onMeasurementMeanData">
+    <a class="href-link" href="#onMeasurementMeanData">#</a>
+    
+    <span class="code-name">
+        onMeasurementMeanData
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onMeasurementMeanData event, cb: <a href="MeasurementMeanData.html"><code>MeasurementMeanData</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMeasurementMeanData: (<a href="MeasurementMeanData.html"><code>MeasurementMeanData</code></a>) => console.log('onMeasurementMeanData:', <a href="MeasurementMeanData.html"><code>MeasurementMeanData</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onMeasurementProgress">
+    <a class="href-link" href="#onMeasurementProgress">#</a>
+    
+    <span class="code-name">
+        onMeasurementProgress
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onMeasurementProgress event, cb: <a href="MeasurementProgress.html"><code>MeasurementProgress</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMeasurementProgress: (<a href="MeasurementProgress.html"><code>MeasurementProgress</code></a>) => console.log('onMeasurementProgress:', <a href="MeasurementProgress.html"><code>MeasurementProgress</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onMeasurementSignal">
+    <a class="href-link" href="#onMeasurementSignal">#</a>
+    
+    <span class="code-name">
+        onMeasurementSignal
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onMeasurementSignal event, cb: <a href="MeasurementSignal.html"><code>MeasurementSignal</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMeasurementSignal: (<a href="MeasurementSignal.html"><code>MeasurementSignal</code></a>) => console.log('onMeasurementSignal:', <a href="MeasurementSignal.html"><code>MeasurementSignal</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onMeasurementStatus">
+    <a class="href-link" href="#onMeasurementStatus">#</a>
+    
+    <span class="code-name">
+        onMeasurementStatus
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onMeasurementStatus event, cb: <a href="MeasurementStatus.html"><code>MeasurementStatus</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMeasurementStatus: (<a href="MeasurementStatus.html"><code>MeasurementStatus</code></a>) => console.log('onMeasurementStatus:', <a href="MeasurementStatus.html"><code>MeasurementStatus</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onMovingWarning">
+    <a class="href-link" href="#onMovingWarning">#</a>
+    
+    <span class="code-name">
+        onMovingWarning
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onMovingWarning event, cb: <a href="MovingWarning.html"><code>MovingWarning</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onMovingWarning: (<a href="MovingWarning.html"><code>MovingWarning</code></a>) => console.log('onMovingWarning:', <a href="MovingWarning.html"><code>MovingWarning</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onSendingRateWarning">
+    <a class="href-link" href="#onSendingRateWarning">#</a>
+    
+    <span class="code-name">
+        onSendingRateWarning
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onSendingRateWarning event, cb: <a href="SendingRateWarning.html"><code>SendingRateWarning</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onSendingRateWarning: (<a href="SendingRateWarning.html"><code>SendingRateWarning</code></a>) => console.log('onSendingRateWarning:', <a href="SendingRateWarning.html"><code>SendingRateWarning</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onSignalQuality">
+    <a class="href-link" href="#onSignalQuality">#</a>
+    
+    <span class="code-name">
+        onSignalQuality
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onSignalQuality event, cb: <a href="SignalQuality.html"><code>SignalQuality</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onSignalQuality: (<a href="SignalQuality.html"><code>SignalQuality</code></a>) => console.log('onSignalQuality:', <a href="SignalQuality.html"><code>SignalQuality</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onUnstableConditionsWarning">
+    <a class="href-link" href="#onUnstableConditionsWarning">#</a>
+    
+    <span class="code-name">
+        onUnstableConditionsWarning
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onUnstableConditionsWarning event, cb: <a href="UnstableConditionsWarning.html"><code>UnstableConditionsWarning</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onUnstableConditionsWarning: (<a href="UnstableConditionsWarning.html"><code>UnstableConditionsWarning</code></a>) => console.log('onUnstableConditionsWarning:', <a href="UnstableConditionsWarning.html"><code>UnstableConditionsWarning</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

@@ -5,9 +5,10 @@
   "main": "./src/index.ts",
   "scripts": {
     "build": "tsc && cp -r ./src/lib/module ./dist/lib/",
-    "build-browser": "npm run build && rollup -c && npm run copy-example",
+    "build:browser": "npm run build && rollup -c && npm run copy-example",
+    "build:doc": "jsdoc -c jsdoc.json",
     "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/rppg.* ./dist/example/browser",
-    "watch-browser": "npm run build-browser && http-server ./dist/example/browser",
+    "example:browser": "npm run build:browser && http-server ./dist/example/browser",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +20,9 @@
     "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "better-docs": "^2.3.2",
     "eslint": "^7.24.0",
+    "jsdoc-to-markdown": "^7.0.1",
     "rollup": "^2.45.2",
     "rollup-plugin-babel-minify": "^10.0.0",
     "rollup-plugin-commonjs": "^10.1.0",
