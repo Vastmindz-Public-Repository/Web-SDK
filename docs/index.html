@@ -127,6 +127,102 @@
 
 
 
+    <section>
+        <article><h1>RPPG</h1>
+<p><a href="https://websdk1.blob.core.windows.net/sdk/docs/RPPG.html">Documentation</a></p>
+<p><a href="https://websdk1.blob.core.windows.net/sdk/example/index.html">Live demo</a></p>
+<p><a href="https://bitbucket.org/ggevgg/sdk/src/master/src/example/">Source code of examples</a></p>
+<h2>Build</h2>
+<h4>Cloning repository:</h4>
+<pre class="prettyprint source"><code>$ git clone https://ggevgg@bitbucket.org/ggevgg/sdk.git/wiki
+$ cd sdk
+</code></pre>
+<h4>Install dependencies</h4>
+<pre class="prettyprint source"><code>$ npm install
+</code></pre>
+<h4>Build for usage with module structure</h4>
+<pre class="prettyprint source"><code>$ npm run build
+</code></pre>
+<p>Here's an example of some Javscript code:</p>
+<pre class="prettyprint source lang-javascript"><code>import RPPG from 'dist/RPPG'
+const rppgInstance = new RPPG({
+  config
+})
+</code></pre>
+<h4>Build for usage with browser script</h4>
+<pre class="prettyprint source"><code>$ npm run build:browser
+</code></pre>
+<p>Here's an example of some HTML code:</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;dist/rppg.min.js&quot;>
+&lt;script>
+const rppgInstance = new rppg({
+  config
+})
+&lt;/script>
+</code></pre>
+<h4>Build documentation</h4>
+<pre class="prettyprint source"><code>$ npm run build:docs
+</code></pre>
+<h2>Usage example</h2>
+<pre class="prettyprint source lang-javascript"><code>import RPPG from './dist/lib/RPPG'
+...
+const rppgInstance = new RPPG({
+  onFrame: (data) => {
+    console.log('frame data:', data)
+    // will print frame data:
+    // {
+    //   averageFps,
+    //   instantFps,
+    //   rppgTrackerData,
+    //   timestamp
+    // }
+
+    console.log('face coordinates data:', data.face)
+    // will print array of face data:
+    // [x, y, width, height]
+  },
+
+  onMeasurementMeanData: (data) => {
+    console.log('MeasurementMeanData:', data)
+    // will print MeasurementMeanData:
+    // {
+    //   &quot;bpm&quot;: 74,
+    //   &quot;rr&quot;: 154,
+    //   &quot;oxygen&quot;: 99,
+    //   &quot;stressStatus&quot;: &quot;NORMAL&quot;,
+    //   &quot;bloodPressureStatus&quot;: &quot;NORMAL&quot;
+    // }
+  }
+
+  onMeasurementProgress: (data) => {
+    console.log('MeasurementProgress:', data)
+    // will print MeasurementProgress data:
+    // {
+    //   &quot;progressPercent&quot;: 55,
+    // }
+  }
+})
+await rppgInstance.initCamera({
+  width: 640,
+  height: 480,
+  videoElement: document.querySelector('video'),
+  canvasElement: document.querySelector('canvas'),
+  onSuccess: ({
+    width,
+    height,
+  }) => {
+    console.log('obtained values of width and height', width, height)
+  },
+})
+await rppgInstance.initTracker()
+await rppgInstance.initSocket({
+  authToken: this.authToken,
+})
+rppgInstance.start()
+...
+</code></pre></article>
+    </section>
+
 
 
 
