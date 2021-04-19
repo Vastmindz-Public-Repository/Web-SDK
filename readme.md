@@ -9,57 +9,25 @@
 [Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example)
 
 
-## Build
+## Install
 
-#### Cloning repository:
-
+yarn
 ```
-$ git clone https://github.com/Vastmindz-Public-Repository/Web-SDK
-$ cd sdk
+$ yarn add https://github.com/Vastmindz-Public-Repository/Web-SDK
 ```
 
-#### Install dependencies
+npm
 ```
-$ npm install
-```
-
-#### Build for usage with module structure
-
-```
-$ npm run build
+$ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 ```
 
-Here's an example of some Javscript code:
-```javascript
-import RPPG from 'dist/RPPG'
-const rppgInstance = new RPPG({
-  config
-})
+cdn (```rppg``` will be available as global in Browsers)
+```
+<script src="https://websdk1.blob.core.windows.net/sdk/dist/rppg.min.js"></script>
 ```
 
-#### Build for usage with browser script
 
-```
-$ npm run build:browser
-```
-
-Here's an example of some HTML code:
-```html
-<script src="dist/rppg.min.js">
-<script>
-const rppgInstance = new rppg({
-  config
-})
-</script>
-```
-
-#### Build documentation
-
-```
-$ npm run build:docs
-```
-
-## Usage example
+## Quick usage
 
 ```javascript
 import RPPG from './dist/lib/RPPG'
@@ -119,3 +87,57 @@ await rppgInstance.initSocket({
 rppgInstance.start()
 ...
 ```
+
+
+## Build
+
+#### Cloning repository:
+
+```
+$ git clone https://github.com/Vastmindz-Public-Repository/Web-SDK
+$ cd Web-SDK
+```
+
+#### Install dependencies
+```
+$ npm install
+```
+
+#### Build for usage with module structure
+
+```
+$ npm run build
+```
+
+Here's an example of some Javscript code:
+```javascript
+import RPPG from 'dist/RPPG'
+const rppgInstance = new RPPG({
+  config
+})
+```
+
+#### Build for usage with browser script
+
+```
+$ npm run build:browser
+```
+
+Here's an example of some HTML code:
+```html
+<script src="dist/rppg.min.js">
+<script>
+const rppgInstance = new rppg({
+  config
+})
+</script>
+```
+
+#### Build documentation
+
+```
+$ npm run build:docs
+```
+
+## Note
+The sdk is based on the WebAssembly standard; therefore, on first use, it needs some time to download and compile the wasm and data files. After the first use, the browser may cache the file so that the next time no 'downloading' is required.
