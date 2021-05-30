@@ -17,7 +17,7 @@ var RPPGCamera = /** @class */ (function () {
         this.videoElement = config.videoElement || document.createElement('video');
         this.canvasElement = config.canvasElement || document.createElement('canvas');
         this.ctx = this.canvasElement.getContext('2d');
-        this.stream = null;
+        this.stream = config.stream || null;
     }
     /**
      * Init RPPG Camera instance
@@ -49,14 +49,17 @@ var RPPGCamera = /** @class */ (function () {
             return tslib_1.__generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 3, , 4]);
+                        _b.trys.push([0, 4, , 5]);
+                        if (!!this.stream) return [3 /*break*/, 2];
                         _a = this;
                         return [4 /*yield*/, this.getWebcamStream()];
                     case 1:
                         _a.stream = _b.sent();
+                        _b.label = 2;
+                    case 2:
                         this.videoElement.srcObject = this.stream;
                         return [4 /*yield*/, this.videoElement.play()];
-                    case 2:
+                    case 3:
                         _b.sent();
                         this.width = this.videoElement.videoWidth;
                         this.height = this.videoElement.videoHeight;
@@ -72,12 +75,12 @@ var RPPGCamera = /** @class */ (function () {
                                 width: this.width,
                                 height: this.height,
                             }];
-                    case 3:
+                    case 4:
                         error_1 = _b.sent();
                         console.log('Error initializing webcam', error_1);
                         this.onError(error_1);
                         throw error_1;
-                    case 4: return [2 /*return*/];
+                    case 5: return [2 /*return*/];
                 }
             });
         });

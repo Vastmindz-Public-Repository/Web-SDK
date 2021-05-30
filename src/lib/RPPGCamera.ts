@@ -28,7 +28,7 @@ class RPPGCamera implements RPPGCameraInterface {
     this.videoElement = config.videoElement || document.createElement('video')
     this.canvasElement = config.canvasElement || document.createElement('canvas')
     this.ctx = this.canvasElement.getContext('2d')
-    this.stream = null
+    this.stream = config.stream || null
   }
 
   /**
@@ -57,7 +57,9 @@ class RPPGCamera implements RPPGCameraInterface {
    */
   async init(): Promise<RPPGCameraInit> {
     try {
-      this.stream = await this.getWebcamStream()
+      if (!this.stream) {
+        this.stream = await this.getWebcamStream()
+      }
       this.videoElement.srcObject = this.stream
       await this.videoElement.play()
       this.width = this.videoElement.videoWidth

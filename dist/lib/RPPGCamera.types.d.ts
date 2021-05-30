@@ -53,8 +53,9 @@ export interface RPPGCameraInit {
  * ```javascript
  * const rppgInstance = new RPPG()
  * await rppgInstance.initCamera({
- *   width: 640,
- *   height: 480,
+ *   stream, // used for external Media stream, eg: WebRTC Media stream
+ *   width: 640, // used when no stream passed, get stream from webcam
+ *   height: 480, // used when no stream passed, get stream from webcam
  *   videoElement: document.querySelector('video'),
  *   canvasElement: document.querySelector('canvas'),
  *   onSuccess: data => console.log('Initializing camera success', data),
@@ -86,6 +87,11 @@ export interface RPPGCameraConfig {
     * @memberof RPPGCameraConfig
     */
     canvasElement?: HTMLCanvasElement | null;
+    /**
+     * Media stream
+     * @memberof RPPGCameraConfig
+     */
+    stream?: MediaStream | null;
     /**
      * onError event
      * @memberof RPPGCameraConfig

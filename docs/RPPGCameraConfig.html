@@ -127,8 +127,9 @@
 <h3>Usage with regular javascript</h3>
 <pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG()
 await rppgInstance.initCamera({
-  width: 640,
-  height: 480,
+  stream, // used for external Media stream, eg: WebRTC Media stream
+  width: 640, // used when no stream passed, get stream from webcam
+  height: 480, // used when no stream passed, get stream from webcam
   videoElement: document.querySelector('video'),
   canvasElement: document.querySelector('canvas'),
   onSuccess: data => console.log('Initializing camera success', data),
@@ -442,6 +443,81 @@ Default: 480 (px)</p>
 
 <div class="description">
     <p>onSuccess event</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">MediaStream</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </span>
+
+<h4 class="name" id="stream">
+    <a class="href-link" href="#stream">#</a>
+    
+    <span class="code-name">
+        stream
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>Media stream</p>
 </div>
 
 
