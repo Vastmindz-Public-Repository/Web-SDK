@@ -35,5 +35,9 @@ declare class RPPGSocket implements RPPGSocketInterface {
      * @returns {Promise<Event>}
      */
     send(message: RPPGSocketSendMessage): void;
+    /**
+     * Close socket connection
+     */
+    close(): Promise<void>;
 }
 export default RPPGSocket;

@@ -126,13 +126,23 @@ var RPPG = /** @class */ (function () {
      *
      */
     RPPG.prototype.initSocket = function (rppgSocketConfig) {
-        if (this.rppgSocket) {
-            // TODO
-            console.log('Error initializing - rppgSocket is already initialized');
-            return Promise.reject();
-        }
-        this.rppgSocket = new RPPGSocket_1.default(tslib_1.__assign(tslib_1.__assign({}, rppgSocketConfig), { onEvent: this.onEvent.bind(this) }));
-        return this.rppgSocket.init();
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.rppgSocket) return [3 /*break*/, 2];
+                        console.log('Re-inititialize socket connection');
+                        this.processing = false;
+                        return [4 /*yield*/, this.rppgSocket.close()];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        this.rppgSocket = new RPPGSocket_1.default(tslib_1.__assign(tslib_1.__assign({}, rppgSocketConfig), { onEvent: this.onEvent.bind(this) }));
+                        return [2 /*return*/, this.rppgSocket.init()];
+                }
+            });
+        });
     };
     /**
      * Initialize RPPG Camera instance

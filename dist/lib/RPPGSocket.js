@@ -72,6 +72,22 @@ var RPPGSocket = /** @class */ (function () {
     RPPGSocket.prototype.send = function (message) {
         this.socket.send(JSON.stringify(message));
     };
+    /**
+     * Close socket connection
+     */
+    RPPGSocket.prototype.close = function () {
+        var _this = this;
+        var onClose = this.config.onClose;
+        return new Promise(function (resolve) {
+            _this.socket.onclose = function (event) {
+                resolve();
+                if (typeof onClose === 'function') {
+                    onClose(event);
+                }
+            };
+            _this.socket.close();
+        });
+    };
     return RPPGSocket;
 }());
 exports.default = RPPGSocket;

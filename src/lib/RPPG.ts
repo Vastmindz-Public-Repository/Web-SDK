@@ -148,11 +148,11 @@ class RPPG implements RPPGinterface {
    *   })
    * 
    */
-  initSocket(rppgSocketConfig: RPPGSocketConfig): Promise<Event> {
+  async initSocket(rppgSocketConfig: RPPGSocketConfig): Promise<Event> {
     if (this.rppgSocket) {
-      // TODO
-      console.log('Error initializing - rppgSocket is already initialized')
-      return Promise.reject()
+      console.log('Re-inititialize socket connection')
+      this.processing = false
+      await this.rppgSocket.close()
     }
     this.rppgSocket = new RPPGSocket({
       ...rppgSocketConfig,

@@ -92,6 +92,24 @@ class RPPGSocket implements RPPGSocketInterface {
   send(message: RPPGSocketSendMessage): void {
     this.socket.send(JSON.stringify(message))
   }
+
+  /**
+   * Close socket connection
+   */
+  close(): Promise<void> {
+    const {
+      onClose,
+    } = this.config
+    return new Promise(resolve => {
+      this.socket.onclose = event => {
+        resolve()
+        if (typeof onClose === 'function') {
+          onClose(event)
+        }
+      }
+      this.socket.close()
+    })
+  }
 }
 
 export default RPPGSocket
