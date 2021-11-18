@@ -32,7 +32,7 @@ var RPPGSocket = /** @class */ (function () {
      * @returns {Promise<Event>}
      */
     RPPGSocket.prototype.init = function () {
-        var url = (this.config.url || api_1.SOCKET_URL) + "?authToken=" + this.config.authToken;
+        var url = "".concat(this.config.url || api_1.SOCKET_URL, "?authToken=").concat(this.config.authToken);
         var socket = new WebSocket(url);
         this.socket = socket;
         var _a = this.config, onConnect = _a.onConnect, onClose = _a.onClose, onMessage = _a.onMessage, onEvent = _a.onEvent, onError = _a.onError;

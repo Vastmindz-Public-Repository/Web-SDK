@@ -76,7 +76,7 @@ class RPPGCamera implements RPPGCameraInterface {
         width: this.width,
         height: this.height,
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('Error initializing webcam', error)
       this.onError(error)
       throw error

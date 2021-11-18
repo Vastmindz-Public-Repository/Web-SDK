@@ -11,4 +11,5 @@ export declare const EVENTS: {
     INTERFERENCE_WARNING: string;
     SIGNAL_QUALITY: string;
     HRV_METRICS: string;
+    STRESS_INDEX: string;
 };

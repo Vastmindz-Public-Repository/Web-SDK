@@ -14,5 +14,6 @@ exports.EVENTS = {
     INTERFERENCE_WARNING: 'onInterferenceWarning',
     SIGNAL_QUALITY: 'onSignalQuality',
     HRV_METRICS: 'hrvMetrics',
+    STRESS_INDEX: 'onStressIndex',
 };
 //# sourceMappingURL=events.js.map

@@ -136,7 +136,7 @@ const rppgInstance = new rppg({
 #### Build documentation
 
 ```
-$ npm run build:docs
+$ npm run build:doc
 ```
 
 ## Note

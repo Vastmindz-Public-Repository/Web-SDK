@@ -224,3 +224,10 @@ export interface HrvMetrics {
     /***/
     sdnn: number;
 }
+/**
+ * StressIndex
+ */
+export interface StressIndex {
+    /***/
+    stress: number;
+}

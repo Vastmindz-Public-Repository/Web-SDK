@@ -14,6 +14,7 @@ async function init() {
     onFrame: (data) => console.log('onFrame', data),
     onMeasurementProgress: (data) => console.log('onMeasurementProgress', data),
     onMeasurementMeanData: (data) => console.log('onMeasurementMeanData', data),
+    onStressIndex: (data) => console.log('onStressIndex:', data),
   })
 
   await rppgInstance.initCamera({

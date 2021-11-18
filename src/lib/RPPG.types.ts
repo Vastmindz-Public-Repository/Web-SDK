@@ -1,5 +1,20 @@
 import { RPPGCameraConfig } from './RPPGCamera.types'
-import { AccessToken, BloodPressure, HrvMetrics, InterferenceWarning, MeasurementMeanData, MeasurementProgress, MeasurementSignal, MeasurementStatus, MovingWarning, RPPGSocketConfig, SendingRateWarning, SignalQuality, UnstableConditionsWarning } from './RPPGSocket.types'
+import {
+  AccessToken,
+  BloodPressure,
+  HrvMetrics,
+  InterferenceWarning,
+  MeasurementMeanData,
+  MeasurementProgress,
+  MeasurementSignal,
+  MeasurementStatus,
+  MovingWarning,
+  RPPGSocketConfig,
+  SendingRateWarning,
+  SignalQuality,
+  StressIndex,
+  UnstableConditionsWarning,
+} from './RPPGSocket.types'
 import { RPPGTrackerConfig, RPPGTrackerProcessLandmarkData } from './RPPGTracker.types'
 
 /**
@@ -226,6 +241,19 @@ export interface RPPGConfig {
   * ```
   */
   onHrvMetrics?: (arg0: HrvMetrics) => void;
+
+  /**
+  * onStressIndex event, cb: {@link StressIndex}
+  *
+  * ### Usage with regular javascript
+  *
+  * ```javascript
+  * const rppgInstance = new RPPG({
+  *   onStressIndex: ({@link StressIndex}) => console.log('onStressIndex:', {@link StressIndex})
+  * })
+  * ```
+  */
+   onStressIndex?: (arg0: StressIndex) => void;
 }
 
 export interface RPPGinterface {

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var RPPGCamera_1 = tslib_1.__importDefault(require("./RPPGCamera"));
-var RPPGSocket_1 = tslib_1.__importDefault(require("./RPPGSocket"));
-var RPPGTracker_1 = tslib_1.__importDefault(require("./RPPGTracker"));
+var RPPGCamera_1 = (0, tslib_1.__importDefault)(require("./RPPGCamera"));
+var RPPGSocket_1 = (0, tslib_1.__importDefault)(require("./RPPGSocket"));
+var RPPGTracker_1 = (0, tslib_1.__importDefault)(require("./RPPGTracker"));
 var events_1 = require("./consts/events");
 /**
  * Class RPPG
@@ -53,9 +53,9 @@ var RPPG = /** @class */ (function () {
         // TODO verify config
     }
     RPPG.prototype.init = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var _a, rppgTrackerConfig, rppgSocketConfig, rppgCameraConfig, error_1;
-            return tslib_1.__generator(this, function (_b) {
+            return (0, tslib_1.__generator)(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _a = this.config, rppgTrackerConfig = _a.rppgTrackerConfig, rppgSocketConfig = _a.rppgSocketConfig, rppgCameraConfig = _a.rppgCameraConfig;
@@ -107,7 +107,7 @@ var RPPG = /** @class */ (function () {
             console.log('Error initializing - rppgCamera should be initialized before initTracker');
             return Promise.reject();
         }
-        this.rppgTracker = new RPPGTracker_1.default(tslib_1.__assign(tslib_1.__assign({}, rppgTrackerConfig), { width: this.width, height: this.height }));
+        this.rppgTracker = new RPPGTracker_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgTrackerConfig), { width: this.width, height: this.height }));
         return this.rppgTracker.init();
     };
     /**
@@ -126,8 +126,8 @@ var RPPG = /** @class */ (function () {
      *
      */
     RPPG.prototype.initSocket = function (rppgSocketConfig) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+            return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!this.rppgSocket) return [3 /*break*/, 2];
@@ -138,7 +138,7 @@ var RPPG = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
-                        this.rppgSocket = new RPPGSocket_1.default(tslib_1.__assign(tslib_1.__assign({}, rppgSocketConfig), { onEvent: this.onEvent.bind(this) }));
+                        this.rppgSocket = new RPPGSocket_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgSocketConfig), { onEvent: this.onEvent.bind(this) }));
                         return [2 /*return*/, this.rppgSocket.init()];
                 }
             });
@@ -165,9 +165,9 @@ var RPPG = /** @class */ (function () {
      *
      */
     RPPG.prototype.initCamera = function (rppgCameraConfig) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var _a, width, height;
-            return tslib_1.__generator(this, function (_b) {
+            return (0, tslib_1.__generator)(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         if (this.rppgCamera) {
@@ -215,9 +215,9 @@ var RPPG = /** @class */ (function () {
         this.processing = false;
     };
     RPPG.prototype.capture = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var timestamp, frame, rppgTrackerData;
-            return tslib_1.__generator(this, function (_a) {
+            return (0, tslib_1.__generator)(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (this.processing) {

@@ -4,7 +4,7 @@ var tslib_1 = require("tslib");
 /* eslint-disable no-underscore-dangle */
 var api_1 = require("./consts/api");
 var errors_1 = require("./consts/errors");
-var rppg_1 = tslib_1.__importDefault(require("./module/rppg"));
+var rppg_1 = (0, tslib_1.__importDefault)(require("./module/rppg"));
 /**
  * Class RPPGTracker
  * @example
@@ -29,9 +29,9 @@ var RPPGTracker = /** @class */ (function () {
      * @returns {Promise<void>}
      */
     RPPGTracker.prototype.init = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var moduleOptions, _a, e_1;
-            return tslib_1.__generator(this, function (_b) {
+            return (0, tslib_1.__generator)(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _b.trys.push([0, 5, , 6]);
@@ -77,9 +77,9 @@ var RPPGTracker = /** @class */ (function () {
         this.uint8Array = new Uint8ClampedArray(this.module.HEAPU8.buffer, this.inputBuf, this.bufferSize);
     };
     RPPGTracker.prototype.processLandmarksImage = function (data) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var status, bgr1d, landmarks, face;
-            return tslib_1.__generator(this, function (_a) {
+            return (0, tslib_1.__generator)(this, function (_a) {
                 if (!this.module) {
                     throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
                 }
