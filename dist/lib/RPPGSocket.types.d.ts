@@ -96,6 +96,15 @@ export interface MeasurementMeanData {
     bloodPressureStatus: BloodPressureStatus;
 }
 /**
+ * Post data
+ */
+export interface PostData {
+    /** Health data object */
+    healthData: MeasurementMeanData;
+    /** Health measurement result */
+    healthStatus: string;
+}
+/**
  * StressStatus
  */
 export declare enum StressStatus {

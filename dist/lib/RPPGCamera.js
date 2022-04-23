@@ -110,7 +110,6 @@ var RPPGCamera = /** @class */ (function () {
         });
     };
     RPPGCamera.prototype.getWebcamStream = function () {
-        // alert(this.useFrontCamera ? SourceWebcam.user : SourceWebcam.environment)
         return navigator.mediaDevices.getUserMedia({
             audio: false,
             video: {

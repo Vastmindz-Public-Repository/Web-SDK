@@ -54,7 +54,7 @@ async function init() {
   startButton.addEventListener('click', async () => {
     if (!rppgInstance.rppgSocket) {
       await this.rppgInstance.initSocket({
-        url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
+        url: 'wss://airasia-dev.xyz/vp/bgr_signal_socket',
         authToken: tokenInput.value,
         onConnect: () => console.log('Socket connection established'),
         onClose: (event) => console.log('Socket connection closed', event),
@@ -73,7 +73,6 @@ async function init() {
   })
 
   switchCamera.addEventListener('click', () => {
-    // alert('switchCamera')
     const useFrontCamera = rppgInstance.rppgCamera.useFrontCamera
     rppgInstance.rppgCamera.switchCamera(!useFrontCamera)
   })
