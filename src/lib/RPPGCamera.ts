@@ -3,6 +3,7 @@ import {
   RPPGCameraGetFrame,
   RPPGCameraInit,
   RPPGCameraInterface,
+  SourceWebcam,
 } from './RPPGCamera.types'
 
 /**
@@ -19,6 +20,7 @@ class RPPGCamera implements RPPGCameraInterface {
   private stream: MediaStream | null
   private width = 0
   private height = 0
+  private useFrontCamera = true
 
   /**
    * @param {RPPGCameraConfig} config Config passed to RPPGCamera
@@ -29,6 +31,7 @@ class RPPGCamera implements RPPGCameraInterface {
     this.canvasElement = config.canvasElement || document.createElement('canvas')
     this.ctx = this.canvasElement.getContext('2d')
     this.stream = config.stream || null
+    this.useFrontCamera = config.useFrontCamera
   }
 
   /**
@@ -83,10 +86,29 @@ class RPPGCamera implements RPPGCameraInterface {
     }
   }
 
+    /**
+   * Switch Web Camera
+   * 
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * switchWebcam(true)
+   * ```
+   * 
+   * @returns {Promise<RPPGCameraInit>} Returns actual parameters of camera
+   *
+   */
+  async switchCamera(useFrontCamera: boolean): Promise<RPPGCameraInit | void> {
+    this.close()
+    this.useFrontCamera = useFrontCamera
+    return this.init()
+  }
+
   private getWebcamStream(): Promise<MediaStream> {
     return navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
+        facingMode: this.useFrontCamera ? SourceWebcam.user : SourceWebcam.environment,
         width: {
           ideal: this.config.width || 640,
         },
@@ -117,6 +139,7 @@ class RPPGCamera implements RPPGCameraInterface {
   close(): void {
     if (this.stream) {
       this.stream.getTracks().forEach((track) => track.stop())
+      this.stream = null
     }
   }
 

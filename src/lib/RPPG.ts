@@ -8,6 +8,7 @@ import {
 } from './RPPG.types'
 import {
   RPPGCameraConfig,
+  RPPGCameraInit,
   RPPGCameraInterface,
 } from './RPPGCamera.types'
 import {
@@ -204,6 +205,17 @@ class RPPG implements RPPGinterface {
     if (this.rppgCamera) {
       this.rppgCamera.close()
     }
+  }
+
+  /**
+   * Switch web camera
+   * @return {void}
+   */
+  switchCamera(useFrontCamera: boolean): Promise<RPPGCameraInit | void> {
+    if (this.rppgCamera) {
+      return this.rppgCamera.switchCamera(useFrontCamera)
+    }
+    return Promise.resolve()
   }
 
   /**

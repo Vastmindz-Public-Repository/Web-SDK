@@ -99,6 +99,12 @@ export interface RPPGCameraConfig {
    * @memberof RPPGCameraConfig
    */
   stream?: MediaStream | null;
+
+  /**
+   * Use front camera
+   * @memberof RPPGCameraConfig
+   */
+  useFrontCamera: boolean
   
   /**
    * onError event
@@ -117,7 +123,13 @@ export interface RPPGCameraInterface {
   config: RPPGCameraConfig;
   init: () => Promise<RPPGCameraInit>;
   close: () => void;
+  switchCamera: (useFrontCamera: boolean) => Promise<RPPGCameraInit | void>;
   getFrame: () => RPPGCameraGetFrame | null;
   onError: (event: Error) => void;
   onSuccess: (event: RPPGCameraInit) => void;
+}
+
+export enum SourceWebcam {
+  user = 'user',
+  environment = 'environment',
 }

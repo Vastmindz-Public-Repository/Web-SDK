@@ -196,6 +196,16 @@ var RPPG = /** @class */ (function () {
         }
     };
     /**
+     * Switch web camera
+     * @return {void}
+     */
+    RPPG.prototype.switchCamera = function (useFrontCamera) {
+        if (this.rppgCamera) {
+            return this.rppgCamera.switchCamera(useFrontCamera);
+        }
+        return Promise.resolve();
+    };
+    /**
      * Start tracking
      * @return {void}
      */

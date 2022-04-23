@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var RPPGCamera_types_1 = require("./RPPGCamera.types");
 /**
  * Class RPPGCamera
  * @example
@@ -13,11 +14,13 @@ var RPPGCamera = /** @class */ (function () {
     function RPPGCamera(config) {
         this.width = 0;
         this.height = 0;
+        this.useFrontCamera = true;
         this.config = config;
         this.videoElement = config.videoElement || document.createElement('video');
         this.canvasElement = config.canvasElement || document.createElement('canvas');
         this.ctx = this.canvasElement.getContext('2d');
         this.stream = config.stream || null;
+        this.useFrontCamera = config.useFrontCamera;
     }
     /**
      * Init RPPG Camera instance
@@ -85,10 +88,33 @@ var RPPGCamera = /** @class */ (function () {
             });
         });
     };
+    /**
+   * Switch Web Camera
+   *
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * switchWebcam(true)
+   * ```
+   *
+   * @returns {Promise<RPPGCameraInit>} Returns actual parameters of camera
+   *
+   */
+    RPPGCamera.prototype.switchCamera = function (useFrontCamera) {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+            return (0, tslib_1.__generator)(this, function (_a) {
+                this.close();
+                this.useFrontCamera = useFrontCamera;
+                return [2 /*return*/, this.init()];
+            });
+        });
+    };
     RPPGCamera.prototype.getWebcamStream = function () {
+        // alert(this.useFrontCamera ? SourceWebcam.user : SourceWebcam.environment)
         return navigator.mediaDevices.getUserMedia({
             audio: false,
             video: {
+                facingMode: this.useFrontCamera ? RPPGCamera_types_1.SourceWebcam.user : RPPGCamera_types_1.SourceWebcam.environment,
                 width: {
                     ideal: this.config.width || 640,
                 },
@@ -113,6 +139,7 @@ var RPPGCamera = /** @class */ (function () {
     RPPGCamera.prototype.close = function () {
         if (this.stream) {
             this.stream.getTracks().forEach(function (track) { return track.stop(); });
+            this.stream = null;
         }
     };
     RPPGCamera.prototype.onError = function (event) {

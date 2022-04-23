@@ -1,5 +1,5 @@
 import { RPPGConfig, RPPGinterface, RPPGOnFrame } from './RPPG.types';
-import { RPPGCameraConfig } from './RPPGCamera.types';
+import { RPPGCameraConfig, RPPGCameraInit } from './RPPGCamera.types';
 import { RPPGSocketConfig } from './RPPGSocket.types';
 import { RPPGTrackerConfig } from './RPPGTracker.types';
 /**
@@ -109,6 +109,11 @@ declare class RPPG implements RPPGinterface {
      * @return {void}
      */
     closeCamera(): void;
+    /**
+     * Switch web camera
+     * @return {void}
+     */
+    switchCamera(useFrontCamera: boolean): Promise<RPPGCameraInit | void>;
     /**
      * Start tracking
      * @return {void}

@@ -1,4 +1,4 @@
-import { RPPGCameraConfig } from './RPPGCamera.types'
+import { RPPGCameraConfig, RPPGCameraInit } from './RPPGCamera.types'
 import {
   AccessToken,
   BloodPressure,
@@ -266,4 +266,5 @@ export interface RPPGinterface {
   initSocket(rppgSocketConfig: RPPGSocketConfig): Promise<Event>;
   initCamera(rppgCameraConfig: RPPGCameraConfig): Promise<void>;
   closeCamera(): void;
+  switchCamera: (useFrontCamera: boolean) => Promise<RPPGCameraInit | void>
 }

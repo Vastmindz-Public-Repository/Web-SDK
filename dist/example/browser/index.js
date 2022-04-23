@@ -8,6 +8,7 @@ async function init() {
   const emailInput = document.querySelector('.email')
   const passwordInput = document.querySelector('.password')
   const startButton = document.querySelector('.startButton')
+  const switchCamera = document.querySelector('.switchCamera')
   const loginButton = document.querySelector('.loginButton')
 
   const rppgInstance = window.rppgInstance = new rppg({
@@ -22,6 +23,7 @@ async function init() {
     height: 480,
     videoElement: videoElement,
     canvasElement: canvasElement,
+    useFrontCamera: false,
   })
 
   await rppgInstance.initTracker({
@@ -45,7 +47,7 @@ async function init() {
       tokenInput.value = data.authToken
       startButton.removeAttribute('disabled')
     } catch (e) {
-      startButton.addAttribute('disabled')
+      startButton.setAttribute('disabled', true)
     }
   })
 
@@ -62,10 +64,18 @@ async function init() {
     if (rppgInstance.processing) {
       rppgInstance.stop()
       startButton.innerText = 'Start'
+      switchCamera.removeAttribute('disabled')
     } else {
       rppgInstance.start()
       startButton.innerText = 'Stop'
+      switchCamera.setAttribute('disabled', true)
     }
+  })
+
+  switchCamera.addEventListener('click', () => {
+    // alert('switchCamera')
+    const useFrontCamera = rppgInstance.rppgCamera.useFrontCamera
+    rppgInstance.rppgCamera.switchCamera(!useFrontCamera)
   })
 }
 

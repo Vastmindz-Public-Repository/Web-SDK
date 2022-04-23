@@ -12,6 +12,7 @@ declare class RPPGCamera implements RPPGCameraInterface {
     private stream;
     private width;
     private height;
+    private useFrontCamera;
     /**
      * @param {RPPGCameraConfig} config Config passed to RPPGCamera
      */
@@ -41,6 +42,19 @@ declare class RPPGCamera implements RPPGCameraInterface {
      *
      */
     init(): Promise<RPPGCameraInit>;
+    /**
+   * Switch Web Camera
+   *
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * switchWebcam(true)
+   * ```
+   *
+   * @returns {Promise<RPPGCameraInit>} Returns actual parameters of camera
+   *
+   */
+    switchCamera(useFrontCamera: boolean): Promise<RPPGCameraInit | void>;
     private getWebcamStream;
     getFrame(): RPPGCameraGetFrame | null;
     close(): void;

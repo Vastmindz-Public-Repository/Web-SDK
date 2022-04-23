@@ -8,6 +8,7 @@ async function init() {
   const emailInput = document.querySelector('.email')
   const passwordInput = document.querySelector('.password')
   const startButton = document.querySelector('.startButton')
+  const switchCamera = document.querySelector('.switchCamera')
   const loginButton = document.querySelector('.loginButton')
 
   const rppgInstance = window.rppgInstance = new rppg({
@@ -22,6 +23,7 @@ async function init() {
     height: 480,
     videoElement: videoElement,
     canvasElement: canvasElement,
+    useFrontCamera: false,
   })
 
   await rppgInstance.initTracker({
@@ -45,14 +47,14 @@ async function init() {
       tokenInput.value = data.authToken
       startButton.removeAttribute('disabled')
     } catch (e) {
-      startButton.addAttribute('disabled')
+      startButton.setAttribute('disabled', true)
     }
   })
 
   startButton.addEventListener('click', async () => {
     if (!rppgInstance.rppgSocket) {
       await this.rppgInstance.initSocket({
-        url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
+        url: 'wss://airasia-dev.xyz/vp/bgr_signal_socket',
         authToken: tokenInput.value,
         onConnect: () => console.log('Socket connection established'),
         onClose: (event) => console.log('Socket connection closed', event),
@@ -62,10 +64,17 @@ async function init() {
     if (rppgInstance.processing) {
       rppgInstance.stop()
       startButton.innerText = 'Start'
+      switchCamera.removeAttribute('disabled')
     } else {
       rppgInstance.start()
       startButton.innerText = 'Stop'
+      switchCamera.setAttribute('disabled', true)
     }
+  })
+
+  switchCamera.addEventListener('click', () => {
+    const useFrontCamera = rppgInstance.rppgCamera.useFrontCamera
+    rppgInstance.rppgCamera.switchCamera(!useFrontCamera)
   })
 }
 
