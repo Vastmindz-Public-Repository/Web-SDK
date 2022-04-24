@@ -261,10 +261,13 @@ class RPPG implements RPPGinterface {
 
     const rppgTrackerData = await this.rppgTracker.processLandmarksImage(frame.data)
 
-    this.rppgSocket.send({
-      bgrSignal: rppgTrackerData.bgr1d,
-      timestamp,
-    })
+    if (!this.config.skipSocketWhenNoFace ||
+        (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
+      this.rppgSocket.send({
+        bgrSignal: rppgTrackerData.bgr1d,
+        timestamp,
+      })
+    }
 
     this.onFrame({
       rppgTrackerData,

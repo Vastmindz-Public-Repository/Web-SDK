@@ -247,10 +247,13 @@ var RPPG = /** @class */ (function () {
                         return [4 /*yield*/, this.rppgTracker.processLandmarksImage(frame.data)];
                     case 1:
                         rppgTrackerData = _a.sent();
-                        this.rppgSocket.send({
-                            bgrSignal: rppgTrackerData.bgr1d,
-                            timestamp: timestamp,
-                        });
+                        if (!this.config.skipSocketWhenNoFace ||
+                            (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
+                            this.rppgSocket.send({
+                                bgrSignal: rppgTrackerData.bgr1d,
+                                timestamp: timestamp,
+                            });
+                        }
                         this.onFrame({
                             rppgTrackerData: rppgTrackerData,
                             instantFps: this.instantFps,

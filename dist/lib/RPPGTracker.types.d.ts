@@ -24,7 +24,7 @@ export interface RPPGTrackerConfig {
  */
 export interface RPPGTrackerProcessLandmarkData {
     /** */
-    status: string;
+    status: number;
     /** */
     bgr1d: number[];
     /** */
@@ -42,7 +42,7 @@ export interface RPPGTrackerInterface {
 }
 export interface EmscriptenModule {
     _process_landmarks: (arg0: number, arg1: number, arg2: number) => void;
-    getStatus: () => string;
+    getStatus: () => number;
     get_bgr1d: () => any;
     getFace: () => number[];
     getLastLandmarks: () => any;

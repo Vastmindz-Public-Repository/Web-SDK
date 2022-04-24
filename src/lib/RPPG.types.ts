@@ -253,7 +253,20 @@ export interface RPPGConfig {
   * })
   * ```
   */
-   onStressIndex?: (arg0: StressIndex) => void;
+  onStressIndex?: (arg0: StressIndex) => void;
+
+  /**
+  * skipSocketWhenNoFace - skip sending any socket data in case no face detected {@link SkipSocketWhenNoFace}
+  *
+  * ### Usage with regular javascript
+  *
+  * ```javascript
+  * const rppgInstance = new RPPG({
+  *   skipSocketWhenNoFace: true
+  * })
+  * ```
+  */
+  skipSocketWhenNoFace?: boolean
 }
 
 export interface RPPGinterface {
