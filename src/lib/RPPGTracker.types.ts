@@ -12,6 +12,12 @@ export interface RPPGTrackerConfig {
   pathToWasmData?: string;
 
   /** */
+  maxTimeBetweenBlinksSeconds?: number
+  
+  /** */
+  detectionThreshold?: number
+
+  /** */
   onError?: () => void;
 
   /** */
@@ -42,6 +48,9 @@ export interface RPPGTrackerProcessLandmarkData {
 
   /** */
   face: number[];
+
+  /** */
+  eyeBlinkStatus: boolean
 }
 
 export interface RPPGTrackerInterface {
@@ -56,6 +65,7 @@ export interface RPPGTrackerInterface {
 export interface EmscriptenModule {
   _process_landmarks: (arg0: number, arg1: number, arg2: number) => void;
   getStatus: () => number;
+  getEyeBlinkStatus: (maxTimeBetweenBlinksSeconds: number, detectionThreshold: number) => boolean;
   get_bgr1d: () => any;
   getFace: () => number[];
   getLastLandmarks: () => any;

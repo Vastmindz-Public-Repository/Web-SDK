@@ -93,11 +93,16 @@ class RPPGTracker implements RPPGTrackerInterface {
     this.module._process_landmarks(this.inputBuf, this.width, this.height)
 
     const status = this.module.getStatus()
+    const eyeBlinkStatus = this.module.getEyeBlinkStatus(
+      this.config.maxTimeBetweenBlinksSeconds || 20,
+      this.config.detectionThreshold || 1,
+    )
     const bgr1d = this.getBgr1d()
     const landmarks = this.getLastLandmarks()
     const face = this.getFace()
 
     return {
+      eyeBlinkStatus,
       status,
       bgr1d,
       landmarks,
