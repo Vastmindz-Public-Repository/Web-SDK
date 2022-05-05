@@ -27,7 +27,7 @@ async function init() {
   })
 
   await rppgInstance.initTracker({
-    pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+    pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-1/',
   })
 
   loginButton.addEventListener('click', async () => {

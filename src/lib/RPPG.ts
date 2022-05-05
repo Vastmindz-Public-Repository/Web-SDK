@@ -37,7 +37,7 @@ import { EVENTS } from './consts/events'
  *   canvasElement: canvasElement,
  * })
  * await rppgInstance.initTracker({
- *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+ *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-1/',
  * })
  * await this.rppgInstance.initSocket({
  *   url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
@@ -113,7 +113,7 @@ class RPPG implements RPPGinterface {
    * @example
    * const rppgInstance = new RPPG()
    * await rppgInstance.initTracker({
-   *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk/',
+   *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-1/',
    * })
    */
   initTracker(rppgTrackerConfig: RPPGTrackerConfig = {}): Promise<void> {

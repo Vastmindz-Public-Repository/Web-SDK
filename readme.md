@@ -1,10 +1,10 @@
 # RPPG
 
-[Documentation](https://websdk1.blob.core.windows.net/sdk/docs/index.html)
+[Documentation](https://websdk1.blob.core.windows.net/sdk-1-1-1/docs/index.html)
 
-[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk/docs/RPPG.html)
+[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk-1-1-1/docs/RPPG.html)
 
-[Live demo](https://websdk1.blob.core.windows.net/sdk/example/index.html)
+[Live demo](https://websdk1.blob.core.windows.net/sdk-1-1-1/example/index.html)
 
 [Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example)
 
@@ -23,7 +23,7 @@ $ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 
 cdn (```rppg``` will be available as global in Browsers)
 ```
-<script src="https://websdk1.blob.core.windows.net/sdk/dist/rppg.min.js"></script>
+<script src="https://websdk1.blob.core.windows.net/sdk-1-1-1/dist/rppg.min.js"></script>
 ```
 
 
