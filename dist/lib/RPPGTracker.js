@@ -78,7 +78,7 @@ var RPPGTracker = /** @class */ (function () {
     };
     RPPGTracker.prototype.processLandmarksImage = function (data) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var status, eyeBlinkStatus, bgr1d, landmarks, face;
+            var status, eyeBlinkStatus, imageQualityFlagsByte, imageQualityFlags, bgr1d, landmarks, face;
             return (0, tslib_1.__generator)(this, function (_a) {
                 if (!this.module) {
                     throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
@@ -89,11 +89,19 @@ var RPPGTracker = /** @class */ (function () {
                 this.module._process_landmarks(this.inputBuf, this.width, this.height);
                 status = this.module.getStatus();
                 eyeBlinkStatus = this.module.getEyeBlinkStatus(this.config.maxTimeBetweenBlinksSeconds || 20, this.config.detectionThreshold || 1);
+                imageQualityFlagsByte = this.module.getImageQualityFlags();
+                imageQualityFlags = {
+                    brightColorFlag: Boolean(imageQualityFlagsByte & (1 << 0)),
+                    illumChangeFlag: Boolean(imageQualityFlagsByte & (1 << 1)),
+                    noiseFlag: Boolean(imageQualityFlagsByte & (1 << 2)),
+                    sharpFlag: Boolean(imageQualityFlagsByte & (1 << 4)),
+                };
                 bgr1d = this.getBgr1d();
                 landmarks = this.getLastLandmarks();
                 face = this.getFace();
                 return [2 /*return*/, {
                         eyeBlinkStatus: eyeBlinkStatus,
+                        imageQualityFlags: imageQualityFlags,
                         status: status,
                         bgr1d: bgr1d,
                         landmarks: landmarks,

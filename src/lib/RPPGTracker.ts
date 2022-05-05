@@ -7,6 +7,7 @@ import {
 import Module from './module/rppg'
 import {
   EmscriptenModule,
+  ImageQualityFlags,
   RPPGTrackerConfig,
   RPPGTrackerInterface,
   RPPGTrackerProcessLandmarkData,
@@ -97,12 +98,22 @@ class RPPGTracker implements RPPGTrackerInterface {
       this.config.maxTimeBetweenBlinksSeconds || 20,
       this.config.detectionThreshold || 1,
     )
+
+    const imageQualityFlagsByte = this.module.getImageQualityFlags()
+    const imageQualityFlags: ImageQualityFlags = {
+      brightColorFlag: Boolean(imageQualityFlagsByte & (1 << 0)),
+      illumChangeFlag: Boolean(imageQualityFlagsByte & (1 << 1)),
+      noiseFlag: Boolean(imageQualityFlagsByte & (1 << 2)),
+      sharpFlag: Boolean(imageQualityFlagsByte & (1 << 4)),
+    }
+
     const bgr1d = this.getBgr1d()
     const landmarks = this.getLastLandmarks()
     const face = this.getFace()
 
     return {
       eyeBlinkStatus,
+      imageQualityFlags,
       status,
       bgr1d,
       landmarks,

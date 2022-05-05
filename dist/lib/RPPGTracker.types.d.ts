@@ -35,8 +35,29 @@ export interface RPPGTrackerProcessLandmarkData {
     landmarks: number[];
     /** */
     face: number[];
-    /** */
+    /**
+     * eyeBlinkStatus
+     * It returns true if the eye blinks were detected during the last 20 sec, and it returns false otherwise.
+     */
     eyeBlinkStatus: boolean;
+    /**
+     * imageQualityFlags
+     * It returns 4 flags in a list (brightColorFlag, illumChangeFlag, noiseFlag, sharpFlag)
+    */
+    imageQualityFlags: ImageQualityFlags;
+}
+/**
+ * ImageQualityFlags
+ */
+export interface ImageQualityFlags {
+    /** */
+    brightColorFlag: boolean;
+    /** */
+    illumChangeFlag: boolean;
+    /** */
+    noiseFlag: boolean;
+    /** */
+    sharpFlag: boolean;
 }
 export interface RPPGTrackerInterface {
     config: RPPGTrackerConfig;
@@ -50,6 +71,7 @@ export interface EmscriptenModule {
     _process_landmarks: (arg0: number, arg1: number, arg2: number) => void;
     getStatus: () => number;
     getEyeBlinkStatus: (maxTimeBetweenBlinksSeconds: number, detectionThreshold: number) => boolean;
+    getImageQualityFlags: () => number;
     get_bgr1d: () => any;
     getFace: () => number[];
     getLastLandmarks: () => any;
