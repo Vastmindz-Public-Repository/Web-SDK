@@ -10,6 +10,6 @@ export const EVENTS = {
   UNSTABLE_CONDITIONS_WARNING: 'onUnstableConditionsWarning',
   INTERFERENCE_WARNING: 'onInterferenceWarning',
   SIGNAL_QUALITY: 'onSignalQuality',
-  HRV_METRICS: 'hrvMetrics',
+  HRV_METRICS: 'onHrvMetrics',
   STRESS_INDEX: 'onStressIndex',
 }
