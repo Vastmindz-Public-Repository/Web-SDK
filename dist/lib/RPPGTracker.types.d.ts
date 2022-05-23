@@ -58,6 +58,10 @@ export interface ImageQualityFlags {
     noiseFlag: boolean;
     /** */
     sharpFlag: boolean;
+    /** */
+    faceSizeFlag: boolean;
+    /** */
+    faceOrientFlag: boolean;
 }
 export interface RPPGTrackerInterface {
     config: RPPGTrackerConfig;

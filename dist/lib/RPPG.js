@@ -20,7 +20,7 @@ var events_1 = require("./consts/events");
  *   canvasElement: canvasElement,
  * })
  * await rppgInstance.initTracker({
- *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-1/',
+ *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-2/',
  * })
  * await this.rppgInstance.initSocket({
  *   url: 'wss://rppg-dev2.xyz/vp/bgr_signal_socket',
@@ -93,7 +93,7 @@ var RPPG = /** @class */ (function () {
      * @example
      * const rppgInstance = new RPPG()
      * await rppgInstance.initTracker({
-     *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-1/',
+     *   pathToWasmData: 'https://websdk1.blob.core.windows.net/sdk-1-1-2/',
      * })
      */
     RPPG.prototype.initTracker = function (rppgTrackerConfig) {

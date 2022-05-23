@@ -95,6 +95,8 @@ var RPPGTracker = /** @class */ (function () {
                     illumChangeFlag: Boolean(imageQualityFlagsByte & (1 << 1)),
                     noiseFlag: Boolean(imageQualityFlagsByte & (1 << 2)),
                     sharpFlag: Boolean(imageQualityFlagsByte & (1 << 4)),
+                    faceSizeFlag: Boolean(imageQualityFlagsByte & (1 << 8)),
+                    faceOrientFlag: Boolean(imageQualityFlagsByte & (1 << 16)),
                 };
                 bgr1d = this.getBgr1d();
                 landmarks = this.getLastLandmarks();

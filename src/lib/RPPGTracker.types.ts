@@ -77,6 +77,12 @@ export interface ImageQualityFlags {
   
   /** */
   sharpFlag: boolean
+
+  /** */
+  faceSizeFlag: boolean
+
+  /** */
+  faceOrientFlag: boolean
 }
 
 export interface RPPGTrackerInterface {
