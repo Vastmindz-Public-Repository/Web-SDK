@@ -9,13 +9,13 @@ import {
   MeasurementSignal,
   MeasurementStatus,
   MovingWarning,
-  RPPGSocketConfig,
   SendingRateWarning,
   SignalQuality,
   StressIndex,
   UnstableConditionsWarning,
-} from './RPPGSocket.types'
-import { RPPGTrackerConfig, RPPGTrackerProcessLandmarkData } from './RPPGTracker.types'
+} from './RPPGEvents.types'
+import { RPPGSocketConfig } from './RPPGSocket.types'
+import { RPPGTrackerConfig, RPPGTrackerProcessFrameData } from './RPPGTracker.types'
 
 /**
  * RPPGOnFrame
@@ -28,7 +28,7 @@ export interface RPPGOnFrame {
    * @type {RPPGTrackerProcessLandmarkData}
    * @memberof RPPGOnFrame
    */
-  rppgTrackerData: RPPGTrackerProcessLandmarkData;
+  rppgTrackerData: RPPGTrackerProcessFrameData;
 
   /**
    * Instant value of FPS
@@ -70,6 +70,7 @@ export interface RPPGOnFrame {
  *
  */
 export interface RPPGConfig {
+  serverless?: boolean;
   rppgTrackerConfig?: RPPGTrackerConfig;
   rppgSocketConfig?: RPPGSocketConfig;
   rppgCameraConfig?: RPPGCameraConfig;

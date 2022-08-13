@@ -12,7 +12,6 @@ import {
   RPPGCameraInterface,
 } from './RPPGCamera.types'
 import {
-  MessageEvents,
   RPPGSocketConfig,
   RPPGSocketInterface,
 } from './RPPGSocket.types'
@@ -21,6 +20,7 @@ import {
   RPPGTrackerInterface,
 } from './RPPGTracker.types'
 import { EVENTS } from './consts/events'
+import { MessageEvents } from './RPPGEvents.types'
 
 /**
  * Class RPPG
@@ -88,11 +88,12 @@ class RPPG implements RPPGinterface {
 
   async init(): Promise<void> {
     const {
+      serverless = false,
       rppgTrackerConfig,
       rppgSocketConfig,
       rppgCameraConfig,
     } = this.config
-    if (!rppgTrackerConfig || !rppgSocketConfig || !rppgCameraConfig) {
+    if (!rppgTrackerConfig || (!rppgSocketConfig && !serverless) || !rppgCameraConfig) {
       console.log('Error initializing - incorrect configuration')
       // TODO
       return
@@ -100,7 +101,9 @@ class RPPG implements RPPGinterface {
     try {
       await this.initCamera(rppgCameraConfig)
       await this.initTracker(rppgTrackerConfig)
-      await this.initSocket(rppgSocketConfig)
+      if (!serverless && rppgSocketConfig) {
+        await this.initSocket(rppgSocketConfig)
+      }
     } catch (error) {
       console.log('Error initializing RPPG', error)
     }
@@ -130,6 +133,10 @@ class RPPG implements RPPGinterface {
       ...rppgTrackerConfig,
       width: this.width,
       height: this.height,
+      serverless: this.config.serverless,
+      ...(this.config.serverless && {
+        onEvent: this.onEvent.bind(this),
+      }),
     })
     return this.rppgTracker.init()
   }
@@ -244,7 +251,7 @@ class RPPG implements RPPGinterface {
       requestAnimationFrame(this.capture.bind(this))
     }
 
-    if (this.width === 0 || !this.rppgCamera || !this.rppgTracker || !this.rppgSocket) {
+    if (this.width === 0 || !this.rppgCamera || !this.rppgTracker || (!this.config.serverless && !this.rppgSocket)) {
       // TODO error
       return
     }
@@ -259,11 +266,11 @@ class RPPG implements RPPGinterface {
       return
     }
 
-    const rppgTrackerData = await this.rppgTracker.processLandmarksImage(frame.data)
+    const rppgTrackerData = await this.rppgTracker.processFrame(frame.data)
 
     if (!this.config.skipSocketWhenNoFace ||
         (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
-      this.rppgSocket.send({
+      this.rppgSocket?.send({
         bgrSignal: rppgTrackerData.bgr1d,
         timestamp,
       })

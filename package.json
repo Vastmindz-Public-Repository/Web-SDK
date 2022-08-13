@@ -8,7 +8,7 @@
     "build:browser": "npm run build && rollup -c && npm run copy-example",
     "build:doc": "jsdoc -c jsdoc.json",
     "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/rppg.* ./dist/example/browser",
-    "example:browser": "npm run build:browser && http-server -c-1 ./dist/example/browser",
+    "example:browser": "npm run build:browser && http-server --cors -c-1 ./dist/example/browser",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
