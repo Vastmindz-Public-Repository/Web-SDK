@@ -6,6 +6,9 @@ export interface RPPGSocketConfig {
   url?: string;
 
   /***/
+  query?: string;
+
+  /***/
   authToken: string;
 
   /***/
