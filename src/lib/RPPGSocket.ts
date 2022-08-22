@@ -40,7 +40,7 @@ class RPPGSocket implements RPPGSocketInterface {
    * @returns {Promise<Event>}
    */
   init(): Promise<Event> {
-    const url = `${this.config.url || SOCKET_URL}?authToken=${this.config.authToken}`
+    const url = `${this.config.url || SOCKET_URL}?authToken=${this.config.authToken}&${this.config.query || ''}`
     const socket = new WebSocket(url)
     this.socket = socket
 
