@@ -1,19 +1,21 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EVENTS = void 0;
-exports.EVENTS = {
-    ACCESS_TOKEN: 'accessToken',
-    MEASUREMENT_MEAN_DATA: 'onMeasurementMeanData',
-    MEASUREMENT_STATUS: 'onMeasurementStatus',
-    SENDING_RATE_WARNING: 'onSendingRateWarning',
-    MEASUREMENT_PROGRESS: 'onMeasurementProgress',
-    MEASUREMENT_SIGNAL: 'onMeasurementSignal',
-    MOVING_WARNING: 'onMovingWarning',
-    BLOOD_PRESSURE: 'onBloodPressure',
-    UNSTABLE_CONDITIONS_WARNING: 'onUnstableConditionsWarning',
-    INTERFERENCE_WARNING: 'onInterferenceWarning',
-    SIGNAL_QUALITY: 'onSignalQuality',
-    HRV_METRICS: 'onHrvMetrics',
-    STRESS_INDEX: 'onStressIndex',
-};
+var RPPGEvents_types_1 = require("../RPPGEvents.types");
+exports.EVENTS = (_a = {},
+    _a[RPPGEvents_types_1.RPPGMessageType.ACCESS_TOKEN] = 'accessToken',
+    _a[RPPGEvents_types_1.RPPGMessageType.MEASUREMENT_MEAN_DATA] = 'onMeasurementMeanData',
+    _a[RPPGEvents_types_1.RPPGMessageType.MEASUREMENT_STATUS] = 'onMeasurementStatus',
+    _a[RPPGEvents_types_1.RPPGMessageType.SENDING_RATE_WARNING] = 'onSendingRateWarning',
+    _a[RPPGEvents_types_1.RPPGMessageType.MEASUREMENT_PROGRESS] = 'onMeasurementProgress',
+    _a[RPPGEvents_types_1.RPPGMessageType.MEASUREMENT_SIGNAL] = 'onMeasurementSignal',
+    _a[RPPGEvents_types_1.RPPGMessageType.MOVING_WARNING] = 'onMovingWarning',
+    _a[RPPGEvents_types_1.RPPGMessageType.BLOOD_PRESSURE] = 'onBloodPressure',
+    _a[RPPGEvents_types_1.RPPGMessageType.UNSTABLE_CONDITIONS_WARNING] = 'onUnstableConditionsWarning',
+    _a[RPPGEvents_types_1.RPPGMessageType.INTERFERENCE_WARNING] = 'onInterferenceWarning',
+    _a[RPPGEvents_types_1.RPPGMessageType.SIGNAL_QUALITY] = 'onSignalQuality',
+    _a[RPPGEvents_types_1.RPPGMessageType.HRV_METRICS] = 'onHrvMetrics',
+    _a[RPPGEvents_types_1.RPPGMessageType.STRESS_INDEX] = 'onStressIndex',
+    _a);
 //# sourceMappingURL=events.js.map

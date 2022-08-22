@@ -54,34 +54,36 @@ var RPPG = /** @class */ (function () {
     }
     RPPG.prototype.init = function () {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var _a, rppgTrackerConfig, rppgSocketConfig, rppgCameraConfig, error_1;
-            return (0, tslib_1.__generator)(this, function (_b) {
-                switch (_b.label) {
+            var _a, _b, serverless, rppgTrackerConfig, rppgSocketConfig, rppgCameraConfig, error_1;
+            return (0, tslib_1.__generator)(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a = this.config, rppgTrackerConfig = _a.rppgTrackerConfig, rppgSocketConfig = _a.rppgSocketConfig, rppgCameraConfig = _a.rppgCameraConfig;
-                        if (!rppgTrackerConfig || !rppgSocketConfig || !rppgCameraConfig) {
+                        _a = this.config, _b = _a.serverless, serverless = _b === void 0 ? false : _b, rppgTrackerConfig = _a.rppgTrackerConfig, rppgSocketConfig = _a.rppgSocketConfig, rppgCameraConfig = _a.rppgCameraConfig;
+                        if (!rppgTrackerConfig || (!rppgSocketConfig && !serverless) || !rppgCameraConfig) {
                             console.log('Error initializing - incorrect configuration');
                             // TODO
                             return [2 /*return*/];
                         }
-                        _b.label = 1;
+                        _c.label = 1;
                     case 1:
-                        _b.trys.push([1, 5, , 6]);
+                        _c.trys.push([1, 6, , 7]);
                         return [4 /*yield*/, this.initCamera(rppgCameraConfig)];
                     case 2:
-                        _b.sent();
+                        _c.sent();
                         return [4 /*yield*/, this.initTracker(rppgTrackerConfig)];
                     case 3:
-                        _b.sent();
+                        _c.sent();
+                        if (!(!serverless && rppgSocketConfig)) return [3 /*break*/, 5];
                         return [4 /*yield*/, this.initSocket(rppgSocketConfig)];
                     case 4:
-                        _b.sent();
-                        return [3 /*break*/, 6];
-                    case 5:
-                        error_1 = _b.sent();
+                        _c.sent();
+                        _c.label = 5;
+                    case 5: return [3 /*break*/, 7];
+                    case 6:
+                        error_1 = _c.sent();
                         console.log('Error initializing RPPG', error_1);
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/];
                 }
             });
         });
@@ -107,7 +109,9 @@ var RPPG = /** @class */ (function () {
             console.log('Error initializing - rppgCamera should be initialized before initTracker');
             return Promise.reject();
         }
-        this.rppgTracker = new RPPGTracker_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgTrackerConfig), { width: this.width, height: this.height }));
+        this.rppgTracker = new RPPGTracker_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgTrackerConfig), { width: this.width, height: this.height, serverless: this.config.serverless }), (this.config.serverless && {
+            onEvent: this.onEvent.bind(this),
+        })));
         return this.rppgTracker.init();
     };
     /**
@@ -225,15 +229,16 @@ var RPPG = /** @class */ (function () {
         this.processing = false;
     };
     RPPG.prototype.capture = function () {
+        var _a;
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var timestamp, frame, rppgTrackerData;
-            return (0, tslib_1.__generator)(this, function (_a) {
-                switch (_a.label) {
+            return (0, tslib_1.__generator)(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (this.processing) {
                             requestAnimationFrame(this.capture.bind(this));
                         }
-                        if (this.width === 0 || !this.rppgCamera || !this.rppgTracker || !this.rppgSocket) {
+                        if (this.width === 0 || !this.rppgCamera || !this.rppgTracker || (!this.config.serverless && !this.rppgSocket)) {
                             // TODO error
                             return [2 /*return*/];
                         }
@@ -244,12 +249,12 @@ var RPPG = /** @class */ (function () {
                         if (!frame) {
                             return [2 /*return*/];
                         }
-                        return [4 /*yield*/, this.rppgTracker.processLandmarksImage(frame.data)];
+                        return [4 /*yield*/, this.rppgTracker.processFrame(frame.data)];
                     case 1:
-                        rppgTrackerData = _a.sent();
+                        rppgTrackerData = _b.sent();
                         if (!this.config.skipSocketWhenNoFace ||
                             (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
-                            this.rppgSocket.send({
+                            (_a = this.rppgSocket) === null || _a === void 0 ? void 0 : _a.send({
                                 bgrSignal: rppgTrackerData.bgr1d,
                                 timestamp: timestamp,
                             });
