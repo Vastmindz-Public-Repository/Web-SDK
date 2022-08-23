@@ -301,3 +301,11 @@ export interface StressIndex {
   /***/
   stress: number;
 }
+
+/**
+ * AfibRisk
+ */
+ export interface AfibRisk {
+  /***/
+  afibRisk: number;
+}
