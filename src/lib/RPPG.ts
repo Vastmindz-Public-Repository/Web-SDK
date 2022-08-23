@@ -266,7 +266,9 @@ class RPPG implements RPPGinterface {
       return
     }
 
-    const rppgTrackerData = await this.rppgTracker.processFrame(frame.data)
+    const relativeTimestamp = this.timestamp - this.startTimeStamp
+
+    const rppgTrackerData = await this.rppgTracker.processFrame(frame.data, relativeTimestamp)
 
     if (!this.config.skipSocketWhenNoFace ||
         (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
@@ -285,7 +287,7 @@ class RPPG implements RPPGinterface {
 
     this.frameNumber++
     // eslint-disable-next-line max-len
-    this.averageFps = +((1000 * this.frameNumber) / (this.timestamp - this.startTimeStamp)).toFixed(2)
+    this.averageFps = +((1000 * this.frameNumber) / relativeTimestamp).toFixed(2)
   }
 
   /**

@@ -138,7 +138,7 @@ class RPPGTracker implements RPPGTrackerInterface {
     )
   }
 
-  async processFrame(data: Uint8ClampedArray): Promise<RPPGTrackerProcessFrameData> {
+  async processFrame(data: Uint8ClampedArray, timestamp: number): Promise<RPPGTrackerProcessFrameData> {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
@@ -147,9 +147,9 @@ class RPPGTracker implements RPPGTrackerInterface {
     }
 
     if (this.config.serverless) {
-      this.module._track(this.inputBuf, this.width, this.height)
+      this.module._track(this.inputBuf, this.width, this.height, timestamp)
     } else {
-      this.module._process_landmarks(this.inputBuf, this.width, this.height)
+      this.module._process_landmarks(this.inputBuf, this.width, this.height, timestamp)
     }
 
     const eyeBlinkStatus = this.getEyeBlinkStatus()

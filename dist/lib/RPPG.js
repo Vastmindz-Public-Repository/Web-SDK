@@ -231,7 +231,7 @@ var RPPG = /** @class */ (function () {
     RPPG.prototype.capture = function () {
         var _a;
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var timestamp, frame, rppgTrackerData;
+            var timestamp, frame, relativeTimestamp, rppgTrackerData;
             return (0, tslib_1.__generator)(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -249,7 +249,8 @@ var RPPG = /** @class */ (function () {
                         if (!frame) {
                             return [2 /*return*/];
                         }
-                        return [4 /*yield*/, this.rppgTracker.processFrame(frame.data)];
+                        relativeTimestamp = this.timestamp - this.startTimeStamp;
+                        return [4 /*yield*/, this.rppgTracker.processFrame(frame.data, relativeTimestamp)];
                     case 1:
                         rppgTrackerData = _b.sent();
                         if (!this.config.skipSocketWhenNoFace ||
@@ -267,7 +268,7 @@ var RPPG = /** @class */ (function () {
                         });
                         this.frameNumber++;
                         // eslint-disable-next-line max-len
-                        this.averageFps = +((1000 * this.frameNumber) / (this.timestamp - this.startTimeStamp)).toFixed(2);
+                        this.averageFps = +((1000 * this.frameNumber) / relativeTimestamp).toFixed(2);
                         return [2 /*return*/];
                 }
             });

@@ -115,7 +115,7 @@ var RPPGTracker = /** @class */ (function () {
         this.inputBuf = this.module._malloc(this.bufferSize);
         this.uint8Array = new Uint8ClampedArray(this.module.HEAPU8.buffer, this.inputBuf, this.bufferSize);
     };
-    RPPGTracker.prototype.processFrame = function (data) {
+    RPPGTracker.prototype.processFrame = function (data, timestamp) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
             var eyeBlinkStatus, imageQualityFlags, status, signal, ecg, bloodPressureStatus, snr, stress, stressStatus, progressPercent, hrv, mean, measurementProgressData, measurementSignalData, hrvMetricsData, measurementStressData, signalQualityData, measurementMeanData, measurementStatusData, bloodPressureData, bgr1d, landmarks, face;
             return (0, tslib_1.__generator)(this, function (_a) {
@@ -126,10 +126,10 @@ var RPPGTracker = /** @class */ (function () {
                     this.uint8Array.set(data);
                 }
                 if (this.config.serverless) {
-                    this.module._track(this.inputBuf, this.width, this.height);
+                    this.module._track(this.inputBuf, this.width, this.height, timestamp);
                 }
                 else {
-                    this.module._process_landmarks(this.inputBuf, this.width, this.height);
+                    this.module._process_landmarks(this.inputBuf, this.width, this.height, timestamp);
                 }
                 eyeBlinkStatus = this.getEyeBlinkStatus();
                 imageQualityFlags = this.getImageQualityFlags();

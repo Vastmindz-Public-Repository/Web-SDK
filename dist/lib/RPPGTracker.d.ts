@@ -28,7 +28,7 @@ declare class RPPGTracker implements RPPGTrackerInterface {
     init(): Promise<void>;
     private getModuleOptions;
     private initMemoryBuffer;
-    processFrame(data: Uint8ClampedArray): Promise<RPPGTrackerProcessFrameData>;
+    processFrame(data: Uint8ClampedArray, timestamp: number): Promise<RPPGTrackerProcessFrameData>;
     /**
      * getBgr1d
      * @returns {number[]}

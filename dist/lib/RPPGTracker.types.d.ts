@@ -71,14 +71,14 @@ export interface ImageQualityFlags {
 export interface RPPGTrackerInterface {
     config: RPPGTrackerConfig;
     init: () => Promise<void>;
-    processFrame: (data: Uint8ClampedArray) => Promise<RPPGTrackerProcessFrameData>;
+    processFrame: (data: Uint8ClampedArray, timestamp: number) => Promise<RPPGTrackerProcessFrameData>;
     getBgr1d: () => number[];
     getLastLandmarks: () => number[];
     getFace: () => number[];
 }
 export interface EmscriptenModule {
-    _process_landmarks: (arg0: number, arg1: number, arg2: number) => void;
-    _track: (arg0: number, arg1: number, arg2: number) => void;
+    _process_landmarks: (arg0: number, arg1: number, arg2: number, timestamp: number) => void;
+    _track: (arg0: number, arg1: number, arg2: number, timestamp: number) => void;
     getStatus: () => number;
     getEyeBlinkStatus: (maxTimeBetweenBlinksSeconds: number, detectionThreshold: number) => boolean;
     getImageQualityFlags: () => number;
