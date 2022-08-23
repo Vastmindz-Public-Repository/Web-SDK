@@ -1,6 +1,7 @@
 import { RPPGCameraConfig, RPPGCameraInit } from './RPPGCamera.types'
 import {
   AccessToken,
+  AfibRisk,
   BloodPressure,
   HrvMetrics,
   InterferenceWarning,
@@ -254,6 +255,19 @@ export interface RPPGConfig {
   * ```
   */
   onStressIndex?: (arg0: StressIndex) => void;
+
+  /**
+  * onStressIndex event, cb: {@link StressIndex}
+  *
+  * ### Usage with regular javascript
+  *
+  * ```javascript
+  * const rppgInstance = new RPPG({
+  *   onAfibRisk: ({@link AfibRisk}) => console.log('onAfibRisk:', {@link AfibRisk})
+  * })
+  * ```
+  */
+   onAfibRisk?: (arg0: AfibRisk) => void;
 
   /**
   * skipSocketWhenNoFace - skip sending any socket data in case no face detected {@link SkipSocketWhenNoFace}

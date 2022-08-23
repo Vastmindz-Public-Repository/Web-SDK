@@ -5,6 +5,8 @@ export interface RPPGSocketConfig {
     /***/
     url?: string;
     /***/
+    query?: string;
+    /***/
     authToken: string;
     /***/
     onConnect?: (arg0: Event) => void;
@@ -239,4 +241,11 @@ export interface HrvMetrics {
 export interface StressIndex {
     /***/
     stress: number;
+}
+/**
+ * AfibRisk
+ */
+export interface AfibRisk {
+    /***/
+    afibRisk: number;
 }

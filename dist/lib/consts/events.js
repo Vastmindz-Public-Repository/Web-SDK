@@ -15,5 +15,6 @@ exports.EVENTS = {
     SIGNAL_QUALITY: 'onSignalQuality',
     HRV_METRICS: 'onHrvMetrics',
     STRESS_INDEX: 'onStressIndex',
+    AFIB_RISK: 'onAfibRisk',
 };
 //# sourceMappingURL=events.js.map

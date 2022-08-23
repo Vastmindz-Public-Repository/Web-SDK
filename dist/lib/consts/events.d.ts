@@ -12,4 +12,5 @@ export declare const EVENTS: {
     SIGNAL_QUALITY: string;
     HRV_METRICS: string;
     STRESS_INDEX: string;
+    AFIB_RISK: string;
 };
