@@ -14,4 +14,5 @@ export const EVENTS = {
   [RPPGMessageType.SIGNAL_QUALITY]: 'onSignalQuality',
   [RPPGMessageType.HRV_METRICS]: 'onHrvMetrics',
   [RPPGMessageType.STRESS_INDEX]: 'onStressIndex',
+  [RPPGMessageType.AFIB_RISK]: 'onAfibRisk',
 }

@@ -216,6 +216,14 @@ export interface StressIndex {
 }
 
 /**
+ * AfibRisk
+ */
+ export interface AfibRisk {
+  /***/
+  afibRisk: number;
+}
+
+/**
  * Post data
  */
  export interface PostData {
@@ -240,7 +248,8 @@ export interface StressIndex {
  SignalQuality |
  InterferenceWarning |
  UnstableConditionsWarning |
- HrvMetrics
+ HrvMetrics |
+ AfibRisk
 
 
 /**
@@ -260,4 +269,5 @@ export enum RPPGMessageType {
   STRESS_INDEX = 'STRESS_INDEX',
   HRV_METRICS = 'HRV_METRICS',
   ACCESS_TOKEN = 'ACCESS_TOKEN',
+  AFIB_RISK = 'AFIB_RISK',
 }
