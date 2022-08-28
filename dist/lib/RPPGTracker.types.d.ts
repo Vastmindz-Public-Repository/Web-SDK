@@ -1,7 +1,10 @@
+import { MessageEvents } from "./RPPGEvents.types";
 /**
  * RPPGTrackerConfig
  */
 export interface RPPGTrackerConfig {
+    /** */
+    serverless?: boolean;
     /** */
     width?: number;
     /** */
@@ -22,11 +25,13 @@ export interface RPPGTrackerConfig {
     onStatus?: () => void;
     /** */
     onFace?: () => void;
+    /** */
+    onEvent?: (arg0: string, arg1: MessageEvents) => void;
 }
 /**
- * RPPGTrackerProcessLandmarkData
+ * RPPGTrackerProcessFrameData
  */
-export interface RPPGTrackerProcessLandmarkData {
+export interface RPPGTrackerProcessFrameData {
     /** */
     status: number;
     /** */
@@ -66,17 +71,32 @@ export interface ImageQualityFlags {
 export interface RPPGTrackerInterface {
     config: RPPGTrackerConfig;
     init: () => Promise<void>;
-    processLandmarksImage: (data: Uint8ClampedArray) => Promise<RPPGTrackerProcessLandmarkData>;
+    processFrame: (data: Uint8ClampedArray, timestamp: number) => Promise<RPPGTrackerProcessFrameData>;
     getBgr1d: () => number[];
     getLastLandmarks: () => number[];
     getFace: () => number[];
 }
 export interface EmscriptenModule {
-    _process_landmarks: (arg0: number, arg1: number, arg2: number) => void;
+    _process_landmarks: (arg0: number, arg1: number, arg2: number, timestamp: number) => void;
+    _track: (arg0: number, arg1: number, arg2: number, timestamp: number) => void;
     getStatus: () => number;
     getEyeBlinkStatus: (maxTimeBetweenBlinksSeconds: number, detectionThreshold: number) => boolean;
     getImageQualityFlags: () => number;
+    getBP: () => number;
+    getBPM: () => number;
     get_bgr1d: () => any;
+    getHRVFeatures: () => any;
+    getMean_BPM_RR_SpO2: () => any;
+    getSignal: (size: number) => any;
+    getECG: (size: number) => any;
+    getPeaksIndexes: (size: number) => any;
+    getRR: () => any;
+    getSNR: () => any;
+    getMeanSNR: () => any;
+    getSpO2: () => any;
+    getStressStatus: () => any;
+    getStress: () => any;
+    getProgress: () => any;
     getFace: () => number[];
     getLastLandmarks: () => any;
     ready: Promise<void>;

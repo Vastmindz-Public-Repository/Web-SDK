@@ -20,6 +20,11 @@
       display: flex;
       flex-direction: column;
     }
+
+    .container .chart {
+      width: 720px;
+      height: 400px;
+    }
   </style>
 </head>
 <body>
@@ -29,16 +34,21 @@
       <canvas class="canvas"></canvas>
     </div>
     <div class="control-container">
-      <div class="login-container">
+      <!-- <div class="login-container">
         <input class="email" type="email" value="ggevgg@gmail.com" />
         <input class="password" type="password" value="kenitek6" />
         <button class="loginButton">Login</button>
-      </div>
+      </div> -->
       <div class="tracker-container">
-        token: <input class="token" />
+        <!-- token: <input class="token" /> -->
+        <button class="startButton-w-socket">Start with server</button>
+        <button class="startButton-wo-socket">Start serverless</button>
         <button class="startButton" disabled>Start</button>
-        <button class="switchCamera">Switch camera</button>
+        <button class="switchCamera" disabled>Switch camera</button>
       </div>
+    </div>
+    <div>
+      <canvas class="chart"></canvas>
     </div>
   </div>
 </body>
