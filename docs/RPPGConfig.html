@@ -94,7 +94,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="RPPG.html">RPPG</a></li><li><a href="RPPGCamera.html">RPPGCamera</a></li><li><a href="RPPGSocket.html">RPPGSocket</a></li><li><a href="RPPGTracker.html">RPPGTracker</a></li></ul><h3>Interfaces</h3><ul><li><a href="AccessToken.html">AccessToken</a></li><li><a href="BloodPressure.html">BloodPressure</a></li><li><a href="HrvMetrics.html">HrvMetrics</a></li><li><a href="ImageQualityFlags.html">ImageQualityFlags</a></li><li><a href="InterferenceWarning.html">InterferenceWarning</a></li><li><a href="MeasurementMeanData.html">MeasurementMeanData</a></li><li><a href="MeasurementProgress.html">MeasurementProgress</a></li><li><a href="MeasurementSignal.html">MeasurementSignal</a></li><li><a href="MeasurementStatus.html">MeasurementStatus</a></li><li><a href="MovingWarning.html">MovingWarning</a></li><li><a href="PostData.html">PostData</a></li><li><a href="RPPGCameraConfig.html">RPPGCameraConfig</a></li><li><a href="RPPGCameraGetFrame.html">RPPGCameraGetFrame</a></li><li><a href="RPPGCameraInit.html">RPPGCameraInit</a></li><li><a href="RPPGConfig.html">RPPGConfig</a></li><li><a href="RPPGOnFrame.html">RPPGOnFrame</a></li><li><a href="RPPGSocketConfig.html">RPPGSocketConfig</a></li><li><a href="RPPGSocketSendMessage.html">RPPGSocketSendMessage</a></li><li><a href="RPPGTrackerConfig.html">RPPGTrackerConfig</a></li><li><a href="RPPGTrackerProcessFrameData.html">RPPGTrackerProcessFrameData</a></li><li><a href="SendingRateWarning.html">SendingRateWarning</a></li><li><a href="SignalQuality.html">SignalQuality</a></li><li><a href="StressIndex.html">StressIndex</a></li><li><a href="UnstableConditionsWarning.html">UnstableConditionsWarning</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BloodPressureStatus">BloodPressureStatus</a></li><li><a href="global.html#RPPGMessageType">RPPGMessageType</a></li><li><a href="global.html#StatusCode">StatusCode</a></li><li><a href="global.html#StressStatus">StressStatus</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="RPPG.html">RPPG</a></li><li><a href="RPPGCamera.html">RPPGCamera</a></li><li><a href="RPPGSocket.html">RPPGSocket</a></li><li><a href="RPPGTracker.html">RPPGTracker</a></li></ul><h3>Interfaces</h3><ul><li><a href="AccessToken.html">AccessToken</a></li><li><a href="AfibRisk.html">AfibRisk</a></li><li><a href="BloodPressure.html">BloodPressure</a></li><li><a href="HrvMetrics.html">HrvMetrics</a></li><li><a href="ImageQualityFlags.html">ImageQualityFlags</a></li><li><a href="InterferenceWarning.html">InterferenceWarning</a></li><li><a href="MeasurementMeanData.html">MeasurementMeanData</a></li><li><a href="MeasurementProgress.html">MeasurementProgress</a></li><li><a href="MeasurementSignal.html">MeasurementSignal</a></li><li><a href="MeasurementStatus.html">MeasurementStatus</a></li><li><a href="MovingWarning.html">MovingWarning</a></li><li><a href="PostData.html">PostData</a></li><li><a href="RPPGCameraConfig.html">RPPGCameraConfig</a></li><li><a href="RPPGCameraGetFrame.html">RPPGCameraGetFrame</a></li><li><a href="RPPGCameraInit.html">RPPGCameraInit</a></li><li><a href="RPPGConfig.html">RPPGConfig</a></li><li><a href="RPPGOnFrame.html">RPPGOnFrame</a></li><li><a href="RPPGSocketConfig.html">RPPGSocketConfig</a></li><li><a href="RPPGSocketSendMessage.html">RPPGSocketSendMessage</a></li><li><a href="RPPGTrackerConfig.html">RPPGTrackerConfig</a></li><li><a href="RPPGTrackerProcessFrameData.html">RPPGTrackerProcessFrameData</a></li><li><a href="SendingRateWarning.html">SendingRateWarning</a></li><li><a href="SignalQuality.html">SignalQuality</a></li><li><a href="StressIndex.html">StressIndex</a></li><li><a href="UnstableConditionsWarning.html">UnstableConditionsWarning</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BloodPressureStatus">BloodPressureStatus</a></li><li><a href="global.html#RPPGMessageType">RPPGMessageType</a></li><li><a href="global.html#StatusCode">StatusCode</a></li><li><a href="global.html#StressStatus">StressStatus</a></li></ul></div>
                 
             </nav>
         </div>
@@ -219,6 +219,83 @@
 <h3>Usage with regular javascript</h3>
 <pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
   onAccessToken: (<a href="AccessToken.html"><code>AccessToken</code></a>) => console.log('onAccessToken:', <a href="AccessToken.html"><code>AccessToken</code></a>)
+})
+</code></pre>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">function</span>
+
+
+    </span>
+
+<h4 class="name" id="onAfibRisk">
+    <a class="href-link" href="#onAfibRisk">#</a>
+    
+    <span class="code-name">
+        onAfibRisk
+    </span>
+    
+        <span class='tag'>Optional</span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>onStressIndex event, cb: <a href="StressIndex.html"><code>StressIndex</code></a></p>
+<h3>Usage with regular javascript</h3>
+<pre class="prettyprint source lang-javascript"><code>const rppgInstance = new RPPG({
+  onAfibRisk: (<a href="AfibRisk.html"><code>AfibRisk</code></a>) => console.log('onAfibRisk:', <a href="AfibRisk.html"><code>AfibRisk</code></a>)
 })
 </code></pre>
 </div>

@@ -58,5 +58,6 @@ var RPPGMessageType;
     RPPGMessageType["STRESS_INDEX"] = "STRESS_INDEX";
     RPPGMessageType["HRV_METRICS"] = "HRV_METRICS";
     RPPGMessageType["ACCESS_TOKEN"] = "ACCESS_TOKEN";
+    RPPGMessageType["AFIB_RISK"] = "AFIB_RISK";
 })(RPPGMessageType = exports.RPPGMessageType || (exports.RPPGMessageType = {}));
 //# sourceMappingURL=RPPGEvents.types.js.map

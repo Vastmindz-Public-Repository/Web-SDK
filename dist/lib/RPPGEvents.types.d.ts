@@ -182,6 +182,13 @@ export interface StressIndex {
     stress: number;
 }
 /**
+ * AfibRisk
+ */
+export interface AfibRisk {
+    /***/
+    afibRisk: number;
+}
+/**
  * Post data
  */
 export interface PostData {
@@ -193,7 +200,7 @@ export interface PostData {
 /**
  * MessageEvents
  */
-export declare type MessageEvents = AccessToken | MeasurementMeanData | MeasurementStatus | SendingRateWarning | MeasurementProgress | MeasurementSignal | MovingWarning | BloodPressure | SignalQuality | InterferenceWarning | UnstableConditionsWarning | HrvMetrics;
+export declare type MessageEvents = AccessToken | MeasurementMeanData | MeasurementStatus | SendingRateWarning | MeasurementProgress | MeasurementSignal | MovingWarning | BloodPressure | SignalQuality | InterferenceWarning | UnstableConditionsWarning | HrvMetrics | AfibRisk;
 /**
  * RPPGMessageType
  */
@@ -210,5 +217,6 @@ export declare enum RPPGMessageType {
     UNSTABLE_CONDITIONS_WARNING = "UNSTABLE_CONDITIONS_WARNING",
     STRESS_INDEX = "STRESS_INDEX",
     HRV_METRICS = "HRV_METRICS",
-    ACCESS_TOKEN = "ACCESS_TOKEN"
+    ACCESS_TOKEN = "ACCESS_TOKEN",
+    AFIB_RISK = "AFIB_RISK"
 }

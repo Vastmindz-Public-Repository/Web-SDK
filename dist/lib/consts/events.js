@@ -17,5 +17,6 @@ exports.EVENTS = (_a = {},
     _a[RPPGEvents_types_1.RPPGMessageType.SIGNAL_QUALITY] = 'onSignalQuality',
     _a[RPPGEvents_types_1.RPPGMessageType.HRV_METRICS] = 'onHrvMetrics',
     _a[RPPGEvents_types_1.RPPGMessageType.STRESS_INDEX] = 'onStressIndex',
+    _a[RPPGEvents_types_1.RPPGMessageType.AFIB_RISK] = 'onAfibRisk',
     _a);
 //# sourceMappingURL=events.js.map
