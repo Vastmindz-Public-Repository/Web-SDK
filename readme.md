@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/white_logo.png" alt="Logo" width="100" height="80">
+    <img src="images/white_logo.png" alt="Logo" width="100" height="">
   </a>
 
 <h3 align="center">Web SDK</h3>
