@@ -1,4 +1,6 @@
-# RPPG
+# Vastmindz's Web SDK
+
+Welcome to Vastmindz's web SDK repository!
 
 [Documentation](https://websdk1.blob.core.windows.net/sdk-1-1-2/docs/index.html)
 
@@ -8,6 +10,13 @@
 
 [Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example)
 
+## Getting started
+
+To run a quick demo of our web SDK, run the following command:
+```
+$ npm install
+$ npm run example:browser
+```
 
 ## Install
 
