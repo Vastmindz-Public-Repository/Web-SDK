@@ -54,6 +54,12 @@
 
 Vastmindz's remote health screening solution offer's the ability to extract physiological information from users, using just a camera.
 
+<br />
+<div align="center">
+  <img src="images/sdk_image.png" alt="SDK flow" width="">
+</div>
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
