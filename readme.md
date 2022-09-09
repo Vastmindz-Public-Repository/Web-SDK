@@ -12,7 +12,7 @@ Welcome to Vastmindz's web SDK repository!
 
 ## Getting started
 
-To run a quick demo of our web SDK, run the following command:
+To run a quick demo of our web SDK, run the following CLI commands:
 ```
 $ npm install
 $ npm run example:browser
