@@ -115,6 +115,11 @@ declare class RPPG implements RPPGinterface {
      */
     switchCamera(useFrontCamera: boolean): Promise<RPPGCameraInit | void>;
     /**
+     * Switch serverless without rppg instance reinitialisation
+     * @return {void}
+     */
+    switchServerless(serverless: boolean): void;
+    /**
      * Start tracking
      * @return {void}
      */

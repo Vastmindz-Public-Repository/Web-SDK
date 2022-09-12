@@ -97,8 +97,17 @@ sequenceDiagram
 You MUST obtain access to our production environment to get started. If you are unsure on how to do this, please reach out to your Vastmindz representative or email us at team@vastmindz.com.
 
 ---
+To run a quick demo of our web SDK on AngularJS, run the following CLI commands:
+```
+$ npm install
+$ npm run example:angular
+```
+**NOTE**
 
-To run a quick demo of our web SDK, run the following CLI commands:
+You should have the ssh access to the web SDK repo so that the npm package can be installed correctly
+
+
+To run a quick demo of our web SDK on native js, run the following CLI commands:
 ```
 $ npm install
 $ npm run example:browser
@@ -118,18 +127,18 @@ $ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 
 cdn (```rppg``` will be available as global in Browsers)
 ```
-<script src="https://websdk1.blob.core.windows.net/sdk-1-1-2/dist/rppg.min.js"></script>
+<script src="https://websdk1.blob.core.windows.net/sdk-1-2-2/dist/rppg.min.js"></script>
 ```
 
 <!-- # Vastmindz's Web SDK
 
 Welcome to Vastmindz's web SDK repository!
 
-[Documentation](https://websdk1.blob.core.windows.net/sdk-1-1-2/docs/index.html)
+[Documentation](https://websdk1.blob.core.windows.net/sdk-1-2-2/docs/index.html)
 
-[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk-1-1-2/docs/RPPG.html)
+[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk-1-2-2/docs/RPPG.html)
 
-[Live demo](https://websdk1.blob.core.windows.net/sdk-1-1-2/example/index.html)
+[Live demo](https://websdk1.blob.core.windows.net/sdk-1-2-2/example/index.html)
 
 [Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example) -->
 
@@ -147,6 +156,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 import RPPG from './dist/lib/RPPG'
 ...
 const rppgInstance = new RPPG({
+  serverless: false,
   onFrame: (data) => {
     console.log('frame data:', data)
     // will print frame data:

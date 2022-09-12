@@ -1,0 +1,12 @@
+@import 'variables';
+
+.footer-container {
+  font-size: 0.625rem;
+
+  .footer-notice,
+  .footer-risks {
+    .footer-title {
+      text-decoration: underline;
+    }
+  }
+}

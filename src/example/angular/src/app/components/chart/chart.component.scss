@@ -1,0 +1,13 @@
+@import 'variables';
+
+.chart-container {
+  height: 30px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: center;
+
+  .chart {
+    width: 255px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,26 @@
+@import 'variables';
+
+.status-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 5.625rem;
+
+  .status {
+    background-color: $status-background;
+    font-size: $status-main-font-size;
+    color: $status-color;
+    border-radius: $status-border-radius;
+    padding: 1rem 3.125rem;
+    min-width: 18.75rem;
+    text-align: center;
+    line-height: 2.25rem;
+
+    .additional-text {
+      font-size: $status-additional-font-size;
+      margin: 0;
+      text-align: center;
+      line-height: 1rem;
+    }
+  }
+}

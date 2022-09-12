@@ -109,9 +109,7 @@ var RPPG = /** @class */ (function () {
             console.log('Error initializing - rppgCamera should be initialized before initTracker');
             return Promise.reject();
         }
-        this.rppgTracker = new RPPGTracker_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgTrackerConfig), { width: this.width, height: this.height, serverless: this.config.serverless }), (this.config.serverless && {
-            onEvent: this.onEvent.bind(this),
-        })));
+        this.rppgTracker = new RPPGTracker_1.default((0, tslib_1.__assign)((0, tslib_1.__assign)({}, rppgTrackerConfig), { width: this.width, height: this.height, serverless: this.config.serverless, onEvent: this.onEvent.bind(this) }));
         return this.rppgTracker.init();
     };
     /**
@@ -208,6 +206,16 @@ var RPPG = /** @class */ (function () {
             return this.rppgCamera.switchCamera(useFrontCamera);
         }
         return Promise.resolve();
+    };
+    /**
+     * Switch serverless without rppg instance reinitialisation
+     * @return {void}
+     */
+    RPPG.prototype.switchServerless = function (serverless) {
+        if (this.rppgTracker) {
+            this.config.serverless = serverless;
+            this.rppgTracker.config.serverless = serverless;
+        }
     };
     /**
      * Start tracking

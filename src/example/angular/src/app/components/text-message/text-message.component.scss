@@ -1,0 +1,72 @@
+@import 'variables';
+
+.text-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 5.625rem;
+
+  .text-message {
+    color: $white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.in {
+      overflow: hidden;
+      transition: max-height 0.25s ease-out, opacity 0.25s ease-out;
+      opacity: 1;
+    }
+    
+    &.out {
+      overflow: hidden;
+      transition: max-height 0.25s ease-out, opacity 0.25s ease-out;
+      opacity: 0;
+    }
+    
+    .welcome-title {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-medium;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    } 
+    .welcome-description {
+      font-weight: $font-weight-normal;
+      font-size: $font-size-small;
+      margin: 0;
+      margin-bottom: 2rem;
+    } 
+  }
+}
+
+
+
+@keyframes fadeInDown {
+  0% {
+  // opacity: 0;
+  // transform: translate3d(0, -20px, 0);
+  max-height: 0px;
+}
+50% {
+  max-height: 50%;
+}
+100% {
+  // opacity: 1;
+  // transform: none;
+  max-height: 100%;
+  }
+} 
+
+@keyframes fadeOutUp {
+  0% {
+  // opacity: 1;
+  // transform: none;
+  height: 100%;
+}
+100% {
+  // opacity: 0;
+  // transform: translate3d(0, -20px, 0);
+  height: 0;
+}
+} 
