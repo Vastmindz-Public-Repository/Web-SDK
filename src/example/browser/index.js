@@ -1,21 +1,33 @@
 /* global rppg */
 
+// Global settings
+const authToken = null // Put here your token (pls request from Vastmindz team)
+const pathToWasmData = '/'
+const useFrontCamera = false
+
+// Webcam settings
+const videoWidth = 640
+const videoHeight = 480
+
+// Chart canvas settings
+const canvasChartWidth = 720
+const canvasChartHeight = 600
+const canvasChartLineWidth = 1
+
+const startButtonWSocket = document.querySelector('.startButton-w-socket')
+const startButtonWOSocket = document.querySelector('.startButton-wo-socket')
+const startButton = document.querySelector('.startButton')
+const switchCamera = document.querySelector('.switchCamera')
+
 async function initRPPG(serverless) {
-  // const backendUrl = 'https://rppg-dev2.xyz/v1/account/api/public/login'
   const videoElement = document.querySelector('.video')
   const canvasElement = document.querySelector('.canvas')
   const canvasChartElement = document.querySelector('.chart')
   const canvasChartCtx = canvasChartElement.getContext('2d')
 
-  canvasChartElement.width = 720
-  canvasChartElement.height = 600
-  canvasChartCtx.lineWidth = 1
-  // canvasChartCtx.imageSmoothingEnabled = true
-
-  // const tokenInput = document.querySelector('.token')
-  // const emailInput = document.querySelector('.email')
-  // const passwordInput = document.querySelector('.password')
-  // const loginButton = document.querySelector('.loginButton')
+  canvasChartElement.width = canvasChartWidth
+  canvasChartElement.height = canvasChartHeight
+  canvasChartCtx.lineWidth = canvasChartLineWidth
 
   const calcData = {
     frameData: {
@@ -65,11 +77,10 @@ async function initRPPG(serverless) {
   const rppgInstance = window.rppgInstance = new rppg({
     serverless,
     onFrame: (data) => {
-      // console.log('onFrame', data)
       calcData.frameData = data
       
       render(calcData)
-      console.log('onFrame', calcData)
+      // console.log('onFrame', calcData)
     },
 
     onMeasurementProgress: (data) => {
@@ -114,43 +125,21 @@ async function initRPPG(serverless) {
   })
 
   await rppgInstance.initCamera({
-    width: 640,
-    height: 480,
-    videoElement: videoElement,
-    canvasElement: canvasElement,
-    useFrontCamera: false,
+    width: videoWidth,
+    height: videoHeight,
+    videoElement,
+    canvasElement,
+    useFrontCamera,
   })
 
   await rppgInstance.initTracker({
-    pathToWasmData: 'http://localhost:8080/',
+    pathToWasmData,
   })
-
-  // loginButton.addEventListener('click', async () => {
-  //   try {
-  //     const response = await fetch(backendUrl, {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         email: emailInput.value,
-  //         password: passwordInput.value,
-  //       }),
-  //     })
-  //     const { data } = await response.json()
-  //     tokenInput.value = data.authToken
-  //     startButton.removeAttribute('disabled')
-  //   } catch (e) {
-  //     startButton.setAttribute('disabled', true)
-  //   }
-  // })
 
   startButton.addEventListener('click', async () => {
     if (!serverless && !rppgInstance.rppgSocket) {
       await this.rppgInstance.initSocket({
-        url: 'wss://airasia-dev.xyz/vp/bgr_signal_socket',
-        // authToken: tokenInput.value,
+        authToken,
         onConnect: () => console.log('Socket connection established'),
         onClose: (event) => console.log('Socket connection closed', event),
         onError: (event) => console.log('Socket connection error', event),
@@ -255,11 +244,6 @@ async function initRPPG(serverless) {
   }
 }
 
-const startButtonWSocket = document.querySelector('.startButton-w-socket')
-const startButtonWOSocket = document.querySelector('.startButton-wo-socket')
-const startButton = document.querySelector('.startButton')
-const switchCamera = document.querySelector('.switchCamera')
-
 function init() {
   startButtonWSocket.addEventListener('click', async () => {
     startButton.removeAttribute('disabled')
@@ -276,7 +260,5 @@ function init() {
     initRPPG(true)
   })
 }
-
-
 
 init()
