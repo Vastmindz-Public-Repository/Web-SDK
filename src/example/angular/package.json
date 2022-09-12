@@ -23,7 +23,7 @@
     "@angular/router": "~11.2.10",
     "angular-in-memory-web-api": "~0.11.0",
     "ngx-spinner": "^11.0.2",
-    "rppg": "git+git@github.com:Vastmindz-Public-Repository/Web-SDK#angular-example",
+    "rppg": "git+git@github.com:Vastmindz-Public-Repository/Web-SDK",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
