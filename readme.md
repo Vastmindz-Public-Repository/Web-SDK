@@ -103,7 +103,9 @@ $ npm install
 $ npm run example:angular
 ```
 **NOTE**
+
 You should have the ssh access to the web SDK repo so that the npm package can be installed correctly
+
 
 To run a quick demo of our web SDK on native js, run the following CLI commands:
 ```
