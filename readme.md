@@ -99,7 +99,7 @@ $ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 cdn (```rppg``` will be available as global in Browsers)
 ```
 <script src="https://websdk1.blob.core.windows.net/sdk-1-1-2/dist/rppg.min.js"></script>
-
+```
 
 <!-- # Vastmindz's Web SDK
 
