@@ -72,9 +72,11 @@ sequenceDiagram
         SDK->>SDK: Is the face in the correct position?
         SDK->>SDK: Is the face in the correct orientation?
         SDK->>SDK: Is the face in the correct lighting?
+        SDK-->>FrontEnd: UI/UX Check Result
     end
     SDK->>Vastmindz Cloud Engine: Send BGR Data
     Vastmindz Cloud Engine->>SDK: Return JSON Results (Heart Rate, Respiration, etc.)
+    SDK-->>FrontEnd: Displays results
     Vastmindz Cloud Engine->>SDK: Return Status/Error Codes
 ```
 
