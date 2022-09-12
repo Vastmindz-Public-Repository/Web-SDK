@@ -1,0 +1,33 @@
+<div class="results-container">
+
+  <div class="msg-block">
+    <p class="title">Scan complete</p>
+    <p class="description">We do not claim to diagnose, mitigate, prevent or treat any disease, any disorders, symptoms or abnormal physical state.</p>
+  </div>
+  <div class="results" *ngIf="data">
+    <div *ngFor="let item of schema; trackBy: trackById" class="item">
+      <div class="title">
+        <div class="icon">
+          <img src='assets/images/{{item.iconResult}}'>
+        </div>
+        <div class="name">
+          {{item.name}}
+        </div>
+      </div>
+      <div class="value" *ngIf="data.bgrData[item.key]">
+        {{data.bgrData[item.key]}}
+        <span class="sign">{{item.sign}}</span>
+      </div>
+      <div class="no-value" *ngIf="!data.bgrData[item.key]">
+        <img src='assets/images/note-icon.svg'>
+      </div>
+    </div>
+    <div class="notification" *ngIf="!data.isAllDataCalculated">
+      <img src='assets/images/note-icon.svg'>
+      One or more vitals were unable to be calculated due to bad lighting conditions, please try again later
+    </div>
+  </div>
+
+  <app-button type="primary" (click)="onBackClickButtonHandler()">Take another test</app-button>
+
+</div>

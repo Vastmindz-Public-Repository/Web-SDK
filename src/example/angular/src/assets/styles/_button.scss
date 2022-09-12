@@ -1,0 +1,23 @@
+@import 'variables';
+
+// default font
+$button-font-size: $font-size-small;
+$button-font-weight: $font-weight-normal;
+
+// size
+$button-min-width: 17.5rem;
+$button-min-height: 2rem;
+$button-padding: 0;
+
+// default border
+$button-border-radius: $border-radius-small;
+$button-box-shadow: 0px 0.3px 0.9px rgba($black, 32%), 0px 1.6px 3.6px rgba($black, 28%);
+
+// primary
+$primary-button-background: $scampi;
+$primary-button-hover-background: lighten($scampi, 5%);
+$primary-button-text-color: $white;
+
+// secondary
+$secondary-button-background: $jaffa;
+$secondary-button-text-color: $white;

@@ -1,6 +1,6 @@
 {
   "name": "rppg",
-  "version": "1.2.3",
+  "version": "1.2.2",
   "description": "rppg tracker",
   "main": "./src/index.ts",
   "scripts": {
@@ -9,6 +9,7 @@
     "build:doc": "jsdoc -c jsdoc.json",
     "copy-example": "cp -r ./src/example ./dist/ && cp ./dist/rppg.* ./dist/example/browser && cp ./src/lib/module/* ./dist/example/browser",
     "example:browser": "npm run build:browser && http-server --cors -c-1 ./dist/example/browser",
+    "example:angular": "npm i --prefix src/example/angular && npm start --prefix src/example/angular",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

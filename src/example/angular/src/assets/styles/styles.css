@@ -1,0 +1,20 @@
+@import url('http://fonts.cdnfonts.com/css/segoe-ui-4');
+
+/* Global Styles */
+* {
+  font-family: 'Segoe UI', sans-serif;
+}
+html, body {
+  font-size: 16px;
+  background-color: #242424;
+}
+body {
+  padding: .5rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+
+.ng-star-inserted {
+  width: 100%;
+}

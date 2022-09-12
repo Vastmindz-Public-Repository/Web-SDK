@@ -1,0 +1,95 @@
+<div class="measurement-container">
+
+  <div class="measurement-wrapper">
+
+    <div
+      *ngIf="videoContainerIsVisible"
+      class="video-container">
+      <div class="video-wrapper">
+        <video
+          class="video"
+          #videoElement
+          autoplay
+          playsinline
+          muted
+          [class]="{
+            horizontal: width > height,
+            vertical: width <= height,
+            invert: useFrontCamera
+          }"></video>
+        <!-- <canvas class="canvas" #canvasElement></canvas> -->
+
+        <div class="notification-container" *ngIf="notificationMessage">
+          <div class="notification">
+            {{notificationMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-image-quality
+      *ngIf="imageQualityIsVisible"
+      [imageQualityFlags]="imageQualityFlags">
+    </app-image-quality>
+  
+
+    <app-warning
+      *ngIf="warningIsVisible">
+      {{warningMessage}}
+    </app-warning>
+
+
+
+    <div class="start-block-wrapper">
+      <app-text-message
+        *ngIf="textMessageIsVisible"
+        [progressType]="progressType">
+      </app-text-message>
+
+      <app-check-fps
+        *ngIf="checkFPSIsVisible"
+        [done]="checkDeviceDoneTimer">
+      </app-check-fps>
+
+      <app-chart
+        *ngIf="chartIsVisible"
+        [signal]="signal"
+      ></app-chart>
+
+      <app-info
+        *ngIf="infoIsVisible"
+        [processing]="processing"
+        [bgrData]="bgrData"
+        [lang]="lang"
+      ></app-info>
+
+      <div class="start-controls">
+        <app-button
+          class="btn"
+          *ngIf="buttonIsVisible"
+          [disabled]="!ready"
+          type="primary"
+          (click)="onStartButtonHandler(false)"
+        >
+          Start with server
+        </app-button>
+  
+        <app-button
+          *ngIf="buttonIsVisible"
+          class="btn"
+          [disabled]="!ready"
+          type="primary"
+          (click)="onStartButtonHandler(true)"
+        >
+          Start without server
+        </app-button>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <app-loading-screen *ngIf="loadingScreenIsVisible"></app-loading-screen>
+
+</div>

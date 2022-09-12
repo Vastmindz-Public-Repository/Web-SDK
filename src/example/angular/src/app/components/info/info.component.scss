@@ -1,0 +1,115 @@
+@import 'variables';
+
+.info-container {
+  margin-bottom: 1rem;
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .data {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0.75rem;
+        font-weight: $info-item-font-weight;
+        color: $info-item-color;
+        width: 100px;
+
+        .item-img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .name {
+          font-size: $font-size-nano;
+        }
+
+        .value {
+          position: relative;
+          min-height: 5rem;
+
+          .ring-calculating {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:3rem;
+            height:3rem;
+            background:transparent;
+          
+            &:before {
+              content:'';
+              position:absolute;
+              top:-3px;
+              left:-3px;
+              width:100%;
+              height:100%;
+              animation:animateC 2s linear infinite;
+              background: 
+                linear-gradient(#012668, #012668) padding-box,
+                linear-gradient(to bottom, #9EA2FF, #9EA2FF, #000) border-box;
+              border-radius: 50%;
+              border: 3px solid transparent;
+            }
+          }
+          
+          .ring-calculated {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:3rem;
+            height:3rem;
+            background:transparent;
+          }
+          
+          span {
+            display:block;
+            position:absolute;
+            top:calc(50% - 2px);
+            left:50%;
+            width:50%;
+            height:4px;
+            background:transparent;
+            transform-origin:left;
+            animation: animate 2s linear infinite;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+@keyframes animateC {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform:rotate(45deg);
+  }
+  100% {
+    transform:rotate(405deg);
+  }
+}

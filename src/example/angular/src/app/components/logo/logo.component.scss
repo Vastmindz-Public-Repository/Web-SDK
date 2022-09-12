@@ -1,0 +1,14 @@
+@import 'variables';
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  transform: translate(-50%, 0%);
+}
