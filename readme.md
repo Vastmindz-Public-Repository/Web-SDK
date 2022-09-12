@@ -52,13 +52,31 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Vastmindz's remote health screening solution offer's the ability to extract physiological information from users, using just a camera.
+***High Level Overview***
+The below diagram is a detailed overview of the interation between the Vastmindz platform and the front-end application.
 
-<br />
-<div align="center">
-  <img src="images/sdk_image.png" alt="SDK flow" width="">
-</div>
-
+```mermaid
+sequenceDiagram
+    participant FrontEnd
+    FrontEnd-->>SDK: Integrate
+    participant SDK
+    SDK->>SDK: Initialize SDK
+    participant Auth
+    participant Vastmindz Cloud Engine
+    SDK->>Auth: Authenticate
+    SDK->>Vastmindz Cloud Engine: Open websocket connection
+    SDK->>SDK: Start health scan
+    loop UI/UX Checks
+        SDK->>SDK: Is the face detected?
+        SDK->>SDK: Is the face in the frame?
+        SDK->>SDK: Is the face in the correct position?
+        SDK->>SDK: Is the face in the correct orientation?
+        SDK->>SDK: Is the face in the correct lighting?
+    end
+    SDK->>Vastmindz Cloud Engine: Send BGR Data
+    Vastmindz Cloud Engine->>SDK: Return JSON Results (Heart Rate, Respiration, etc.)
+    Vastmindz Cloud Engine->>SDK: Return Status/Error Codes
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
