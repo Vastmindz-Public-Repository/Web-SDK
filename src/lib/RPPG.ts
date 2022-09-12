@@ -134,9 +134,7 @@ class RPPG implements RPPGinterface {
       width: this.width,
       height: this.height,
       serverless: this.config.serverless,
-      ...(this.config.serverless && {
-        onEvent: this.onEvent.bind(this),
-      }),
+      onEvent: this.onEvent.bind(this),
     })
     return this.rppgTracker.init()
   }
@@ -223,6 +221,17 @@ class RPPG implements RPPGinterface {
       return this.rppgCamera.switchCamera(useFrontCamera)
     }
     return Promise.resolve()
+  }
+
+  /**
+   * Switch serverless without rppg instance reinitialisation
+   * @return {void}
+   */
+  switchServerless(serverless: boolean): void {
+    if (this.rppgTracker) {
+      this.config.serverless = serverless
+      this.rppgTracker.config.serverless = serverless
+    }
   }
 
   /**
