@@ -83,7 +83,6 @@ sequenceDiagram
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
-* [![React][React.js]][React-url]
 * [![Angular][Angular.io]][Angular-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
