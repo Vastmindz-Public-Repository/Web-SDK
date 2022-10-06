@@ -126,18 +126,18 @@ $ npm install https://github.com/Vastmindz-Public-Repository/Web-SDK
 
 cdn (```rppg``` will be available as global in Browsers)
 ```
-<script src="https://websdk1.blob.core.windows.net/sdk-1-2-2/dist/rppg.min.js"></script>
+<script src="https://websdk1.blob.core.windows.net/sdk-1-2-3/dist/rppg.min.js"></script>
 ```
 
 <!-- # Vastmindz's Web SDK
 
 Welcome to Vastmindz's web SDK repository!
 
-[Documentation](https://websdk1.blob.core.windows.net/sdk-1-2-2/docs/index.html)
+[Documentation](https://websdk1.blob.core.windows.net/sdk-1-2-3/docs/index.html)
 
-[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk-1-2-2/docs/RPPG.html)
+[Documentation RPPG class](https://websdk1.blob.core.windows.net/sdk-1-2-3/docs/RPPG.html)
 
-[Live demo](https://websdk1.blob.core.windows.net/sdk-1-2-2/example/index.html)
+[Live demo](https://websdk1.blob.core.windows.net/sdk-1-2-3/example/index.html)
 
 [Source code of examples](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/master/src/example) -->
 
