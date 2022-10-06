@@ -244,6 +244,7 @@ class RPPG implements RPPGinterface {
     this.averageFps = 0
     this.timestamp = 0
     this.startTimeStamp = new Date().getTime()
+    this.rppgTracker?.reInit()
     this.capture()
   }
 

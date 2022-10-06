@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
+import { throttle, mergeWith } from 'lodash'
 import { PATH_TO_WASM } from './consts/api'
 import {
   ERROR_MODULE_INITIALIZATION,
   ERROR_MODULE_NOT_INITIALIZED,
 } from './consts/errors'
+import { EVENT_NOTIFICATION_INTERVAL } from './consts/events'
 import Module from './module/rppg'
 import {
   BloodPressure,
@@ -24,6 +26,12 @@ import {
   RPPGTrackerInterface,
   RPPGTrackerProcessFrameData,
 } from './RPPGTracker.types'
+
+export interface MeanData {
+  bpm_mean: number
+  rr_mean: number
+  oxygen_mean: number
+}
 
 const STATUS = {
   ALL_VITALS_CALCULATED: 0,   //!< ALL vitals calculated(hr, rr& spO2 displayed) -> Calculating vitals�
@@ -64,6 +72,24 @@ const STRESS_STATUS = 	{
   3: 'VERY_HIGH',
 }
 
+const DEFAULT_MEAN_DATA: MeanData = {
+  bpm_mean: 0,
+  rr_mean: 0,
+  oxygen_mean: 0,
+}
+
+const DEFAULT_STRESS_STATUS = -1
+
+const DEFAULT_BLOOD_PRESSURE_STATUS = BloodPressureStatus.NO_DATA
+
+const DEFAULT_HRV_METRICS = {
+  ibi: -1,
+  rmssd: -1,
+  sdnn: -1,
+}
+
+const DEFAULT_STRESS_INDEX = 0
+
 /**
  * Class RPPGTracker
  * @example
@@ -82,6 +108,12 @@ class RPPGTracker implements RPPGTrackerInterface {
   private height!: number
   private unstableTimeout!: NodeJS.Timeout | null
   private unstableTimeoutLimit!: number
+  
+  private previousMeanData: MeanData
+  private previousStressStatus: StressStatus
+  private previousBloodPressureStatus: BloodPressureStatus
+  private previousHrvMetrics: HrvMetrics
+  private previousStressIndex: number
 
   /**
    * @param {RPPGTrackerConfig} config Config passed to RPPGTracker
@@ -93,6 +125,12 @@ class RPPGTracker implements RPPGTrackerInterface {
     this.bufferSize = this.width * this.height * this.deepColor
     this.unstableTimeout = null
     this.unstableTimeoutLimit = 15000
+
+    this.previousMeanData = {...DEFAULT_MEAN_DATA}
+    this.previousStressStatus = DEFAULT_STRESS_STATUS
+    this.previousBloodPressureStatus = DEFAULT_BLOOD_PRESSURE_STATUS
+    this.previousHrvMetrics = {...DEFAULT_HRV_METRICS}
+    this.previousStressIndex = DEFAULT_STRESS_INDEX
   }
 
   /**
@@ -101,7 +139,6 @@ class RPPGTracker implements RPPGTrackerInterface {
    */
   async init(): Promise<void> {
     try {
-      
       const moduleOptions = this.getModuleOptions()
       this.module = await new (this.Module as any)(moduleOptions) as EmscriptenModule
       if (this.module) {
@@ -114,6 +151,14 @@ class RPPGTracker implements RPPGTrackerInterface {
       console.error(ERROR_MODULE_INITIALIZATION, e)
       throw Error(ERROR_MODULE_INITIALIZATION)
     }
+  }
+
+  reInit(): void {
+    this.previousMeanData = {...DEFAULT_MEAN_DATA}
+    this.previousStressStatus = DEFAULT_STRESS_STATUS
+    this.previousBloodPressureStatus = DEFAULT_BLOOD_PRESSURE_STATUS
+    this.previousHrvMetrics = {...DEFAULT_HRV_METRICS}
+    this.previousStressIndex = DEFAULT_STRESS_INDEX
   }
 
   private getModuleOptions() {
@@ -137,6 +182,18 @@ class RPPGTracker implements RPPGTrackerInterface {
       this.bufferSize,
     )
   }
+
+  private sendFaceOrientWarningNotification = throttle(() =>
+      this.config.onEvent && this.config.onEvent(RPPGMessageType.FACE_ORIENT_WARNING, {})
+    , EVENT_NOTIFICATION_INTERVAL, {
+      leading: true,
+    })
+
+  private sendFaceSizeWarningNotification = throttle(() =>
+      this.config.onEvent && this.config.onEvent(RPPGMessageType.FACE_SIZE_WARNING, {})
+    , EVENT_NOTIFICATION_INTERVAL, {
+      leading: true,
+    })
 
   async processFrame(data: Uint8ClampedArray, timestamp: number): Promise<RPPGTrackerProcessFrameData> {
     if (!this.module) {
@@ -204,9 +261,9 @@ class RPPGTracker implements RPPGTrackerInterface {
 
       // onMeasurementMeanData
       const measurementMeanData: MeasurementMeanData = {
-        bpm: Math.round(mean.bpm_mean),
-        rr: Math.round(mean.rr_mean),
-        oxygen: Math.round(mean.oxygen_mean),
+        bpm: mean.bpm_mean,
+        rr: mean.rr_mean,
+        oxygen: mean.oxygen_mean,
         stressStatus,
         bloodPressureStatus,
       }
@@ -235,6 +292,13 @@ class RPPGTracker implements RPPGTrackerInterface {
       } else {
         this.unstableTimeout && clearTimeout(this.unstableTimeout)
         this.unstableTimeout = null
+      }
+
+      if (!imageQualityFlags.faceOrientFlag) {
+        this.sendFaceOrientWarningNotification()
+      }
+      if (!imageQualityFlags.faceSizeFlag) {
+        this.sendFaceSizeWarningNotification()
       }
     }
     
@@ -311,28 +375,35 @@ class RPPGTracker implements RPPGTrackerInterface {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
     const hrv = this.module.getHRVFeatures()
-    const hrvObj = {
+    return mergeWith(this.previousHrvMetrics, {
       ibi: hrv.get(0) ?? -1,
       rmssd: hrv.get(1) ?? -1,
       sdnn: hrv.get(2) ?? -1,
-    }
-    return hrvObj
+    }, (oldValue, newValue) => {
+      if (newValue === -1) {
+        return oldValue
+      }
+    })
   }
 
   /**
    * getMean_BPM_RR_SpO2
    * @returns {number[]}
    */
-  getMean_BPM_RR_SpO2(): {bpm_mean: number, rr_mean: number, oxygen_mean: number} {
+  getMean_BPM_RR_SpO2(): MeanData {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
     const signal = this.module.getMean_BPM_RR_SpO2()
-    return {
-      bpm_mean: signal.get(0),
-      rr_mean: signal.get(1),
-      oxygen_mean: signal.get(2),
-    }
+    return mergeWith(this.previousMeanData, {
+      bpm_mean: Math.round(signal.get(0)),
+      rr_mean: Math.round(signal.get(1)),
+      oxygen_mean: Math.round(signal.get(2)),
+    }, (oldValue, newValue) => {
+      if (newValue === 0) {
+        return oldValue
+      }
+    })
   }
 
   /**
@@ -392,7 +463,14 @@ class RPPGTracker implements RPPGTrackerInterface {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
     // @ts-ignore
-    return BP_STATUS[this.getBP()]
+    const bpStatus = BP_STATUS[this.getBP()]
+
+    if (bpStatus === BloodPressureStatus.NO_DATA) {
+      return this.previousBloodPressureStatus
+    }
+
+    this.previousBloodPressureStatus = bpStatus
+    return bpStatus
   }
 
   /**
@@ -480,8 +558,15 @@ class RPPGTracker implements RPPGTrackerInterface {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
+    const stressStatus = this.module.getStressStatus()
+    if (stressStatus === -1) {
+      // @ts-ignore
+      return STRESS_STATUS[this.previousStressStatus]
+    }
+    
+    this.previousStressStatus = stressStatus
     // @ts-ignore
-    return STRESS_STATUS[this.module.getStressStatus()]
+    return STRESS_STATUS[stressStatus]
   }
 
   /**
@@ -492,7 +577,14 @@ class RPPGTracker implements RPPGTrackerInterface {
     if (!this.module) {
       throw Error(ERROR_MODULE_NOT_INITIALIZED)
     }
-    return this.module.getStress()
+    const stress = this.module.getStress()
+
+    if(stress === 0) {
+      return this.previousStressIndex
+    }
+
+    this.previousStressIndex = stress
+    return stress
   }
 
   /**

@@ -4,7 +4,6 @@ import {
   AfibRisk,
   BloodPressure,
   HrvMetrics,
-  InterferenceWarning,
   MeasurementMeanData,
   MeasurementProgress,
   MeasurementSignal,
@@ -13,7 +12,6 @@ import {
   SendingRateWarning,
   SignalQuality,
   StressIndex,
-  UnstableConditionsWarning,
 } from './RPPGEvents.types'
 import { RPPGSocketConfig } from './RPPGSocket.types'
 import { RPPGTrackerConfig, RPPGTrackerProcessFrameData } from './RPPGTracker.types'
@@ -206,30 +204,56 @@ export interface RPPGConfig {
   onSignalQuality?: (arg0: SignalQuality) => void;
 
   /**
-   * onInterferenceWarning event, cb: {@link InterferenceWarning}
+   * onInterferenceWarning event, cb
    *
    * ### Usage with regular javascript
    *
    * ```javascript
    * const rppgInstance = new RPPG({
-   *   onInterferenceWarning: ({@link InterferenceWarning}) => console.log('onInterferenceWarning:', {@link InterferenceWarning})
+   *   onInterferenceWarning: () => console.log('onInterferenceWarning')
    * })
    * ```
    */
-  onInterferenceWarning?: (arg0: InterferenceWarning) => void;
+  onInterferenceWarning?: () => void;
 
   /**
-  * onUnstableConditionsWarning event, cb: {@link UnstableConditionsWarning}
+   * onFaceOrientWarning event, cb
+   *
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * const rppgInstance = new RPPG({
+   *   onFaceOrientWarning: () => console.log('onFaceOrientWarning')
+   * })
+   * ```
+   */
+  onFaceOrientWarning?: () => void;
+
+  /**
+   * onFaceSizeWarning event, cb
+   *
+   * ### Usage with regular javascript
+   *
+   * ```javascript
+   * const rppgInstance = new RPPG({
+   *   onFaceSizeWarning: () => console.log('onFaceSizeWarning')
+   * })
+   * ```
+   */
+  onFaceSizeWarning?: () => void;
+
+  /**
+  * onUnstableConditionsWarning event, cb
   *
   * ### Usage with regular javascript
   *
   * ```javascript
   * const rppgInstance = new RPPG({
-  *   onUnstableConditionsWarning: ({@link UnstableConditionsWarning}) => console.log('onUnstableConditionsWarning:', {@link UnstableConditionsWarning})
+  *   onUnstableConditionsWarning: () => console.log('onUnstableConditionsWarning')
   * })
   * ```
   */
-  onUnstableConditionsWarning?: (arg0: UnstableConditionsWarning) => void;
+  onUnstableConditionsWarning?: () => void;
 
   /**
   * onHrvMetrics event, cb: {@link HrvMetrics}

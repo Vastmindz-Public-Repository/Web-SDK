@@ -222,11 +222,13 @@ var RPPG = /** @class */ (function () {
      * @return {void}
      */
     RPPG.prototype.start = function () {
+        var _a;
         this.processing = true;
         this.frameNumber = 0;
         this.averageFps = 0;
         this.timestamp = 0;
         this.startTimeStamp = new Date().getTime();
+        (_a = this.rppgTracker) === null || _a === void 0 ? void 0 : _a.reInit();
         this.capture();
     };
     /**
