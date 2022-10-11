@@ -10,6 +10,7 @@
     "copy-example": "cp -r ./src/example/browser ./dist/example/ && cp ./dist/rppg.* ./dist/example/browser && cp ./src/lib/module/* ./dist/example/browser",
     "example:browser": "npm run build:browser && http-server --cors -c-1 ./dist/example/browser",
     "example:angular": "npm i --prefix src/example/angular && npm start --prefix src/example/angular",
+    "example:react": "npm i --prefix src/example/react ----legacy-peer-deps && npm start --prefix src/example/react",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

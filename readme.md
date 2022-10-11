@@ -84,6 +84,7 @@ sequenceDiagram
 
 ### Built With
 * [![Angular][Angular.io]][Angular-url]
+* [![React.js][React.js]][React-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -100,6 +101,12 @@ To run a quick demo of our web SDK on AngularJS, run the following CLI commands:
 ```
 $ npm install
 $ npm run example:angular
+```
+
+To run a quick demo of our web SDK on React, run the following CLI commands:
+```
+$ npm install
+$ npm run example:react
 ```
 **NOTE**
 
