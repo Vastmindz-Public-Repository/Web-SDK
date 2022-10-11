@@ -98,6 +98,7 @@ export interface ImageQualityFlags {
 export interface RPPGTrackerInterface {
   config: RPPGTrackerConfig;
   init: () => Promise<void>;
+  reInit: () => void;
   processFrame: (data: Uint8ClampedArray, timestamp: number) => Promise<RPPGTrackerProcessFrameData>;
   getBgr1d: () => number[];
   getLastLandmarks: () => number[];

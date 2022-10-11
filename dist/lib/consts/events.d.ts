@@ -9,8 +9,11 @@ export declare const EVENTS: {
     BLOOD_PRESSURE: string;
     UNSTABLE_CONDITIONS_WARNING: string;
     INTERFERENCE_WARNING: string;
+    FACE_ORIENT_WARNING: string;
+    FACE_SIZE_WARNING: string;
     SIGNAL_QUALITY: string;
     HRV_METRICS: string;
     STRESS_INDEX: string;
     AFIB_RISK: string;
 };
+export declare const EVENT_NOTIFICATION_INTERVAL = 5000;

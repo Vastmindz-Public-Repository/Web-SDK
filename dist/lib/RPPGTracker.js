@@ -3,8 +3,10 @@ var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 /* eslint-disable no-underscore-dangle */
+var lodash_1 = require("lodash");
 var api_1 = require("./consts/api");
 var errors_1 = require("./consts/errors");
+var events_1 = require("./consts/events");
 var rppg_1 = (0, tslib_1.__importDefault)(require("./module/rppg"));
 var RPPGEvents_types_1 = require("./RPPGEvents.types");
 var STATUS = {
@@ -42,6 +44,19 @@ var STRESS_STATUS = (_b = {},
     _b[2] = 'ELEVATED',
     _b[3] = 'VERY_HIGH',
     _b);
+var DEFAULT_MEAN_DATA = {
+    bpm_mean: 0,
+    rr_mean: 0,
+    oxygen_mean: 0,
+};
+var DEFAULT_STRESS_STATUS = -1;
+var DEFAULT_BLOOD_PRESSURE_STATUS = RPPGEvents_types_1.BloodPressureStatus.NO_DATA;
+var DEFAULT_HRV_METRICS = {
+    ibi: -1,
+    rmssd: -1,
+    sdnn: -1,
+};
+var DEFAULT_STRESS_INDEX = 0;
 /**
  * Class RPPGTracker
  * @example
@@ -52,16 +67,32 @@ var RPPGTracker = /** @class */ (function () {
      * @param {RPPGTrackerConfig} config Config passed to RPPGTracker
      */
     function RPPGTracker(config) {
+        var _this = this;
         if (config === void 0) { config = {}; }
         this.Module = rppg_1.default;
         this.module = null;
         this.deepColor = 4;
+        this.sendFaceOrientWarningNotification = (0, lodash_1.throttle)(function () {
+            return _this.config.onEvent && _this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.FACE_ORIENT_WARNING, {});
+        }, events_1.EVENT_NOTIFICATION_INTERVAL, {
+            leading: true,
+        });
+        this.sendFaceSizeWarningNotification = (0, lodash_1.throttle)(function () {
+            return _this.config.onEvent && _this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.FACE_SIZE_WARNING, {});
+        }, events_1.EVENT_NOTIFICATION_INTERVAL, {
+            leading: true,
+        });
         this.width = config.width || 0;
         this.height = config.height || 0;
         this.config = config;
         this.bufferSize = this.width * this.height * this.deepColor;
         this.unstableTimeout = null;
         this.unstableTimeoutLimit = 15000;
+        this.previousMeanData = (0, tslib_1.__assign)({}, DEFAULT_MEAN_DATA);
+        this.previousStressStatus = DEFAULT_STRESS_STATUS;
+        this.previousBloodPressureStatus = DEFAULT_BLOOD_PRESSURE_STATUS;
+        this.previousHrvMetrics = (0, tslib_1.__assign)({}, DEFAULT_HRV_METRICS);
+        this.previousStressIndex = DEFAULT_STRESS_INDEX;
     }
     /**
      * Init RPPG Tracker instance
@@ -98,6 +129,13 @@ var RPPGTracker = /** @class */ (function () {
                 }
             });
         });
+    };
+    RPPGTracker.prototype.reInit = function () {
+        this.previousMeanData = (0, tslib_1.__assign)({}, DEFAULT_MEAN_DATA);
+        this.previousStressStatus = DEFAULT_STRESS_STATUS;
+        this.previousBloodPressureStatus = DEFAULT_BLOOD_PRESSURE_STATUS;
+        this.previousHrvMetrics = (0, tslib_1.__assign)({}, DEFAULT_HRV_METRICS);
+        this.previousStressIndex = DEFAULT_STRESS_INDEX;
     };
     RPPGTracker.prototype.getModuleOptions = function () {
         var _a = this.config.pathToWasmData, pathToWasmData = _a === void 0 ? api_1.PATH_TO_WASM : _a;
@@ -164,9 +202,9 @@ var RPPGTracker = /** @class */ (function () {
                     };
                     this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.SIGNAL_QUALITY, signalQualityData);
                     measurementMeanData = {
-                        bpm: Math.round(mean.bpm_mean),
-                        rr: Math.round(mean.rr_mean),
-                        oxygen: Math.round(mean.oxygen_mean),
+                        bpm: mean.bpm_mean,
+                        rr: mean.rr_mean,
+                        oxygen: mean.oxygen_mean,
                         stressStatus: stressStatus,
                         bloodPressureStatus: bloodPressureStatus,
                     };
@@ -189,6 +227,12 @@ var RPPGTracker = /** @class */ (function () {
                     else {
                         this.unstableTimeout && clearTimeout(this.unstableTimeout);
                         this.unstableTimeout = null;
+                    }
+                    if (!imageQualityFlags.faceOrientFlag) {
+                        this.sendFaceOrientWarningNotification();
+                    }
+                    if (!imageQualityFlags.faceSizeFlag) {
+                        this.sendFaceSizeWarningNotification();
                     }
                 }
                 bgr1d = this.getBgr1d();
@@ -258,12 +302,15 @@ var RPPGTracker = /** @class */ (function () {
             throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
         }
         var hrv = this.module.getHRVFeatures();
-        var hrvObj = {
+        return (0, lodash_1.mergeWith)(this.previousHrvMetrics, {
             ibi: (_a = hrv.get(0)) !== null && _a !== void 0 ? _a : -1,
             rmssd: (_b = hrv.get(1)) !== null && _b !== void 0 ? _b : -1,
             sdnn: (_c = hrv.get(2)) !== null && _c !== void 0 ? _c : -1,
-        };
-        return hrvObj;
+        }, function (oldValue, newValue) {
+            if (newValue === -1) {
+                return oldValue;
+            }
+        });
     };
     /**
      * getMean_BPM_RR_SpO2
@@ -274,11 +321,15 @@ var RPPGTracker = /** @class */ (function () {
             throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
         }
         var signal = this.module.getMean_BPM_RR_SpO2();
-        return {
-            bpm_mean: signal.get(0),
-            rr_mean: signal.get(1),
-            oxygen_mean: signal.get(2),
-        };
+        return (0, lodash_1.mergeWith)(this.previousMeanData, {
+            bpm_mean: Math.round(signal.get(0)),
+            rr_mean: Math.round(signal.get(1)),
+            oxygen_mean: Math.round(signal.get(2)),
+        }, function (oldValue, newValue) {
+            if (newValue === 0) {
+                return oldValue;
+            }
+        });
     };
     /**
      * getSignal
@@ -339,7 +390,12 @@ var RPPGTracker = /** @class */ (function () {
             throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
         }
         // @ts-ignore
-        return BP_STATUS[this.getBP()];
+        var bpStatus = BP_STATUS[this.getBP()];
+        if (bpStatus === RPPGEvents_types_1.BloodPressureStatus.NO_DATA) {
+            return this.previousBloodPressureStatus;
+        }
+        this.previousBloodPressureStatus = bpStatus;
+        return bpStatus;
     };
     /**
      * getBP
@@ -419,8 +475,14 @@ var RPPGTracker = /** @class */ (function () {
         if (!this.module) {
             throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
         }
+        var stressStatus = this.module.getStressStatus();
+        if (stressStatus === -1) {
+            // @ts-ignore
+            return STRESS_STATUS[this.previousStressStatus];
+        }
+        this.previousStressStatus = stressStatus;
         // @ts-ignore
-        return STRESS_STATUS[this.module.getStressStatus()];
+        return STRESS_STATUS[stressStatus];
     };
     /**
      * getStress
@@ -430,7 +492,12 @@ var RPPGTracker = /** @class */ (function () {
         if (!this.module) {
             throw Error(errors_1.ERROR_MODULE_NOT_INITIALIZED);
         }
-        return this.module.getStress();
+        var stress = this.module.getStress();
+        if (stress === 0) {
+            return this.previousStressIndex;
+        }
+        this.previousStressIndex = stress;
+        return stress;
     };
     /**
      * getProgress

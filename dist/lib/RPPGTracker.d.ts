@@ -1,5 +1,10 @@
 import { HrvMetrics, BloodPressureStatus, StressStatus } from './RPPGEvents.types';
 import { ImageQualityFlags, RPPGTrackerConfig, RPPGTrackerInterface, RPPGTrackerProcessFrameData } from './RPPGTracker.types';
+export interface MeanData {
+    bpm_mean: number;
+    rr_mean: number;
+    oxygen_mean: number;
+}
 /**
  * Class RPPGTracker
  * @example
@@ -17,6 +22,11 @@ declare class RPPGTracker implements RPPGTrackerInterface {
     private height;
     private unstableTimeout;
     private unstableTimeoutLimit;
+    private previousMeanData;
+    private previousStressStatus;
+    private previousBloodPressureStatus;
+    private previousHrvMetrics;
+    private previousStressIndex;
     /**
      * @param {RPPGTrackerConfig} config Config passed to RPPGTracker
      */
@@ -26,8 +36,11 @@ declare class RPPGTracker implements RPPGTrackerInterface {
      * @returns {Promise<void>}
      */
     init(): Promise<void>;
+    reInit(): void;
     private getModuleOptions;
     private initMemoryBuffer;
+    private sendFaceOrientWarningNotification;
+    private sendFaceSizeWarningNotification;
     processFrame(data: Uint8ClampedArray, timestamp: number): Promise<RPPGTrackerProcessFrameData>;
     /**
      * getBgr1d
@@ -53,11 +66,7 @@ declare class RPPGTracker implements RPPGTrackerInterface {
      * getMean_BPM_RR_SpO2
      * @returns {number[]}
      */
-    getMean_BPM_RR_SpO2(): {
-        bpm_mean: number;
-        rr_mean: number;
-        oxygen_mean: number;
-    };
+    getMean_BPM_RR_SpO2(): MeanData;
     /**
      * getSignal
      * @returns {number[]}

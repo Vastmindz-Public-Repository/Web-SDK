@@ -154,16 +154,6 @@ export interface SignalQuality {
     snr: number;
 }
 /**
- * InterferenceWarning
- */
-export interface InterferenceWarning {
-}
-/**
- * UnstableConditionsWarning
- */
-export interface UnstableConditionsWarning {
-}
-/**
  * HrvMetrics
  */
 export interface HrvMetrics {
@@ -200,7 +190,7 @@ export interface PostData {
 /**
  * MessageEvents
  */
-export declare type MessageEvents = AccessToken | MeasurementMeanData | MeasurementStatus | SendingRateWarning | MeasurementProgress | MeasurementSignal | MovingWarning | BloodPressure | SignalQuality | InterferenceWarning | UnstableConditionsWarning | HrvMetrics | AfibRisk;
+export declare type MessageEvents = AccessToken | MeasurementMeanData | MeasurementStatus | SendingRateWarning | MeasurementProgress | MeasurementSignal | MovingWarning | BloodPressure | SignalQuality | HrvMetrics | AfibRisk;
 /**
  * RPPGMessageType
  */
@@ -215,6 +205,8 @@ export declare enum RPPGMessageType {
     SIGNAL_QUALITY = "SIGNAL_QUALITY",
     INTERFERENCE_WARNING = "INTERFERENCE_WARNING",
     UNSTABLE_CONDITIONS_WARNING = "UNSTABLE_CONDITIONS_WARNING",
+    FACE_ORIENT_WARNING = "FACE_ORIENT_WARNING",
+    FACE_SIZE_WARNING = "FACE_SIZE_WARNING",
     STRESS_INDEX = "STRESS_INDEX",
     HRV_METRICS = "HRV_METRICS",
     ACCESS_TOKEN = "ACCESS_TOKEN",

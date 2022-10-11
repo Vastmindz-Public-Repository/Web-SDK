@@ -1,0 +1,36 @@
+@import 'assets/styles/variables';
+
+.notification-container {
+  width: 100%;
+
+  .notification {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .notification-type {
+    color: $cream-can;
+    margin-bottom: 1rem;
+
+    .notification-type-text {
+      font-size: 0.75rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:before {
+        background-image: url('/assets/images/warning-icon.svg');
+        content: '';
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}

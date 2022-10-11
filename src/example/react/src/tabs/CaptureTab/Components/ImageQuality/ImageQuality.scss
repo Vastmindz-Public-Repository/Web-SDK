@@ -1,0 +1,19 @@
+@import 'assets/styles/variables';
+
+.image-quality-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 2rem;
+
+  .image-quality {
+    width: 20px;
+    height: auto;
+    color: transparent;
+
+    &.active {
+      color: yellow;
+    }
+  }
+}
