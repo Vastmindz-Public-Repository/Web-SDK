@@ -1,0 +1,103 @@
+{
+  "name": "teamsfx-template-tab",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fluentui/react-northstar": "^0.62.0",
+    "@fluentui/react-teams": "^6.1.2",
+    "@mediapipe/camera_utils": "^0.3.1640029074",
+    "@mediapipe/drawing_utils": "^0.3.1620248257",
+    "@mediapipe/face_mesh": "^0.4.1633559619",
+    "@microsoft/mgt-element": "^2.4.1-next.teamsfx.8d56785",
+    "@microsoft/mgt-react": "^2.4.1-next.teamsfx.8d56785",
+    "@microsoft/mgt-teamsfx-provider": "^2.4.1-next.teamsfx.8d56785",
+    "@microsoft/microsoft-graph-client": "^3.0.1",
+    "@microsoft/teams-js": "^2.2.0",
+    "@microsoft/teamsfx": "^2.0.0-beta.0",
+    "@microsoft/teamsfx-react": "^2.0.0-beta.1",
+    "axios": "^0.21.1",
+    "msteams-react-base-component": "^4.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^4.0.3",
+    "react-spinners": "^0.13.5",
+    "rppg": "git+git@github.com:Vastmindz-Public-Repository/Web-SDK#v1.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.14.6",
+    "@types/react-dom": "^16.9.12",
+    "@types/react-router-dom": "^5.1.7",
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
+    "sass": "^1.54.9",
+    "typescript": "^4.1.2"
+  },
+  "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .env.teamsfx.local npm run start",
+    "start": "cross-env react-scripts start",
+    "install:teamsfx": "npm install",
+    "build": "cross-env react-scripts build",
+    "build:teamsfx": "cross-env-shell \"env-cmd -f .env.teamsfx.${TEAMS_FX_ENV} npm run build\"",
+    "build:teamsfx:dev": "cross-env TEAMS_FX_ENV=dev npm run build:teamsfx",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "quotes": [
+        "warn",
+        "single"
+      ],
+      "comma-dangle": [
+        "warn",
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "only-multiline"
+        }
+      ],
+      "@typescript-eslint/ban-ts-comment": [
+        "warn"
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "no-debugger": [
+        "warn"
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "."
+}

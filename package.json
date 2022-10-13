@@ -11,6 +11,7 @@
     "example:browser": "npm run build:browser && http-server --cors -c-1 ./dist/example/browser",
     "example:angular": "npm i --prefix src/example/angular && npm start --prefix src/example/angular",
     "example:react": "npm i --prefix src/example/react ----legacy-peer-deps && npm start --prefix src/example/react",
+    "example:react-socket": "npm i --prefix src/example/react-socket ----legacy-peer-deps && npm start --prefix src/example/react-socket",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

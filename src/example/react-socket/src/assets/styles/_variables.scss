@@ -1,0 +1,43 @@
+@import 'assets/styles/fonts';
+@import 'assets/styles/colors';
+
+$border-radius-small: 0.25rem;
+$border-radius-normal: 0.625rem;
+$border-radius-large: 2.375rem;
+
+// popup
+$popup-background: $black;
+$popup-text-color: $white;
+$popup-font-size: $font-size-small;
+$popup-opacity: 0.5;
+$popup-border-radius: $border-radius-normal;
+$popup-font-weight: $font-weight-normal;
+
+// status
+$status-background: $scooter;
+$status-color: $white;
+$status-main-font-size: $font-size-large;
+$status-additional-font-size: $font-size-small;
+$status-border-radius: $border-radius-normal;
+
+// logo
+$logo-font-size: $font-size-large;
+$logo-text-color: $scooter;
+$logo-line-height: $font-line-height-large;
+
+// info
+$info-doc-font-size: $font-size-medium;
+$info-doc-font-weight: $font-weight-bold;
+$info-doc-color: $white;
+$info-value-font-size: $font-size-large;
+$info-name-font-size: $font-size-tiny;
+$info-item-color: $white;
+$info-item-font-weight: $font-weight-normal;
+
+// results
+$results-value-font-size: $font-size-large;
+$results-name-font-size: $font-size-tiny;
+$results-item-color: $white;
+$results-item-font-weight: $font-weight-normal;
+$results-item-font-size: $font-size-normal;
+$results-update-time-color: $regent-gray;
