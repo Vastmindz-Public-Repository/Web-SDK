@@ -1,0 +1,23 @@
+@import 'assets/styles/variables';
+
+.check-fps-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .check-fps-message {
+    color: $white;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .check-fps-spinner {
+    margin: 1rem;
+    position: relative;
+  }
+}
+
+
+
+
