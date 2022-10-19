@@ -136,6 +136,7 @@ function useRPPG({
         onFaceOrientWarningCbRef.current()
 
       const rppg = new RPPG({
+        serverless: false,
         // camera config
         rppgCameraConfig: {
           useFrontCamera,
@@ -158,12 +159,10 @@ function useRPPG({
           onError: () => {
             setReady(false)
             setError(new Error('Error connecting socket'))
-            console.error('Socket connection isn\'t established')
           },
           onClose: () => {
             setReady(false)
             setError(new Error('Error connecting socket'))
-            console.error('Socket connection isn\'t established')
           },
         },
   
