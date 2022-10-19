@@ -282,24 +282,23 @@ class RPPGTracker implements RPPGTrackerInterface {
         diastolic: 0,
       }
       this.config.onEvent(RPPGMessageType.BLOOD_PRESSURE, bloodPressureData)
+    }
 
+    if (status === STATUS.NOISE_DETECTED && this.config.onEvent) {
+      this.config.onEvent(RPPGMessageType.UNSTABLE_CONDITIONS_WARNING, {})
+      this.unstableTimeout = this.unstableTimeout ||
+        setTimeout(this.config.onEvent.bind(this, RPPGMessageType.INTERFERENCE_WARNING, {})
+        , this.unstableTimeoutLimit)
+    } else {
+      this.unstableTimeout && clearTimeout(this.unstableTimeout)
+      this.unstableTimeout = null
+    }
 
-      if (status === STATUS.NOISE_DETECTED) {
-        this.config.onEvent(RPPGMessageType.UNSTABLE_CONDITIONS_WARNING, {})
-        this.unstableTimeout = this.unstableTimeout ||
-          setTimeout(this.config.onEvent.bind(this, RPPGMessageType.INTERFERENCE_WARNING, {})
-          , this.unstableTimeoutLimit)
-      } else {
-        this.unstableTimeout && clearTimeout(this.unstableTimeout)
-        this.unstableTimeout = null
-      }
-
-      if (!imageQualityFlags.faceOrientFlag) {
-        this.sendFaceOrientWarningNotification()
-      }
-      if (!imageQualityFlags.faceSizeFlag) {
-        this.sendFaceSizeWarningNotification()
-      }
+    if (!imageQualityFlags.faceOrientFlag) {
+      this.sendFaceOrientWarningNotification()
+    }
+    if (!imageQualityFlags.faceSizeFlag) {
+      this.sendFaceSizeWarningNotification()
     }
     
     const bgr1d = this.getBgr1d()

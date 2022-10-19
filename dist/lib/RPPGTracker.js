@@ -219,21 +219,21 @@ var RPPGTracker = /** @class */ (function () {
                         diastolic: 0,
                     };
                     this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.BLOOD_PRESSURE, bloodPressureData);
-                    if (status === STATUS.NOISE_DETECTED) {
-                        this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.UNSTABLE_CONDITIONS_WARNING, {});
-                        this.unstableTimeout = this.unstableTimeout ||
-                            setTimeout(this.config.onEvent.bind(this, RPPGEvents_types_1.RPPGMessageType.INTERFERENCE_WARNING, {}), this.unstableTimeoutLimit);
-                    }
-                    else {
-                        this.unstableTimeout && clearTimeout(this.unstableTimeout);
-                        this.unstableTimeout = null;
-                    }
-                    if (!imageQualityFlags.faceOrientFlag) {
-                        this.sendFaceOrientWarningNotification();
-                    }
-                    if (!imageQualityFlags.faceSizeFlag) {
-                        this.sendFaceSizeWarningNotification();
-                    }
+                }
+                if (status === STATUS.NOISE_DETECTED && this.config.onEvent) {
+                    this.config.onEvent(RPPGEvents_types_1.RPPGMessageType.UNSTABLE_CONDITIONS_WARNING, {});
+                    this.unstableTimeout = this.unstableTimeout ||
+                        setTimeout(this.config.onEvent.bind(this, RPPGEvents_types_1.RPPGMessageType.INTERFERENCE_WARNING, {}), this.unstableTimeoutLimit);
+                }
+                else {
+                    this.unstableTimeout && clearTimeout(this.unstableTimeout);
+                    this.unstableTimeout = null;
+                }
+                if (!imageQualityFlags.faceOrientFlag) {
+                    this.sendFaceOrientWarningNotification();
+                }
+                if (!imageQualityFlags.faceSizeFlag) {
+                    this.sendFaceSizeWarningNotification();
                 }
                 bgr1d = this.getBgr1d();
                 landmarks = this.getLastLandmarks();
