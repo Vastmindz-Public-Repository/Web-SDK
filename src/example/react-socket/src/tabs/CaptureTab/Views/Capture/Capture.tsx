@@ -21,6 +21,7 @@ import {
   NOTIFICATION_NO_FACE_DETECTED,
 } from 'helpers/notification'
 import './Capture.scss'
+import { ERROR_NOT_SUPPORTED, ERROR_SOCKET_CONNECTION } from 'helpers/error'
 
 export function Capture() {
   const videoElement = useRef<HTMLVideoElement>(null)
@@ -44,7 +45,7 @@ export function Capture() {
 
   const onUnsupportedDeviceCb = () => {
     stopHandler()
-    history.push('/capture/not-supported')
+    history.push('/capture/error', ERROR_NOT_SUPPORTED)
   }
 
   const onCalculationEndedCb = () => {
@@ -125,6 +126,12 @@ export function Capture() {
     processingFaceMesh.current = processing
   }, [processing])
 
+  useEffect(() => {
+    if (error) {
+      history.push('/capture/error', ERROR_SOCKET_CONNECTION)
+    }
+  }, [error, history])
+
   const startHandler = () => {
     start()
   }
@@ -180,7 +187,6 @@ export function Capture() {
               <TextMessage progressType={progressType} />
 
               {checkFps && <CheckFps />}
-
             </>
           )}
 
@@ -192,7 +198,6 @@ export function Capture() {
 
         <Button
           primary
-          // fluid
           content={processing ? 'Stop' : 'Start'} 
           disabled={!ready}
           loading={!ready}

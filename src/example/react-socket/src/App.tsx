@@ -7,7 +7,7 @@ import { TeamsTheme } from '@fluentui/react-teams/lib/cjs/themes'
 import { Provider } from '@fluentui/react-teams'
 import {
   Capture,
-  NotSupported,
+  ErrorNotification,
   BadConditions,
   Results,
 } from 'tabs/CaptureTab/Views'
@@ -33,7 +33,7 @@ export default function App() {
               <Route path="/capture" render={({ match: { url } }) => (
                 <>
                   <Route exact path={`${url}/`} component={Capture} />
-                  <Route exact path={`${url}/not-supported`} component={NotSupported} />
+                  <Route exact path={`${url}/error`} component={ErrorNotification} />
                   <Route exact path={`${url}/bad-conditions`} component={BadConditions} />
                   <Route exact path={`${url}/results`} component={Results} />
                 </>

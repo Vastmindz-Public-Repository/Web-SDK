@@ -22,7 +22,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.3",
     "react-spinners": "^0.13.5",
-    "rppg": "git+git@github.com:Vastmindz-Public-Repository/Web-SDK#v1.2.3"
+    "rppg": "git+git@github.com:Vastmindz-Public-Repository/Web-SDK#v1.2.4"
   },
   "devDependencies": {
     "@types/node": "^12.0.0",
