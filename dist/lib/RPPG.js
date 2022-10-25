@@ -271,29 +271,11 @@ var RPPG = /** @class */ (function () {
                             !this.checkNumberOfTrueFlags([faceOrientFlag, faceSizeFlag], 2);
                         shouldSkipSocketWhenBadLightConditions = skipSocketWhenBadLightConditions &&
                             !this.checkNumberOfTrueFlags([brightColorFlag, illumChangeFlag, noiseFlag, sharpFlag], 3);
-                        console.log('###', {
-                            shouldSkipSocketWhenNoFace: shouldSkipSocketWhenNoFace,
-                            shouldSkipSocketWhenBadFaceConditions: shouldSkipSocketWhenBadFaceConditions,
-                            shouldSkipSocketWhenBadLightConditions: shouldSkipSocketWhenBadLightConditions,
-                            params: {
-                                brightColorFlag: brightColorFlag,
-                                illumChangeFlag: illumChangeFlag,
-                                noiseFlag: noiseFlag,
-                                sharpFlag: sharpFlag,
-                                faceOrientFlag: faceOrientFlag,
-                                faceSizeFlag: faceSizeFlag,
-                            },
-                            shouldSkip: !(!shouldSkipSocketWhenNoFace && !shouldSkipSocketWhenBadFaceConditions && !shouldSkipSocketWhenBadLightConditions)
-                        });
                         if (!shouldSkipSocketWhenNoFace && !shouldSkipSocketWhenBadFaceConditions && !shouldSkipSocketWhenBadLightConditions) {
-                            console.log('### send');
                             (_a = this.rppgSocket) === null || _a === void 0 ? void 0 : _a.send({
                                 bgrSignal: rppgTrackerData.bgr1d,
                                 timestamp: timestamp,
                             });
-                        }
-                        else {
-                            console.log('### skipped');
                         }
                         this.onFrame({
                             rppgTrackerData: rppgTrackerData,
