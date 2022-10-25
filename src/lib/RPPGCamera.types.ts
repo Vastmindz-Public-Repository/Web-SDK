@@ -121,6 +121,8 @@ export interface RPPGCameraConfig {
 
 export interface RPPGCameraInterface {
   config: RPPGCameraConfig;
+  width: number;
+  height: number;
   init: () => Promise<RPPGCameraInit>;
   close: () => void;
   switchCamera: (useFrontCamera: boolean) => Promise<RPPGCameraInit | void>;

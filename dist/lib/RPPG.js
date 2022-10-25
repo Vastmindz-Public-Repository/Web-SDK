@@ -241,9 +241,9 @@ var RPPG = /** @class */ (function () {
     RPPG.prototype.capture = function () {
         var _a;
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            var timestamp, frame, relativeTimestamp, rppgTrackerData;
-            return (0, tslib_1.__generator)(this, function (_b) {
-                switch (_b.label) {
+            var timestamp, frame, relativeTimestamp, rppgTrackerData, _b, skipSocketWhenNoFace, skipSocketWhenBadFaceConditions, skipSocketWhenBadLightConditions, status, _c, faceOrientFlag, faceSizeFlag, brightColorFlag, illumChangeFlag, noiseFlag, sharpFlag, shouldSkipSocketWhenNoFace, shouldSkipSocketWhenBadFaceConditions, shouldSkipSocketWhenBadLightConditions;
+            return (0, tslib_1.__generator)(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         if (this.processing) {
                             requestAnimationFrame(this.capture.bind(this));
@@ -262,13 +262,38 @@ var RPPG = /** @class */ (function () {
                         relativeTimestamp = this.timestamp - this.startTimeStamp;
                         return [4 /*yield*/, this.rppgTracker.processFrame(frame.data, relativeTimestamp)];
                     case 1:
-                        rppgTrackerData = _b.sent();
-                        if (!this.config.skipSocketWhenNoFace ||
-                            (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
+                        rppgTrackerData = _d.sent();
+                        _b = this.config, skipSocketWhenNoFace = _b.skipSocketWhenNoFace, skipSocketWhenBadFaceConditions = _b.skipSocketWhenBadFaceConditions, skipSocketWhenBadLightConditions = _b.skipSocketWhenBadLightConditions;
+                        status = rppgTrackerData.status;
+                        _c = rppgTrackerData.imageQualityFlags, faceOrientFlag = _c.faceOrientFlag, faceSizeFlag = _c.faceSizeFlag, brightColorFlag = _c.brightColorFlag, illumChangeFlag = _c.illumChangeFlag, noiseFlag = _c.noiseFlag, sharpFlag = _c.sharpFlag;
+                        shouldSkipSocketWhenNoFace = skipSocketWhenNoFace && (status === 1 || status === 2);
+                        shouldSkipSocketWhenBadFaceConditions = skipSocketWhenBadFaceConditions &&
+                            !this.checkNumberOfTrueFlags([faceOrientFlag, faceSizeFlag], 2);
+                        shouldSkipSocketWhenBadLightConditions = skipSocketWhenBadLightConditions &&
+                            !this.checkNumberOfTrueFlags([brightColorFlag, illumChangeFlag, noiseFlag, sharpFlag], 3);
+                        console.log('###', {
+                            shouldSkipSocketWhenNoFace: shouldSkipSocketWhenNoFace,
+                            shouldSkipSocketWhenBadFaceConditions: shouldSkipSocketWhenBadFaceConditions,
+                            shouldSkipSocketWhenBadLightConditions: shouldSkipSocketWhenBadLightConditions,
+                            params: {
+                                brightColorFlag: brightColorFlag,
+                                illumChangeFlag: illumChangeFlag,
+                                noiseFlag: noiseFlag,
+                                sharpFlag: sharpFlag,
+                                faceOrientFlag: faceOrientFlag,
+                                faceSizeFlag: faceSizeFlag,
+                            },
+                            shouldSkip: !(!shouldSkipSocketWhenNoFace && !shouldSkipSocketWhenBadFaceConditions && !shouldSkipSocketWhenBadLightConditions)
+                        });
+                        if (!shouldSkipSocketWhenNoFace && !shouldSkipSocketWhenBadFaceConditions && !shouldSkipSocketWhenBadLightConditions) {
+                            console.log('### send');
                             (_a = this.rppgSocket) === null || _a === void 0 ? void 0 : _a.send({
                                 bgrSignal: rppgTrackerData.bgr1d,
                                 timestamp: timestamp,
                             });
+                        }
+                        else {
+                            console.log('### skipped');
                         }
                         this.onFrame({
                             rppgTrackerData: rppgTrackerData,
@@ -305,6 +330,9 @@ var RPPG = /** @class */ (function () {
         if (func && typeof func === 'function') {
             func(event);
         }
+    };
+    RPPG.prototype.checkNumberOfTrueFlags = function (arr, minThreshold) {
+        return arr.filter(function (item) { return item; }).length >= minThreshold;
     };
     return RPPG;
 }());

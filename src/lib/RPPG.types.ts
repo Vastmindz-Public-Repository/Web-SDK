@@ -306,6 +306,36 @@ export interface RPPGConfig {
   * ```
   */
   skipSocketWhenNoFace?: boolean
+
+  /**
+  * skipSocketWhenBadFaceConditions - skip sending any socket data in case
+  * bad face conditions (faceOrientFlag or faceSizeFlag)
+  * {@link skipSocketWhenBadFaceConditions}
+  *
+  * ### Usage with regular javascript
+  *
+  * ```javascript
+  * const rppgInstance = new RPPG({
+  *   skipSocketWhenBadFaceConditions: true
+  * })
+  * ```
+  */
+  skipSocketWhenBadFaceConditions?: boolean
+
+  /**
+  * skipSocketWhenBadLightConditions - skip sending any socket data in case
+  * bad loght conditions(brightColorFlag or illumChangeFlag or noiseFlag or sharpFlag)
+  * {@link skipSocketWhenBadLightConditions}
+  *
+  * ### Usage with regular javascript
+  *
+  * ```javascript
+  * const rppgInstance = new RPPG({
+  *   skipSocketWhenBadLightConditions: true
+  * })
+  * ```
+  */
+  skipSocketWhenBadLightConditions?: boolean
 }
 
 export interface RPPGinterface {

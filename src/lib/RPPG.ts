@@ -64,9 +64,9 @@ class RPPG implements RPPGinterface {
    */
   public version: string
 
-  private rppgCamera: RPPGCameraInterface | null = null;
-  private rppgTracker: RPPGTrackerInterface | null = null;
-  private rppgSocket: RPPGSocketInterface | null = null;
+  public rppgCamera: RPPGCameraInterface | null = null;
+  public rppgTracker: RPPGTrackerInterface | null = null;
+  public rppgSocket: RPPGSocketInterface | null = null;
 
   private width = 0
   private height = 0
@@ -280,8 +280,32 @@ class RPPG implements RPPGinterface {
 
     const rppgTrackerData = await this.rppgTracker.processFrame(frame.data, relativeTimestamp)
 
-    if (!this.config.skipSocketWhenNoFace ||
-        (rppgTrackerData.status !== 1 && rppgTrackerData.status !== 2)) {
+    const {
+      skipSocketWhenNoFace,
+      skipSocketWhenBadFaceConditions,
+      skipSocketWhenBadLightConditions,
+    } = this.config
+
+    const {
+      status,
+    } = rppgTrackerData
+
+    const {
+      faceOrientFlag,
+      faceSizeFlag,
+      brightColorFlag,
+      illumChangeFlag,
+      noiseFlag,
+      sharpFlag,
+    } = rppgTrackerData.imageQualityFlags
+
+    const shouldSkipSocketWhenNoFace = skipSocketWhenNoFace && (status === 1 || status === 2)
+    const shouldSkipSocketWhenBadFaceConditions = skipSocketWhenBadFaceConditions &&
+      !this.checkNumberOfTrueFlags([faceOrientFlag, faceSizeFlag], 2)
+    const shouldSkipSocketWhenBadLightConditions = skipSocketWhenBadLightConditions &&
+      !this.checkNumberOfTrueFlags([brightColorFlag, illumChangeFlag, noiseFlag, sharpFlag], 3)
+
+    if (!shouldSkipSocketWhenNoFace && !shouldSkipSocketWhenBadFaceConditions && !shouldSkipSocketWhenBadLightConditions) {
       this.rppgSocket?.send({
         bgrSignal: rppgTrackerData.bgr1d,
         timestamp,
@@ -325,6 +349,10 @@ class RPPG implements RPPGinterface {
     if (func && typeof func === 'function') {
       func(event)
     }
+  }
+
+  private checkNumberOfTrueFlags(arr: boolean[], minThreshold: number): boolean {
+    return arr.filter(item => item).length >= minThreshold
   }
 }
 

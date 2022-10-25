@@ -12,9 +12,9 @@ var RPPGCamera = /** @class */ (function () {
      * @param {RPPGCameraConfig} config Config passed to RPPGCamera
      */
     function RPPGCamera(config) {
+        this.useFrontCamera = true;
         this.width = 0;
         this.height = 0;
-        this.useFrontCamera = true;
         this.config = config;
         this.videoElement = config.videoElement || document.createElement('video');
         this.canvasElement = config.canvasElement || document.createElement('canvas');

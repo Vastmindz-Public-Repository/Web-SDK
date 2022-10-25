@@ -18,9 +18,9 @@ class RPPGCamera implements RPPGCameraInterface {
   private canvasElement: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D | null
   private stream: MediaStream | null
-  private width = 0
-  private height = 0
-  private useFrontCamera = true
+  public useFrontCamera = true
+  public width = 0
+  public height = 0
 
   /**
    * @param {RPPGCameraConfig} config Config passed to RPPGCamera
