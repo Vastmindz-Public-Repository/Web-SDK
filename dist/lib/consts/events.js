@@ -21,5 +21,5 @@ exports.EVENTS = (_a = {},
     _a[RPPGEvents_types_1.RPPGMessageType.STRESS_INDEX] = 'onStressIndex',
     _a[RPPGEvents_types_1.RPPGMessageType.AFIB_RISK] = 'onAfibRisk',
     _a);
-exports.EVENT_NOTIFICATION_INTERVAL = 5000;
+exports.EVENT_NOTIFICATION_INTERVAL = 500;
 //# sourceMappingURL=events.js.map

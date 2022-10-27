@@ -19,4 +19,4 @@ export const EVENTS = {
   [RPPGMessageType.AFIB_RISK]: 'onAfibRisk',
 }
 
-export const EVENT_NOTIFICATION_INTERVAL = 5000
+export const EVENT_NOTIFICATION_INTERVAL = 500

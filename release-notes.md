@@ -8,6 +8,9 @@
 * make width, height, useFrontCamera of camera instance public
 * make rppgCamera, rppgSocket, rppgTracker instances public
 
+### Changes
+* decrease throttle for face orient and size events
+
 ## [1.2.4](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/v1.2.4) (2022-10-19)
 
 > Description
