@@ -256,6 +256,14 @@ class RPPG implements RPPGinterface {
     this.processing = false
   }
 
+  /**
+   * Set pause
+   * @return {void}
+   */
+  public pause(value: boolean): void {
+    this.rppgSocket?.pause(value)
+  }
+
   private async capture(): Promise<void> {
     if (this.processing) {
       requestAnimationFrame(this.capture.bind(this))

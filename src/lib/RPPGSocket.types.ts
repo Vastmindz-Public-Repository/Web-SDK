@@ -46,7 +46,9 @@ export interface RPPGSocketSendMessage {
 
 export interface RPPGSocketInterface {
   config: RPPGSocketConfig;
+  paused: boolean;
   init: () => Promise<Event>;
   send: (message: RPPGSocketSendMessage) => void;
   close: () => Promise<void>;
+  pause: (value: boolean) => void;
 }

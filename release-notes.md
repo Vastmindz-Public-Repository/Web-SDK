@@ -1,3 +1,11 @@
+## [1.2.6](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/v1.2.6) (2022-11-13)
+
+> Description
+
+### New Features
+* add rr to HRV metrics
+* add pause method to the socket instance
+
 ## [1.2.5](https://github.com/Vastmindz-Public-Repository/Web-SDK/tree/v1.2.5) (2022-10-25)
 
 > Description

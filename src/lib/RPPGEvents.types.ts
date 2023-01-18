@@ -189,6 +189,9 @@ export interface HrvMetrics {
 
   /***/
   sdnn: number
+
+  /***/
+  rr: number[];
 }
 
 /**
