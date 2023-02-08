@@ -41,7 +41,7 @@
     <a href="https://github.com/Vastmindz-Public-Repository/Web-SDK"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://tmp.gevg.xyz/">View Demo</a>
+    <a href="https://tmp.gevg.xyz/capture">View Demo</a>
 
   </p>
 </div>
