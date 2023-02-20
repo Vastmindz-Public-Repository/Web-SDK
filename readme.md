@@ -103,12 +103,6 @@ $ npm install
 $ npm run example:angular
 ```
 
-To run a quick demo of our serverless web SDK on React, run the following CLI commands:
-```
-$ npm install
-$ npm run example:react
-```
-
 To run a quick demo of our server web SDK on React, run the following CLI commands:
 ```
 $ npm install
