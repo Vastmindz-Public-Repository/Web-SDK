@@ -13,12 +13,14 @@ import {
 class RPPGSocket implements RPPGSocketInterface {
   config: RPPGSocketConfig;
   socket!: WebSocket;
+  paused: boolean;
 
   /**
    * @param {RPPGSocketConfig} config Config passed to RPPGSocket
    */
   constructor(config: RPPGSocketConfig) {
     this.config = config
+    this.paused = false
   }
 
   /**
@@ -90,6 +92,9 @@ class RPPGSocket implements RPPGSocketInterface {
    * @returns {Promise<Event>}
    */
   send(message: RPPGSocketSendMessage): void {
+    if (this.paused) {
+      return
+    }
     this.socket.send(JSON.stringify(message))
   }
 
@@ -109,6 +114,13 @@ class RPPGSocket implements RPPGSocketInterface {
       }
       this.socket.close()
     })
+  }
+
+  /**
+   * Set on pause sending socket messages
+   */
+  pause(value: boolean): void {
+    this.paused = value
   }
 }
 

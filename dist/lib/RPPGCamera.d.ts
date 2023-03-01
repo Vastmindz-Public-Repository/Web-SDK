@@ -10,9 +10,9 @@ declare class RPPGCamera implements RPPGCameraInterface {
     private canvasElement;
     private ctx;
     private stream;
-    private width;
-    private height;
-    private useFrontCamera;
+    useFrontCamera: boolean;
+    width: number;
+    height: number;
     /**
      * @param {RPPGCameraConfig} config Config passed to RPPGCamera
      */

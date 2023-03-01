@@ -16,4 +16,4 @@ export declare const EVENTS: {
     STRESS_INDEX: string;
     AFIB_RISK: string;
 };
-export declare const EVENT_NOTIFICATION_INTERVAL = 5000;
+export declare const EVENT_NOTIFICATION_INTERVAL = 500;

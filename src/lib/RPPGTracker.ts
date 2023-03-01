@@ -86,6 +86,7 @@ const DEFAULT_HRV_METRICS = {
   ibi: -1,
   rmssd: -1,
   sdnn: -1,
+  rr: [],
 }
 
 const DEFAULT_STRESS_INDEX = 0

@@ -1,7 +1,7 @@
 import { RPPGConfig, RPPGinterface, RPPGOnFrame } from './RPPG.types';
-import { RPPGCameraConfig, RPPGCameraInit } from './RPPGCamera.types';
-import { RPPGSocketConfig } from './RPPGSocket.types';
-import { RPPGTrackerConfig } from './RPPGTracker.types';
+import { RPPGCameraConfig, RPPGCameraInit, RPPGCameraInterface } from './RPPGCamera.types';
+import { RPPGSocketConfig, RPPGSocketInterface } from './RPPGSocket.types';
+import { RPPGTrackerConfig, RPPGTrackerInterface } from './RPPGTracker.types';
 /**
  * Class RPPG
  * @example
@@ -41,9 +41,9 @@ declare class RPPG implements RPPGinterface {
      * RPPG version
      */
     version: string;
-    private rppgCamera;
-    private rppgTracker;
-    private rppgSocket;
+    rppgCamera: RPPGCameraInterface | null;
+    rppgTracker: RPPGTrackerInterface | null;
+    rppgSocket: RPPGSocketInterface | null;
     private width;
     private height;
     private frameNumber;
@@ -141,5 +141,6 @@ declare class RPPG implements RPPGinterface {
      */
     onFrame(data: RPPGOnFrame): void;
     private onEvent;
+    private checkNumberOfTrueFlags;
 }
 export default RPPG;
